@@ -1,0 +1,8 @@
+.login-logo {
+    height: 132px;
+    aspect-ratio: 1;
+    object-fit: contain
+}
+div:where(.swal2-container) button:where(.swal2-close):focus {
+    box-shadow: 0 0 0 0 !important;
+}
