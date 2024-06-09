@@ -9,7 +9,7 @@
                     <!-- Header -->
                     <div class="text-center mb-3">
                         <p class="mb-2">
-                            <img src="{!! asset(settings()->site_logo ?? 'uploads/logo.png') !!}" class="login-logo" alt="Logo">
+                            <img src="{!! asset($site_logo) !!}" class="login-logo" alt="Logo">
                         </p>
                     </div>
                     <!-- END Header -->

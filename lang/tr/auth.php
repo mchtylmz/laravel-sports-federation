@@ -24,5 +24,17 @@ return [
         'username' => 'Kullanıcı adı',
         'password' => 'Parola',
         'submit' => 'Giriş Yap'
-    ]
+    ],
+
+    'profile' => [
+        'title' => 'Hesap Bilgilerim'
+    ],
+
+    'changePassword' => [
+        'title' => 'Parola Değiştir'
+    ],
+
+    'logout' => [
+        'title' => 'Çıkış Yap'
+    ],
 ];

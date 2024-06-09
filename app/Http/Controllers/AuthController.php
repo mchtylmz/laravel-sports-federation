@@ -37,4 +37,13 @@ class AuthController extends Controller
             'redirect' => '/'
         ]);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        request()->session()->regenerate();
+
+        return redirect()->to('login');
+    }
 }
