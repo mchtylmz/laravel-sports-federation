@@ -27,14 +27,21 @@ return [
     ],
 
     'profile' => [
-        'title' => 'Hesap Bilgilerim'
+        'title' => 'Hesap Bilgilerim',
+        'name' => 'İsim Soyisim',
+        'email' => 'E-posta Adresi',
+        'success' => 'Hesap bilgileriniz güncellendi'
     ],
 
     'changePassword' => [
-        'title' => 'Parola Değiştir'
+        'title' => 'Parola Değiştir',
+        'newPassword' => 'Yeni Parolanız',
+        'confirmPassword' => 'Tekrar Yeni Parolanız',
+        'success' => 'Parolanız başarıyla güncellendi'
     ],
 
     'logout' => [
         'title' => 'Çıkış Yap'
     ],
+
 ];

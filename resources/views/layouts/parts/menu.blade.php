@@ -48,6 +48,28 @@
                             </li>
                         </ul>
                     </li>
+
+                    @if(auth()->user()->hasRole('superadmin'))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                               aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-settings"></i>
+                                <span class="nav-main-link-name">{{ __('settings.title') }}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ route('settings.index') }}">
+                                        <span class="nav-main-link-name">{{ __('settings.general') }}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ route('settings.federation') }}">
+                                        <span class="nav-main-link-name">{{ __('settings.federation') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <!-- END Main Navigation -->

@@ -14,12 +14,8 @@
         </div>
         <div class="p-2">
             <a class="dropdown-item d-flex align-items-center justify-content-between"
-               href="op_auth_lock.html">
+               href="{{ route('profile') }}">
                 <span class="fs-sm fw-medium">{{ __('auth.profile.title') }}</span>
-            </a>
-            <a class="dropdown-item d-flex align-items-center justify-content-between"
-               href="op_auth_lock.html">
-                <span class="fs-sm fw-medium">{{ __('auth.changePassword.title') }}</span>
             </a>
             <a class="dropdown-item d-flex align-items-center justify-content-between"
                href="{{ route('logout') }}">

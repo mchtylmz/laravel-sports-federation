@@ -18,4 +18,17 @@ class LoginRequest extends BaseRequest
             'password' => ['required'],
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'username' => __('auth.login.username'),
+            'password' => __('auth.login.password')
+        ];
+    }
 }
