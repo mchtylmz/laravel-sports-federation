@@ -16,18 +16,21 @@ return new class extends Migration
             $table->enum('role', ['manager', 'admin', 'superadmin'])->default('manager');
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('is_login')->default(1);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
+        /*Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
-        });
+        });*/
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
@@ -45,7 +48,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        //Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
 };

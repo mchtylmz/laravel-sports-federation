@@ -17,7 +17,7 @@ return [
 
     'bilgi_bankasi' => 'Bilgi Bankası',
     'kulupler' => 'Kulüpler',
-    'federasyon_bilgi' => 'Federasyon Bilgileri',
+    'federasyon_bilgi' => 'Federasyon',
     'etkinlik' => 'Etkinlikler',
     'ceza' => 'Cezalar',
 ];

@@ -30,7 +30,7 @@
                         </a>
                     </li>
 
-                    @if(auth()->user()->hasRole('superadmin'))
+                    @if(hasRole('superadmin'))
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('home') }}">
                             <i class="nav-main-link-icon si si-flag"></i>
@@ -39,7 +39,7 @@
                     </li>
                     @endif
 
-                    @if(auth()->user()->hasRole('admin'))
+                    @if(hasRole('admin'))
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('home') }}">
                             <i class="nav-main-link-icon si si-flag"></i>
@@ -48,7 +48,16 @@
                     </li>
                     @endif
 
-                    @if(auth()->user()->hasRole('superadmin', 'admin'))
+                    @if(hasRole('admin', 'manager'))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('events.index') }}">
+                                <i class="nav-main-link-icon si si-event"></i>
+                                <span class="nav-main-link-name">{{ __('table.etkinlik') }}</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(hasRole('superadmin', 'admin'))
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('home') }}">
                             <i class="nav-main-link-icon si si-feed"></i>
@@ -64,7 +73,7 @@
                     </li>
                     @endif
 
-                    @if(auth()->user()->hasRole('admin'))
+                    @if(hasRole('admin'))
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ route('home') }}">
                                 <i class="nav-main-link-icon si si-ban"></i>
@@ -73,16 +82,7 @@
                         </li>
                     @endif
 
-                    @if(auth()->user()->hasRole('admin', 'manager'))
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('home') }}">
-                                <i class="nav-main-link-icon si si-event"></i>
-                                <span class="nav-main-link-name">{{ __('table.etkinlik') }}</span>
-                            </a>
-                        </li>
-                    @endif
-
-                    @if(auth()->user()->hasRole('superadmin'))
+                    @if(hasRole('superadmin'))
 
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"

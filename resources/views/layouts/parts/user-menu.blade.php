@@ -1,4 +1,4 @@
-@if(auth()->user()->hasRole('superadmin'))
+@if(hasRole('superadmin'))
     <!-- settings Dropdown -->
     <div class="dropdown d-inline-block ms-2">
         <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown"

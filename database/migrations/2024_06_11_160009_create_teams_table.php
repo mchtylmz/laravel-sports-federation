@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('federations', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
+            $table->unsignedBigInteger('federation_id')->index();
             $table->string('name');
-            $table->string('document_number')->nullable();
-            $table->string('branch_number')->nullable();
-            $table->tinyInteger('is_special')->default(0);
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('location')->nullable();
+            $table->string('region')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('federations');
+        Schema::dropIfExists('teams');
     }
 };

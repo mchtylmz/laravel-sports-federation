@@ -16,15 +16,28 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'role' => 'superadmin',
-            'name' => 'Admin',
+            'name' => 'superadmin',
+            'username' => 'superadmin',
+            'password' => Hash::make('superadmin')
+        ]);
+        User::create([
+            'role' => 'admin',
+            'name' => 'admin',
             'username' => 'admin',
             'password' => Hash::make('admin')
+        ]);
+        User::create([
+            'role' => 'manager',
+            'name' => 'manager',
+            'username' => 'manager',
+            'password' => Hash::make('manager')
         ]);
 
 
         settings()->set([
             'site_title' => 'Spor',
-            'site_logo'  => 'uploads/logo.png'
+            'site_logo'  => 'uploads/logo.png',
+            'site_favicon'  => 'uploads/logo.png',
         ]);
         // Save all settings
         settings()->save();

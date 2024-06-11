@@ -28,7 +28,7 @@
 </head>
 <body>
 <div id="page-container" class="page-header-light main-content-boxed">
-    <div id="page-loader" class="show"></div>
+    <!-- <div id="page-loader" class="show"></div> -->
 
     <!-- Header -->
     <header id="page-header">

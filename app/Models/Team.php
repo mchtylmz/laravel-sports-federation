@@ -7,13 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Zoha\Metable;
 
-class Federation extends Model
+class Team extends Model
 {
     use HasFactory, SoftDeletes, Metable;
-
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at'
-    ];
 }

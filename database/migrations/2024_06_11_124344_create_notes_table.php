@@ -19,6 +19,7 @@ return new class extends Migration
             $table->tinyInteger('is_read')->default(0);
             $table->timestamp('readed_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
