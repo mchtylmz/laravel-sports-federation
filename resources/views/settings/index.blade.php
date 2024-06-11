@@ -4,37 +4,45 @@
     <div class="content">
 
         <x-block title="{{ __('settings.general') }}">
-            <form class="js-validation-form" action="{{ route('profile.password') }}" method="POST" enctype="multipart/form-data">
+            <form class="js-validation-form" action="{{ route('settings.save') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <label class="form-label" for="password">
-                            {{ __('auth.changePassword.newPassword') }}
-                        </label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="password" placeholder="*******" name="password" autocomplete="off" required>
-                            <button type="button" class="btn btn-dark" data-toggle="password">
-                                <i class="fa fa-eye mx-2"></i>
-                            </button>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <label class="form-label" for="site_favicon">Site Favicon</label>
+                            <input type="file" class="dropify" id="site_favicon" name="images[site_favicon]"
+                                   data-show-remove="false"
+                                   data-show-errors="true"
+                                   data-allowed-file-extensions="jpg png jpeg"
+                                   data-max-file-size="3M"
+                                   data-default-file="{{ asset($site_favicon) }}"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <label class="form-label" for="site_logo">Site Logo</label>
+                            <input type="file" class="dropify" id="site_logo" name="images[site_logo]"
+                                   data-show-remove="false"
+                                   data-show-errors="true"
+                                   data-allowed-file-extensions="jpg png jpeg"
+                                   data-max-file-size="3M"
+                                   data-default-file="{{ asset($site_logo) }}"
+                            />
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <label class="form-label" for="password_confirmation">
-                            {{ __('auth.changePassword.confirmPassword') }}
-                        </label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="password_confirmation" placeholder="*******" name="password_confirmation" autocomplete="off"  required>
-                            <button type="button" class="btn btn-dark" data-toggle="password">
-                                <i class="fa fa-eye mx-2"></i>
-                            </button>
-                        </div>
-                    </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="site_title">Site Başlığı</label>
+                    <input type="text" class="form-control" id="site_title" name="settings[site_title]" placeholder="Başlığı.." value="{{ $site_title }}" required>
                 </div>
-                <div class="mb-4 text-end">
-                    <button type="submit" class="btn btn-alt-primary">
-                        <i class="fa fa-save mx-2 fa-faw"></i> Update
+
+
+                <div class="mb-4 text-center">
+                    <button type="submit" class="btn btn-alt-primary px-4">
+                        <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}
                     </button>
                 </div>
             </form>

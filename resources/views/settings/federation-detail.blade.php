@@ -15,7 +15,7 @@
                            data-show-errors="true"
                            data-allowed-file-extensions="jpg png jpeg"
                            data-max-file-size="3M"
-                           @if(!empty($federation->logo)) data-default-file="{{ asset($federation->logo)  }}" @endif
+                           @if(!empty($federation->logo)) data-default-file="{{ asset($federation->logo) }}" @endif
                     />
                 </div>
 

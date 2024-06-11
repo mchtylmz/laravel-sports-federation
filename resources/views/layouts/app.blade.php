@@ -7,13 +7,11 @@
 
     <title>{{ $title ?? '' }} {{ (!empty($title) ? '| ' : '') . $site_title }}</title>
 
-    <meta name="description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave">
-
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/media/favicons/favicon.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/media/favicons/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset($site_favicon) }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset($site_favicon) }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset($site_favicon) }}">
     <!-- END Icons -->
 
     <!-- Stylesheets -->
@@ -44,7 +42,7 @@
                 </a>
                 <!-- END Logo -->
 
-                @include('layouts.parts.theme-switcher')
+                {{--- @include('layouts.parts.theme-switcher') ---}}
             </div>
             <!-- END Left Section -->
 

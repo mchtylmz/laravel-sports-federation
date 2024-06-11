@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Facades\View::composer('*', function (View $view) {
             $view->with('site_title', settings()->site_title ?? config('app.name'));
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
+            $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
         });
     }
 }

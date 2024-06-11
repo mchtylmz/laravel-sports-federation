@@ -12,4 +12,6 @@ return [
     'federation_delete' => ':name federasyonu silinecektir, işleme devam edilsin mi?',
     'federation_delete_success' => ':name federasyonu silindi',
     'federation_save_success' => ':name federasyonu kayıt edildi',
+
+    'general_save_success' => 'Ayarlar başarıyla kayıt edildi'
 ];

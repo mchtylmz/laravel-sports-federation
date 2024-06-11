@@ -13,5 +13,11 @@ return [
     'ok' => 'Tamam',
     'cancel' => 'Vazgeç',
 
-    'save' => 'Kaydet'
+    'save' => 'Kaydet',
+
+    'bilgi_bankasi' => 'Bilgi Bankası',
+    'kulupler' => 'Kulüpler',
+    'federasyon_bilgi' => 'Federasyon Bilgileri',
+    'etkinlik' => 'Etkinlikler',
+    'ceza' => 'Cezalar',
 ];

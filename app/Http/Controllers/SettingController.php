@@ -16,9 +16,29 @@ class SettingController extends Controller
         ]);
     }
 
-    public function save()
+    public function save(Request $request)
     {
+        $data = [];
 
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $key => $image) {
+                $data[$key] = UploadFile::image($image);
+            }
+        }
+
+        foreach ($request->get('settings') as $key => $value) {
+            $data[$key] = trim($value);
+        }
+
+        if (!empty($data)) {
+            settings()->set($data);
+            settings()->save();
+        }
+
+        return response()->json([
+            'message' => __('settings.general_save_success'),
+            'refresh' => true
+        ]);
     }
 
     public function federation()
