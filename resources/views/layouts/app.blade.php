@@ -18,6 +18,8 @@
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropify/dist/css/dropify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/bootstrap-select/dist/css/bootstrap-select.css') }}" />
 
     <!-- Stylesheets -->
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
@@ -104,6 +106,11 @@
 <script src="{{ asset('assets/js/plugins/jquery-validation/localization/messages_tr.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/dropify/dist/js/dropify.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/flatpickr/l10n/tr.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
 
 <script src="{{ asset('assets/js/app.js') }}"></script>
 

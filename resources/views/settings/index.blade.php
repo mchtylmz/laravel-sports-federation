@@ -9,7 +9,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label" for="site_favicon">Site Favicon</label>
                             <input type="file" class="dropify" id="site_favicon" name="images[site_favicon]"
                                    data-show-remove="false"
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label" for="site_logo">Site Logo</label>
                             <input type="file" class="dropify" id="site_logo" name="images[site_logo]"
                                    data-show-remove="false"
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <label class="form-label" for="site_title">Site Başlığı</label>
                     <input type="text" class="form-control" id="site_title" name="settings[site_title]" placeholder="Başlığı.." value="{{ $site_title }}" required>
                 </div>

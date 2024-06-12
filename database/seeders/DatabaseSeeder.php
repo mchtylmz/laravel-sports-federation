@@ -26,13 +26,20 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('admin')
         ]);
-        User::create([
+        $manager = User::create([
             'role' => 'manager',
             'name' => 'manager',
             'username' => 'manager',
             'password' => Hash::make('manager')
         ]);
-
+        $manager->createMeta([
+            'places' => json_encode([
+                'Stadyum 1',
+                'Stadyum 2',
+                'Stadyum 3',
+                'Stadyum 4',
+            ])
+        ]);
 
         settings()->set([
             'site_title' => 'Spor',

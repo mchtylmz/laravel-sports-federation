@@ -17,10 +17,10 @@
                     <form class="js-validation-signin" action="{{ route('auth') }}" method="POST">
                         @csrf
                         <div class="py-3">
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <input type="text" class="form-control form-control-lg form-control-alt" id="username" name="username" placeholder="{{ __('auth.login.username') }}" autocomplete="off" required>
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <input type="password" class="form-control form-control-lg form-control-alt" id="password" name="password" placeholder="{{ __('auth.login.password') }}" autocomplete="off" required>
                             </div>
                         </div>

@@ -32,9 +32,9 @@
 
                     @if(hasRole('superadmin'))
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('home') }}">
+                        <a class="nav-main-link" href="{{ route('federation.index') }}">
                             <i class="nav-main-link-icon si si-flag"></i>
-                            <span class="nav-main-link-name">{{ __('settings.federation') }}</span>
+                            <span class="nav-main-link-name">{{ __('federations.title') }}</span>
                         </a>
                     </li>
                     @endif
@@ -48,22 +48,7 @@
                     </li>
                     @endif
 
-                    @if(hasRole('admin', 'manager'))
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('events.index') }}">
-                                <i class="nav-main-link-icon si si-event"></i>
-                                <span class="nav-main-link-name">{{ __('table.etkinlik') }}</span>
-                            </a>
-                        </li>
-                    @endif
-
                     @if(hasRole('superadmin', 'admin'))
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('home') }}">
-                            <i class="nav-main-link-icon si si-feed"></i>
-                            <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
-                        </a>
-                    </li>
 
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('home') }}">
@@ -71,13 +56,30 @@
                             <span class="nav-main-link-name">{{ __('table.kulupler') }}</span>
                         </a>
                     </li>
-                    @endif
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('home') }}">
+                            <i class="nav-main-link-icon si si-feed"></i>
+                            <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
+                        </a>
+                    </li>
 
                     @if(hasRole('admin'))
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ route('home') }}">
                                 <i class="nav-main-link-icon si si-ban"></i>
                                 <span class="nav-main-link-name">{{ __('table.ceza') }}</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @endif
+
+                    @if(hasRole('admin', 'manager'))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('event.index') }}">
+                                <i class="nav-main-link-icon si si-event"></i>
+                                <span class="nav-main-link-name">{{ __('table.etkinlik') }}</span>
                             </a>
                         </li>
                     @endif
@@ -92,17 +94,17 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{ route('settings.index') }}">
+                                    <a class="nav-main-link" href="{{ route('user.index', 'manager') }}">
                                         <span class="nav-main-link-name">Tesis Sorumluları</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{ route('settings.federation') }}">
+                                    <a class="nav-main-link" href="{{ route('user.index', 'admin') }}">
                                         <span class="nav-main-link-name">Federasyon Kullanıcıları</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{ route('settings.federation') }}">
+                                    <a class="nav-main-link" href="{{ route('user.index', 'superadmin') }}">
                                         <span class="nav-main-link-name">Yöneticiler</span>
                                     </a>
                                 </li>
@@ -110,23 +112,10 @@
                         </li>
 
                         <li class="nav-main-item d-block d-sm-none">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
-                               aria-expanded="false" href="#">
+                            <a class="nav-main-link" href="{{ route('settings.index') }}">
                                 <i class="nav-main-link-icon si si-settings"></i>
                                 <span class="nav-main-link-name">{{ __('settings.title') }}</span>
                             </a>
-                            <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{ route('settings.index') }}">
-                                        <span class="nav-main-link-name">{{ __('settings.general') }}</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{ route('settings.federation') }}">
-                                        <span class="nav-main-link-name">{{ __('settings.federation') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     @endif
                 </ul>

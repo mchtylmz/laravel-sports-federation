@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Status;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Profile\PasswordRequest;
 use App\Http\Requests\Profile\UpdateRequest;
@@ -25,6 +26,7 @@ class AuthController extends Controller
         $credentials = [
             'username' => $request->validated('username'),
             'password' => $request->validated('password'),
+            'status' => Status::active
         ];
         if (!Auth::attempt($credentials, true)) {
             return response()->json([
@@ -32,7 +34,9 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $request->session()->regenerate();
+        user()->update(['last_login' => now()]);
+
+        request()->session()->regenerate(true);
 
         return response()->json([
             'message' => __('auth.success'),

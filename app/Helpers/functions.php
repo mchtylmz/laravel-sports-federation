@@ -20,3 +20,10 @@ if (!function_exists('role')) {
         return auth()?->user()?->role;
     }
 }
+
+if (!function_exists('user')) {
+    function user()
+    {
+        return auth()?->user();
+    }
+}

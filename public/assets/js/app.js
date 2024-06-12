@@ -39,7 +39,12 @@
 
                                 setTimeout(() => {
                                     if (response.refresh) {
-                                        location.reload();
+                                        let bsTable = $('[data-toggle="table"]');
+                                        if (bsTable.length) {
+                                            bsTable.bootstrapTable('refresh');
+                                        } else {
+                                            location.reload();
+                                        }
                                     }
                                     if (response.redirect) {
                                         window.location.href = response.redirect;
@@ -121,7 +126,12 @@
 
                                 setTimeout(() => {
                                     if (response.refresh) {
-                                        location.reload();
+                                        let bsTable = $('[data-toggle="table"]');
+                                        if (bsTable.length) {
+                                            bsTable.bootstrapTable('refresh');
+                                        } else {
+                                            location.reload();
+                                        }
                                     }
                                     if (response.redirect) {
                                         window.location.href = response.redirect;
@@ -179,11 +189,12 @@
                     'maxHeight': 'Resim yüksekliği çok büyük ({{ value }}px max).',
                     'imageFormat': 'Resim formatına izin verilmiyor (yalnızca {{ value }})',
                     'fileExtension': 'Dosyaya izin verilmiyor (yalnızca {{ value }}).'
-                },
+                }
             });
         }
 
         static init() {
+            One.helpersOnLoad(['js-flatpickr', 'jq-masked-inputs']);
             this.initHelper();
             this.initValidation();
         }

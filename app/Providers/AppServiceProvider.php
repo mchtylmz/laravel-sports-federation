@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\View\View;
@@ -13,7 +15,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Request::macro('paginate', function () {
+            $limit = request()->get('limit', 15);
+            $offset = request()->get('offset', 0);
+
+            return intval($offset / $limit) + 1;
+        });
+
+        Builder::macro('page', function () {
+            $limit = request()->get('limit', 15);
+            $offset = request()->get('offset', 0);
+
+            return $this->take($limit)->skip($offset)->get();
+        });
     }
 
     /**

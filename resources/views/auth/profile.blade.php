@@ -8,15 +8,15 @@
                 <x-block title="{{ __('auth.profile.title') }}">
                     <form class="js-validation-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label">{{ __('auth.login.username') }}</label>
                             <input type="text" class="form-control" value="{{ auth()->user()->username }}" disabled>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label" for="name">{{ __('auth.profile.name') }}</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('auth.profile.name') }}.." value="{{ auth()->user()->name }}" required>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label" for="email">{{ __('auth.profile.email') }}</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email.." value="{{ auth()->user()->email }}">
                         </div>
@@ -33,7 +33,7 @@
                 <x-block title="{{ __('auth.changePassword.title') }}">
                     <form class="js-validation-form" action="{{ route('profile.password') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                             <div class="col-12">
                                 <label class="form-label" for="password">
                                     {{ __('auth.changePassword.newPassword') }}
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                             <div class="col-12">
                                 <label class="form-label" for="password_confirmation">
                                     {{ __('auth.changePassword.confirmPassword') }}
