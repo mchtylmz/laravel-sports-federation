@@ -27,6 +27,7 @@
             data-mobile-responsive="true"
             data-show-search-button="true"
             data-buttons-align="left"
+            data-query-params="queryParams"
             {{ $attributes }}>
             <thead>
             <tr>
@@ -62,6 +63,16 @@
             return row.actions;
         }
 
+        function queryParams(params) {
+            let filterForm = $('form.js-filter-table');
+            if (filterForm.length) {
+                filterForm.serializeArray().forEach(function (row, index) {
+                    params[row.name] = row.value;
+                })
+            }
+
+            return params;
+        }
         function setLoading() {
             $('[data-toggle="bootstrap-table-loading"]').addClass('d-none');
             $(this).closest('.table-responsive').removeClass('d-none');

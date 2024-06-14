@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
             Route::get('json', 'json')->name('json');
             Route::get('detail/{event:id?}', 'detail')->name('show');
             Route::post('save/{event:id?}', 'save')->name('save');
-            Route::post('delete/{event:id?}', 'delete')->name('delete');
+            Route::post('delete/{event:id}', 'delete')->name('delete');
         });
 
     // middleware
@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
             Route::get('json', 'json')->name('json');
             Route::get('detail/{federation:id?}', 'detail')->name('show');
             Route::post('save/{federation:id?}', 'save')->name('save');
-            Route::post('delete/{federation:id?}', 'delete')->name('delete');
+            Route::post('delete/{federation:id}', 'delete')->name('delete');
         });
 
     // middleware

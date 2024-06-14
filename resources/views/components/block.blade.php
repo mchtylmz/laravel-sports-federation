@@ -1,10 +1,11 @@
 @props([
     'title' => '',
-    'options' => true
+    'options' => true,
+    'class' => ''
 ])
 <div>
     <!-- Your Block -->
-    <div class="block block-rounded">
+    <div class="block block-rounded {{ $class }}">
         <div class="block-header block-header-default">
             <h3 class="block-title">
                 {{ $title }}

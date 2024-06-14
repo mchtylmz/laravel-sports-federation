@@ -1,14 +1,17 @@
 @props([
     'id' => false,
     'edit' => false,
+    'view' => false,
     'delete' => false,
     'deleteMessage' => __('table.delete_message')
 ])
 <div class="btn-group">
-    @if($edit)
-        <a type="button" class="btn btn-sm btn-alt-info js-bs-tooltip-enabled" href="{{ $edit }}">
+    @if($view)
+        <button type="button" class="btn btn-sm btn-alt-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" data-toggle="view" data-route="{{ $view }}?format=json">
             <i class="fa fa-fw fa-eye"></i>
-        </a>
+        </button>
+    @endif
+    @if($edit)
         <a type="button" class="btn btn-sm btn-alt-warning js-bs-tooltip-enabled" href="{{ $edit }}">
             <i class="fa fa-fw fa-pencil-alt"></i>
         </a>

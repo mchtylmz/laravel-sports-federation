@@ -14,7 +14,7 @@ class UserController extends Controller
         if (!in_array($userType, UserType::names())) {
             abort(404);
         }
-
+        places();
         return view('users.index', [
             'title' => __('users.' . $userType),
             'userType' => $userType
@@ -42,6 +42,17 @@ class UserController extends Controller
     {
         if (!in_array($userType, UserType::names())) {
             abort(404);
+        }
+
+        if (request()->input('format') == 'json') {
+            return response()->json([
+                'title' => $user->name,
+                'user' => $user,
+                'body' => view('users.offcanvas', [
+                    'userType' => $userType,
+                    'user' => $user
+                ])->render()
+            ]);
         }
 
         return view('users.detail', [

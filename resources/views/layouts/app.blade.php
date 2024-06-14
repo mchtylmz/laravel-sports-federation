@@ -76,7 +76,11 @@
     <!-- Main Container -->
     <main id="main-container">
         @include('layouts.parts.menu', ['mobile' => true])
-        @yield('content')
+        <!-- Page Content -->
+        <div class="content">
+            @yield('content')
+        </div>
+        <!-- END Page Content -->
     </main>
     <!-- END Main Container -->
 
@@ -111,9 +115,8 @@
 <script src="{{ asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
-
+@stack('js')
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
-@stack('js')
 </body>
 </html>

@@ -57,4 +57,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function federation()
+    {
+        $federation_id = $this->getMeta('federation_id');
+
+        return Federation::where('id', $federation_id)->first();
+    }
 }

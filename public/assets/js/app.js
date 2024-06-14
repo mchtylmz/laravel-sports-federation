@@ -32,10 +32,12 @@
                                 $(form).find('[type=submit]').loading('show');
                             },
                             success: function (response) {
-                                alert.fire({
-                                    text: response.message,
-                                    icon: 'success'
-                                });
+                                if (response.message) {
+                                    alert.fire({
+                                        text: response.message,
+                                        icon: 'success'
+                                    });
+                                }
 
                                 setTimeout(() => {
                                     if (response.refresh) {
@@ -80,6 +82,11 @@
                     prevInput.attr('type', 'password');
                     btn.html('<i class="fa fa-eye mx-2"></i>');
                 }
+            });
+
+            jQuery(document).on('submit', 'form.js-filter-table', function (e) {
+                e.preventDefault();
+                $('[data-toggle="table"]').bootstrapTable('refresh');
             });
 
             jQuery(document).on('click', '[data-toggle="delete"]', function (e) {
@@ -148,6 +155,43 @@
                             btn.loading('hide');
                         });
                     }
+                });
+            });
+
+            jQuery(document).on('click', '[data-toggle="view"]', function (e) {
+                e.preventDefault();
+
+                let btn = $(this), route = btn.data('route');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: route,
+                    data: {},
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: 'multipart/form-data',
+                    beforeSend: function () {
+                        btn.loading('show');
+                    },
+                    success: function (response) {
+                        $('.offcanvas-title').html(response.title);
+                        $('.offcanvas-body').html(response.body);
+                    },
+                    error: function (response) {
+                        alert.fire({
+                            text: response.responseJSON.message,
+                            icon: 'error'
+                        });
+                    }
+                }).always(function () {
+                    btn.loading('hide');
                 });
             });
 

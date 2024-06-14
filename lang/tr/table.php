@@ -17,9 +17,12 @@ return [
     'email' => 'E-posta',
     'identity_number' => 'Kimlik',
     'last_login' => 'Son Giriş',
+    'filter' => 'Filtrele',
 
     'yes' => 'Evet',
     'no' => 'Hayır',
+
+    'search' => 'Ara',
 
     'branch_number' => 'Branş Dosya No',
     'is_special' => 'Özerk',
