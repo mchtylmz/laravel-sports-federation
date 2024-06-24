@@ -60,3 +60,6 @@ div:where(.swal2-container) button:where(.swal2-close):focus {
     background-color: white;
     border: var(--bs-border-width) solid #dfe3ea;
 }
+.fc-daygrid-event {
+    white-space: normal !important;
+}

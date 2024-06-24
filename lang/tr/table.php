@@ -22,6 +22,9 @@ return [
     'yes' => 'Evet',
     'no' => 'Hayır',
 
+    'national' => 'Uluslar Arası',
+    'local' => 'Yerel',
+
     'search' => 'Ara',
 
     'branch_number' => 'Branş Dosya No',

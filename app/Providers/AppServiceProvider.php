@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
@@ -40,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
             $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
         });
+
+        Carbon::setlocale(app()->getLocale());
     }
 }

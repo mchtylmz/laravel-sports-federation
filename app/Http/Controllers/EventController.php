@@ -6,6 +6,7 @@ use App\Http\Requests\Event\SaveRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 use App\Models\Federation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -32,6 +33,21 @@ class EventController extends Controller
             'totalNotFiltered' => $event->count(),
             'rows' => EventResource::collection($event->page()),
         ]);
+    }
+
+    public function calendar(Request $request)
+    {
+        $start = Carbon::parse($request->get('start', now()));
+        $end = Carbon::parse($request->get('end', now()));
+
+        $events = Event::whereBetween('start_date', [$start->startOfDay(), $end->endOfDay()]);
+        if (in_array(user()?->role, ['admin', 'manager'])) {
+            $events->where('user_id', auth()->id());
+        }
+
+        return response()->json(
+            EventResource::collection($events->get())
+        );
     }
 
     public function detail(Event $event)

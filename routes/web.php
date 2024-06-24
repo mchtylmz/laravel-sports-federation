@@ -7,6 +7,7 @@ use App\Models\Federation;
 use App\Models\Event;
 use App\Enums\UserType;
 use App\Models\User;
+use App\Models\Club;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -45,6 +46,27 @@ Route::middleware('auth')->group(function () {
             Route::get('detail/{event:id?}', 'detail')->name('show');
             Route::post('save/{event:id?}', 'save')->name('save');
             Route::post('delete/{event:id}', 'delete')->name('delete');
+        });
+
+    Route::name('event.')
+        ->prefix('events')
+        ->controller(\App\Http\Controllers\EventController::class)
+        ->group(function () {
+            Route::get('calendar', 'calendar')->name('calendar');
+        });
+
+
+    // middleware
+    Route::name('club.')
+        ->prefix('clubs')
+        ->middleware('role:superadmin,admin')
+        ->controller(\App\Http\Controllers\ClubController::class)
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('json', 'json')->name('json');
+            Route::get('detail/{club:id?}', 'detail')->name('show');
+            Route::post('save/{club:id?}', 'save')->name('save');
+            Route::post('delete/{club:id}', 'delete')->name('delete');
         });
 
     // middleware

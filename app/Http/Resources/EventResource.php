@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,17 +24,30 @@ class EventResource extends JsonResource
             'id' => $this->id
         ])->render();
 
-        return [
+        $data = [
             'id' => $this->id,
             'user_username' => $this->user?->username,
             'user_name' => $this->user?->name,
             'title' => $this->title,
+            'content' => $this->content,
             'location' => $this->location,
             'is_national' => $this->is_national,
-            'is_national_text' => $this->is_national == 1 ? __('table.yes') : __('table.no'),
+            'is_national_text' => $this->is_national == 1 ? __('table.national') : __('table.local'),
             'start_date' => sprintf('%s %s', $this->start_date?->format('Y-m-d'), $this->start_time),
+            'start' => sprintf('%s %s', $this->start_date?->format('Y-m-d'), $this->start_time),
             'end_date' => sprintf('%s %s', $this->end_date?->format('Y-m-d'), $this->end_time),
+            'end' => sprintf('%s %s', $this->end_date?->format('Y-m-d'), $this->end_time),
+            'startStr' => Carbon::parse($this->start_date)->translatedFormat('d F Y l, H:i'),
             'actions' => $actions
+        ];
+
+        return [
+            ...$data,
+            'startStr' => Carbon::parse($data['start_date'])->translatedFormat('d F Y l, H:i'),
+            'endStr' => Carbon::parse($data['end_date'])->translatedFormat('d F Y l, H:i'),
+            'backgroundColor' => 'blue',
+            'textColor' => 'white',
+            'display' => 'block'
         ];
     }
 }
