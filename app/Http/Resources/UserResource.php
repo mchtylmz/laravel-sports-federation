@@ -26,8 +26,19 @@ class UserResource extends JsonResource
                 return $this->federation()?->name;
             }),
             'identity_number' => $this->when($this->role == 'manager', $this->getMeta('identity_number')),
+            'places_count' => $this->when($this->role == 'manager', function () {
+                return $this->getMeta('places')?->count() ?? 0;
+            }),
+            'places_count_text' => $this->when($this->role == 'manager', function () {
+                return sprintf(
+                    '%d %s',
+                    $this->getMeta('places')?->count() ?? 0,
+                    trans('table.place')
+                );
+            }),
             'username' => $this->username,
             'name' => $this->name,
+            'phone' => $this->phone,
             'email' => $this->email,
             'created_at' => $this->created_at?->format('Y-m-d'),
             'last_login' => $this?->last_login?->format('Y-m-d'),

@@ -48,7 +48,7 @@ class EventResource extends JsonResource
             ...$data,
             'startStr' => Carbon::parse($data['start_date'])->translatedFormat('d F Y l, H:i'),
             'endStr' => Carbon::parse($data['end_date'])->translatedFormat('d F Y l, H:i'),
-            'backgroundColor' => 'blue',
+            'backgroundColor' => $this->user?->getMeta('event_color') ?? 'blue',
             'textColor' => 'white',
             'display' => 'block'
         ];

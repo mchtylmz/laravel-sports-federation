@@ -16,7 +16,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="email">{{ __('auth.profile.email') }}</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email.." value="{{ auth()->user()->email }}">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('users.form.email') }}.." value="{{ auth()->user()->email }}">
                     </div>
                     <div class="mb-4 text-end">
                         <button type="submit" class="btn btn-alt-primary">

@@ -13,8 +13,9 @@
             <div class="row align-items-end justify-content-start">
                 @if($userType == 'admin')
                     <div class="col-lg-3 mb-3">
-                        <label class="form-label" for="federation">{{ __('table.federation') }}</label>
-                        <select class="selectpicker form-control" id="federation" name="federation" data-placeholder="{{ __('table.federation') }}...." data-size="5" data-live-search="true">
+                        <label class="form-label" for="federation_id">{{ __('table.federation') }}</label>
+                        <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="{{ __('table.federation') }}...." data-size="5" data-live-search="true">
+                            <option value="">{{ __('table.all') }}</option>
                             @foreach(federations() as $federation)
                                 <option value="{{ $federation->id }}">{{ $federation->name }}</option>
                             @endforeach
@@ -54,20 +55,26 @@
                         {{ __('table.federation') }}
                     </th>
                 @endif
-                @if($userType == 'manager')
-                    <th data-field="identity_number" data-width="15" data-align="left">
-                        {{ __('table.identity_number') }}
-                    </th>
-                @endif
                 <th data-field="username" data-sortable="true" data-width="15" data-align="left">
                     {{ __('table.username') }}
                 </th>
                 <th data-field="name" data-sortable="true" data-width="20" data-align="left">
                     {{ __('table.name') }}
                 </th>
+                <th data-field="phone" data-sortable="true" data-width="10" data-align="left">
+                    {{ __('table.phone') }}
+                </th>
                 <th data-field="email" data-sortable="true" data-width="10" data-align="left">
                     {{ __('table.email') }}
                 </th>
+                @if($userType == 'manager')
+                    <th data-field="identity_number" data-width="15" data-align="left">
+                        {{ __('table.identity_number') }}
+                    </th>
+                    <th data-field="places_count" data-formatter="setText" data-width="10" data-align="left">
+                        {{ __('table.place') }}
+                    </th>
+                @endif
                 <th data-field="last_login" data-sortable="true" data-width="10" data-align="left">
                     {{ __('table.last_login') }}
                 </th>

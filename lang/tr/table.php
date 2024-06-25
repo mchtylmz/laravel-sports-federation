@@ -15,7 +15,9 @@ return [
     'username' => 'Kullanıcı Adı',
     'name' => 'Ad Soyad',
     'email' => 'E-posta',
+    'phone' => 'Telefon',
     'identity_number' => 'Kimlik',
+    'place' => 'Tesis',
     'last_login' => 'Son Giriş',
     'filter' => 'Filtrele',
     'region' => 'Bölge',
@@ -51,4 +53,6 @@ return [
     'ceza' => 'Cezalar',
 
     'delete_message' => 'Kayıt silinecektir, işleme devam edilsin mi?',
+
+    'choose' => 'Seçiniz'
 ];
