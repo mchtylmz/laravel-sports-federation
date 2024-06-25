@@ -37,9 +37,4 @@ class Club extends Model
             'status' => Status::class
         ];
     }
-
-    public function federation()
-    {
-        return $this->belongsTo(Federation::class);
-    }
 }

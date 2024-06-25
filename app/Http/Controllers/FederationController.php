@@ -36,6 +36,16 @@ class FederationController extends Controller
 
     public function detail(Federation $federation)
     {
+        if (request()->input('format') == 'json') {
+            return response()->json([
+                'title' => $federation->name,
+                'federation' => $federation,
+                'body' => view('federations.offcanvas', [
+                    'federation' => $federation
+                ])->render()
+            ]);
+        }
+
         return view('federations.detail', [
             'title' => !empty($federation->name) ? __('settings.federation_edit') :  __('settings.federation_add'),
             'federation' => $federation

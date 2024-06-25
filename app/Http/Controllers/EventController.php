@@ -24,7 +24,7 @@ class EventController extends Controller
         if ($request->has('sort')) {
             $event = $event->orderBy($request->get('sort'), $request->get('order', 'ASC'));
         }
-        if ($request->has('search')) {
+        if ($request->get('search')) {
             $event->whereAny(['title', 'content', 'location', 'end_notes'], 'LIKE', '%' . $request->get('search'). '%');
         }
 
@@ -52,6 +52,16 @@ class EventController extends Controller
 
     public function detail(Event $event)
     {
+        if (request()->input('format') == 'json') {
+            return response()->json([
+                'title' => $event->title,
+                'event' => $event,
+                'body' => view('events.offcanvas', [
+                    'event' => $event
+                ])->render()
+            ]);
+        }
+
         return view('events.detail', [
             'title' => !empty($event->title) ? __('events.update') :  __('events.create'),
             'event' => $event

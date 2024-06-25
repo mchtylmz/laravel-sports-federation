@@ -19,11 +19,12 @@ return [
         'title' => 'Başlığı',
         'content' => 'Açıklama',
         'location' => 'Yeri',
-        'is_national' => 'Durumu',
+        'is_national' => 'Durum',
         'start_date' => 'Başlangıç Tarihi',
         'start_time' => 'Başlangıç Zamanı',
         'end_date' => 'Bitiş Tarihi',
         'end_time' => 'Bitiş Zamanı',
-        'end_notes' => 'Notlar'
+        'end_notes' => 'Notlar',
+        'user_name' => 'Kullanıcı Ad Soyad'
     ],
 ];

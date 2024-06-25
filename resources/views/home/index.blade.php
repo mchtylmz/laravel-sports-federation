@@ -10,7 +10,6 @@
 
     </div>
 
-    @include('components.offcanvas')
 @endsection
 @push('js')
     <script src="{{ asset('assets/js/plugins/fullcalendar/index.global.min.js') }}"></script>

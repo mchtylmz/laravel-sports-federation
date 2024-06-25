@@ -84,6 +84,8 @@
     </main>
     <!-- END Main Container -->
 
+    @include('components.offcanvas')
+
     <!-- Footer -->
     <footer id="page-footer" class="bg-body-extra-light">
         <div class="content py-3">

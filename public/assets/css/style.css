@@ -62,4 +62,18 @@ div:where(.swal2-container) button:where(.swal2-close):focus {
 }
 .fc-daygrid-event {
     white-space: normal !important;
+    word-break: break-all !important;
+}
+.status.active {
+    color: green;
+    font-weight: 600;
+}
+.status.passive {
+    color: red;
+    font-weight: 600;
+}
+.nav-main-link.active {
+    color: #212529;
+    background-color: #f6f7f9;
+    outline: 0 !important;
 }

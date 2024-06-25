@@ -33,4 +33,5 @@
             </x-slot>
         </x-table>
     </x-block>
+
 @endsection

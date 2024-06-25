@@ -51,7 +51,7 @@
                                     if (response.redirect) {
                                         window.location.href = response.redirect;
                                     }
-                                }, 1500);
+                                }, 500);
                             },
                             error: function (response) {
                                 alert.fire({
@@ -131,19 +131,24 @@
                                     icon: 'success'
                                 });
 
+                                if (response.refresh) {
+                                    let bsTable = $('[data-toggle="table"]');
+                                    if (bsTable.length) {
+                                        bsTable.bootstrapTable('refresh');
+                                    }
+                                }
+
                                 setTimeout(() => {
                                     if (response.refresh) {
                                         let bsTable = $('[data-toggle="table"]');
-                                        if (bsTable.length) {
-                                            bsTable.bootstrapTable('refresh');
-                                        } else {
+                                        if (!bsTable.length) {
                                             location.reload();
                                         }
                                     }
                                     if (response.redirect) {
                                         window.location.href = response.redirect;
                                     }
-                                }, 1500);
+                                }, 750);
                             },
                             error: function (response) {
                                 alert.fire({
@@ -189,6 +194,10 @@
                             text: response.responseJSON.message,
                             icon: 'error'
                         });
+
+                        setTimeout(() => {
+                            $('#offcanvasRight').offcanvas('hide');
+                        }, 500);
                     }
                 }).always(function () {
                     btn.loading('hide');

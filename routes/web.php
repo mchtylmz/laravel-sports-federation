@@ -43,7 +43,6 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('', 'index')->name('index');
             Route::get('json', 'json')->name('json');
-            Route::get('detail/{event:id?}', 'detail')->name('show');
             Route::post('save/{event:id?}', 'save')->name('save');
             Route::post('delete/{event:id}', 'delete')->name('delete');
         });
@@ -53,6 +52,9 @@ Route::middleware('auth')->group(function () {
         ->controller(\App\Http\Controllers\EventController::class)
         ->group(function () {
             Route::get('calendar', 'calendar')->name('calendar');
+            Route::middleware('role:superadmin,admin,manager')
+                ->get('detail/{event:id?}', 'detail')
+                ->name('show');
         });
 
 
@@ -65,8 +67,8 @@ Route::middleware('auth')->group(function () {
             Route::get('', 'index')->name('index');
             Route::get('json', 'json')->name('json');
             Route::get('detail/{club:id?}', 'detail')->name('show');
-            Route::post('save/{club:id?}', 'save')->name('save');
-            Route::post('delete/{club:id}', 'delete')->name('delete');
+            Route::middleware('role:superadmin')->post('save/{club:id?}', 'save')->name('save');
+            Route::middleware('role:superadmin')->post('delete/{club:id}', 'delete')->name('delete');
         });
 
     // middleware

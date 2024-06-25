@@ -15,6 +15,7 @@ class FederationResource extends JsonResource
     public function toArray(Request $request): array
     {
         $actions = view('components.actions', [
+            'view' => route('federation.show', $this->id),
             'edit' => route('federation.show', $this->id),
             'delete' => route('federation.delete', $this->id),
             'deleteMessage' => __('settings.federation_delete', ['name' => $this->name]),

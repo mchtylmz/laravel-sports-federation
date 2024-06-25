@@ -78,5 +78,4 @@
         </x-table>
     </x-block>
 
-    @include('components.offcanvas')
 @endsection

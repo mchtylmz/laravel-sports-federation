@@ -67,6 +67,11 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label class="form-label" for="end_notes">{{ __('events.event') }} {{ __('events.form.end_notes') }}</label>
+                <textarea id="content" class="form-control" name="end_notes" placeholder="{{ __('events.form.end_notes') }}..." rows="3">{{ $event->end_notes ?? '' }}</textarea>
+            </div>
+
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
                     <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}

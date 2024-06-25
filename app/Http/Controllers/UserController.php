@@ -14,7 +14,7 @@ class UserController extends Controller
         if (!in_array($userType, UserType::names())) {
             abort(404);
         }
-        places();
+
         return view('users.index', [
             'title' => __('users.' . $userType),
             'userType' => $userType

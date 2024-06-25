@@ -18,12 +18,18 @@ return [
     'identity_number' => 'Kimlik',
     'last_login' => 'Son Giriş',
     'filter' => 'Filtrele',
+    'region' => 'Bölge',
+    'all' => 'Tümü',
+
+    'federation_count' => 'Federasyon Sayısı',
 
     'yes' => 'Evet',
     'no' => 'Hayır',
 
     'national' => 'Uluslar Arası',
     'local' => 'Yerel',
+
+    'status' => 'Durum',
 
     'search' => 'Ara',
 

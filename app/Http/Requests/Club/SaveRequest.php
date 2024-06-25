@@ -16,12 +16,13 @@ class SaveRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'federation_id' => ['required', 'exists:App\Models\Federation,id'],
+            'federation_id' => ['required'],
             'name' => ['required', 'string'],
             'user_name' => ['required', 'string'],
             'user_phone' => ['nullable', 'string'],
             'user_email' => ['nullable', 'email'],
-            'location' => ['required', 'string'],
+            'location' => ['nullable', 'string'],
+            'region' => ['nullable', 'string'],
             'status' => ['required', 'in:active,passive']
         ];
     }
@@ -35,6 +36,7 @@ class SaveRequest extends BaseRequest
             'user_phone' => __('clubs.form.user_phone'),
             'user_email' => __('clubs.form.user_email'),
             'location' => __('clubs.form.location'),
+            'region' => __('clubs.form.region'),
             'status' => __('clubs.form.status')
         ];
     }

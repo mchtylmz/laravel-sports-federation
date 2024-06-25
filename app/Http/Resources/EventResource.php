@@ -18,6 +18,7 @@ class EventResource extends JsonResource
         $isPast = now()->format('Y-m-d') < $this->start_date?->format('Y-m-d');
 
         $actions = view('components.actions', [
+            'view' => route('event.show', $this->id),
             'edit' => route('event.show', $this->id),
             'delete' => $isPast ? route('event.delete', $this->id) : false,
             'deleteMessage' => __('events.delete', ['title' => $this->title]),
@@ -38,6 +39,8 @@ class EventResource extends JsonResource
             'end_date' => sprintf('%s %s', $this->end_date?->format('Y-m-d'), $this->end_time),
             'end' => sprintf('%s %s', $this->end_date?->format('Y-m-d'), $this->end_time),
             'startStr' => Carbon::parse($this->start_date)->translatedFormat('d F Y l, H:i'),
+            'end_notes' => $this->end_notes,
+            'view_route' => route('event.show', $this->id) . '?format=json',
             'actions' => $actions
         ];
 
