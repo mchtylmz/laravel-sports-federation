@@ -18,7 +18,7 @@
     @endif
     @if($delete && $id)
         <button type="button" class="btn btn-sm btn-alt-danger js-bs-tooltip-enabled" data-toggle="delete" data-route="{{ $delete }}" data-message="{{ $deleteMessage }}" data-id="{{ $id }}">
-            <i class="fa fa-fw fa-times"></i>
+            <i class="fa fa-fw fa-trash-alt"></i>
         </button>
     @endif
 </div>

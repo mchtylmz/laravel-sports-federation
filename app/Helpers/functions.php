@@ -36,6 +36,13 @@ if (!function_exists('federations')) {
     }
 }
 
+if (!function_exists('peoples')) {
+    function peoples()
+    {
+        return \App\Models\People::where('status', 'active')->get();
+    }
+}
+
 if (!function_exists('places')) {
     function places()
     {

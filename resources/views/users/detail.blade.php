@@ -116,7 +116,7 @@
             <div class="mb-3">
                 <label class="form-label" for="status">{{ __('table.status') }}</label>
                 <div class="space-x-2">
-                    @php $status = $club->status?->value ?? 'active'; @endphp
+                    @php $status = $user->status?->value ?? 'active'; @endphp
                     <div class="form-check form-switch form-check-inline">
                         <input class="form-check-input" type="radio" value="active" id="active" name="status" @checked($status == 'active')>
                         <label class="form-check-label" for="active">{{ __('table.active') }}</label>

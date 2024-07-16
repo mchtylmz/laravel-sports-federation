@@ -8,6 +8,8 @@ use App\Models\Event;
 use App\Enums\UserType;
 use App\Models\User;
 use App\Models\Club;
+use App\Models\Punishment;
+use App\Models\People;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -69,6 +71,32 @@ Route::middleware('auth')->group(function () {
             Route::get('detail/{club:id?}', 'detail')->name('show');
             Route::middleware('role:superadmin')->post('save/{club:id?}', 'save')->name('save');
             Route::middleware('role:superadmin')->post('delete/{club:id}', 'delete')->name('delete');
+        });
+
+    // middleware
+    Route::name('punishment.')
+        ->prefix('punishments')
+        ->middleware('role:superadmin,admin')
+        ->controller(\App\Http\Controllers\PunishmentController::class)
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('json', 'json')->name('json');
+            Route::get('detail/{punishment:id?}', 'detail')->name('show');
+            Route::post('save/{punishment:id?}', 'save')->name('save');
+            Route::post('delete/{punishment:id}', 'delete')->name('delete');
+        });
+
+    // middleware
+    Route::name('people.')
+        ->prefix('peoples')
+        ->middleware('role:superadmin,admin')
+        ->controller(\App\Http\Controllers\PeopleController::class)
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('json', 'json')->name('json');
+            Route::get('detail/{people:id?}', 'detail')->name('show');
+            Route::post('save/{people:id?}', 'save')->name('save');
+            Route::post('delete/{people:id}', 'delete')->name('delete');
         });
 
     // middleware

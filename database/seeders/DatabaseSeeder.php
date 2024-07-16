@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\People;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -39,6 +40,24 @@ class DatabaseSeeder extends Seeder
                 'Stadyum 3',
                 'Stadyum 4',
             ])
+        ]);
+
+        People::create([
+            'type' => 'player',
+            'name' => 'Oyuncu 1',
+            'surname' => 'Oyuncu'
+        ]);
+
+        People::create([
+            'type' => 'referee',
+            'name' => 'Hakem 1',
+            'surname' => 'Hakem'
+        ]);
+
+        People::create([
+            'type' => 'coach',
+            'name' => 'Antrenör 1',
+            'surname' => 'Antrenör'
         ]);
 
         settings()->set([

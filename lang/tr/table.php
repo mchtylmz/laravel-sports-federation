@@ -3,6 +3,7 @@
 return [
     'id' => 'ID',
     'logo' => 'Logo',
+    'photo' => 'Fotoğraf',
     'title' => 'Başlık',
     'document_number' => 'Dosya No',
     'location' => 'Yer',
@@ -23,6 +24,8 @@ return [
     'region' => 'Bölge',
     'all' => 'Tümü',
 
+    'description' => 'Açıklama',
+    'reason' => 'Sebep',
     'federation_count' => 'Federasyon Sayısı',
 
     'yes' => 'Evet',
@@ -54,5 +57,10 @@ return [
 
     'delete_message' => 'Kayıt silinecektir, işleme devam edilsin mi?',
 
-    'choose' => 'Seçiniz'
+    'choose' => 'Seçiniz',
+
+    'male' => 'Erkek',
+    'female' =>  'Kadın',
+
+    'gender' => 'Cinsiyet'
 ];

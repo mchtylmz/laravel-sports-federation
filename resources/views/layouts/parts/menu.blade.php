@@ -58,15 +58,15 @@
                     </li>
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('home') }}">
+                        <a class="nav-main-link" href="{{ route('people.index') }}">
                             <i class="nav-main-link-icon si si-feed"></i>
                             <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
                         </a>
                     </li>
 
-                    @if(hasRole('admin'))
+                    @if(hasRole('superadmin', 'admin'))
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('home') }}">
+                            <a class="nav-main-link" href="{{ route('punishment.index') }}">
                                 <i class="nav-main-link-icon si si-ban"></i>
                                 <span class="nav-main-link-name">{{ __('table.ceza') }}</span>
                             </a>
