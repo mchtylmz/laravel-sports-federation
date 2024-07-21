@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Gender;
+use App\Enums\PeopleAdult;
 use App\Enums\PeopleType;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,12 +29,19 @@ class People extends Model
             'updated_at' => 'datetime:Y-m-d H:i',
             'deleted_at' => 'datetime:Y-m-d H:i',
             'status' => Status::class,
-            'type' => PeopleType::class
+            'type' => PeopleType::class,
+            'gender' => Gender::class,
+            'adult' => PeopleAdult::class,
         ];
     }
 
     public function getFullnameAttribute(): string
     {
         return $this->name . ' ' . $this->surname;
+    }
+
+    public function punishments()
+    {
+        return $this->hasMany(Punishment::class)->latest();
     }
 }

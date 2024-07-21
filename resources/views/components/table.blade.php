@@ -57,7 +57,7 @@
         }
         function setImage(value, row) {
             eval('var image = row.' + this.field + '_image;');
-            return '<img src="' + image + '" style="height: 48px; object-fit: contain;" />';
+            return '<img alt="' + image + '" src="' + image + '" style="height: 48px; object-fit: contain;" />';
         }
         function setActions(value, row) {
             return row.actions;

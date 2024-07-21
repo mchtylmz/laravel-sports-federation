@@ -17,6 +17,13 @@ class FederationController extends Controller
         ]);
     }
 
+    public function info()
+    {
+        return view('federations.info', [
+            'title' => user()?->federation()?->name
+        ]);
+    }
+
     public function json(Request $request)
     {
         $federation = Federation::orderBy('name');

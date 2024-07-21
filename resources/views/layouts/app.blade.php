@@ -117,8 +117,34 @@
 <script src="{{ asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
-@stack('js')
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script>
+    function calculateAge(birthdate, minAge = 0) {
+        const birthDateObj = new Date(birthdate);
+        const currentDate = new Date();
+
+        let years = currentDate.getFullYear() - birthDateObj.getFullYear();
+        let months = currentDate.getMonth() - birthDateObj.getMonth();
+        let days = currentDate.getDate() - birthDateObj.getDate();
+
+        if (months < 0 || (months === 0 && days < 0)) {
+            years--;
+            months += 12;
+        }
+        if (days < 0) {
+            const previousMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 0);
+            days += previousMonth.getDate();
+            months--;
+        }
+
+        if (minAge) {
+            return years >= minAge
+        }
+
+        return years;
+    }
+</script>
+@stack('js')
 
 </body>
 </html>

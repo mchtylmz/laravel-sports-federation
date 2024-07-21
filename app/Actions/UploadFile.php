@@ -8,11 +8,16 @@ use Illuminate\Support\Str;
 class UploadFile
 {
 
-    public static function image(UploadedFile $file, string $folder = ''): false|string
+    public static function image(UploadedFile $file, string $folder = '', string|null $extension = null): false|string
+    {
+        return self::file($file, $folder);
+    }
+
+    public static function file(UploadedFile $file, string $folder = '', string|null $extension = null): false|string
     {
         $name = self::name(
             $file->getClientOriginalName(),
-            $file->getClientOriginalExtension()
+            $extension ?: $file->getClientOriginalExtension()
         );
 
         $folder = 'uploads' . (!empty($folder) ? '/' . $folder : '');

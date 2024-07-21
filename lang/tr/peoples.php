@@ -5,7 +5,7 @@ return [
     'title' => 'Bilgi Bankası',
     'add' => 'Ekle',
 
-    'type' => 'Kişi Tipi',
+    'type' => 'Tip',
 
     'nationality' => 'Uyruk',
     'license_no' => 'Lisans No',
@@ -16,6 +16,9 @@ return [
     'racer' => 'Yarışçı',
     'school' => 'Okul Sporları',
 
+    'noAdult' => '18 Yaşından Büyük',
+    'adult18' => '18 Yaşından Küçük, Veli Onaylı',
+    'under18' => '18 Yaşından Küçük, Veli Onaylı Yok',
 
     'delete' => 'Kayıt silinecektir, işleme devam edilsin mi?',
 

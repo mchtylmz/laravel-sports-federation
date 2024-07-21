@@ -29,7 +29,7 @@
     @foreach($federations as $federation)
         <li class="list-group-item">
             <img src="{!! asset($federation->logo) !!}"
-                 style="height: 36px; object-fit: contain; margin-right: 10px"
+                 style="height: 64px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
                  alt="{{ $federation->name }}">
             <strong>{{ $federation->name }}</strong>
         </li>

@@ -36,10 +36,26 @@ if (!function_exists('federations')) {
     }
 }
 
+if (!function_exists('clubs')) {
+    function clubs()
+    {
+        return \App\Models\Club::where('status', 'active')->get();
+    }
+}
+
 if (!function_exists('peoples')) {
     function peoples()
     {
         return \App\Models\People::where('status', 'active')->get();
+    }
+}
+
+if (!function_exists('federation_clubs')) {
+    function federation_clubs(int $federation_id)
+    {
+        return \App\Models\Club::whereRaw(
+            sprintf("FIND_IN_SET('%d', federation_id)", $federation_id)
+        )->get();
     }
 }
 

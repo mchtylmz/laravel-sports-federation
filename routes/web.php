@@ -105,11 +105,19 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:superadmin,admin')
         ->controller(\App\Http\Controllers\FederationController::class)
         ->group(function () {
-            Route::get('', 'index')->name('index');
-            Route::get('json', 'json')->name('json');
-            Route::get('detail/{federation:id?}', 'detail')->name('show');
-            Route::post('save/{federation:id?}', 'save')->name('save');
-            Route::post('delete/{federation:id}', 'delete')->name('delete');
+
+            Route::middleware('role:superadmin')->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('json', 'json')->name('json');
+                Route::get('detail/{federation:id?}', 'detail')->name('show');
+                Route::post('save/{federation:id?}', 'save')->name('save');
+                Route::post('delete/{federation:id}', 'delete')->name('delete');
+            });
+
+            Route::middleware('role:admin')->group(function () {
+                Route::get('', 'info')->name('index');
+            });
+
         });
 
     // middleware

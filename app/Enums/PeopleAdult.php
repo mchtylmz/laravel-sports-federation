@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum Gender: string
+enum PeopleAdult: string
 {
-    case male = 'male';
-
-    case female = 'female';
+    case noAdult = '0';
+    case adult18 = '1';
+    case under18 = '2';
 
     public static function names(): array
     {
@@ -21,8 +21,9 @@ enum Gender: string
     public static function titles(): array
     {
         return [
-            self::male->value => __('table.male'),
-            self::female->value => __('table.female')
+            self::noAdult->value => __('peoples.noAdult'),
+            self::adult18->value => __('peoples.adult18'),
+            self::under18->value => __('peoples.under18'),
         ];
     }
 

@@ -9,8 +9,8 @@
     <x-block title="{{ $title }}">
         <x-table route="{{ route('punishment.json') }}" pagination="ajax">
             <x-slot name="columns">
-                <th data-field="id" data-width="5" data-sortable="true">
-                    {{ __('table.id') }}
+                <th data-field="type" data-formatter="setText" data-width="10">
+                    {{ __('peoples.type') }}
                 </th>
                 <th data-field="photo" data-formatter="setImage" data-width="10">
                     {{ __('table.photo') }}

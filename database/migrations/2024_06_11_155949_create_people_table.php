@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('identity')->nullable();
             $table->string('birth_place')->nullable();
             $table->date('birth_date')->nullable();
-            $table->enum('adult', ['0', '1'])->default('1');
+            $table->enum('adult', ['0', '1', '2'])->default('2');
             $table->string('father_name')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('registered_at')->nullable();

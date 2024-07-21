@@ -16,7 +16,8 @@ class SaveRequest extends BaseRequest
         return [
             'logo' => ['nullable', 'image'],
             'name' => ['required', 'string'],
-            'document_number' => ['nullable', 'string']
+            'document_number' => ['nullable', 'string'],
+            'branch_number' => ['nullable', 'string']
         ];
     }
 }

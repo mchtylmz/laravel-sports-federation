@@ -29,6 +29,8 @@ class PunishmentResource extends JsonResource
             'photo_image' => asset($this->people?->photo),
             'reason' => $this->reason,
             'description' => $this->description,
+            'type' => $this->people?->type?->value,
+            'type_text' => $this->people?->type?->title(),
             'created_at' => $this->created_at?->format('Y-m-d'),
             'actions' => $actions
         ];

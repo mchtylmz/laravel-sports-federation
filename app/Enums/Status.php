@@ -13,6 +13,11 @@ enum Status: string
         return array_column(self::cases(), 'name');
     }
 
+    public function title(): string
+    {
+        return self::titles()[$this->value] ?? '-';
+    }
+
     public static function titles(): array
     {
         return [
