@@ -41,10 +41,43 @@
 
                     @if(hasRole('admin'))
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('home') }}">
-                            <i class="nav-main-link-icon si si-flag"></i>
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                           aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-users"></i>
                             <span class="nav-main-link-name">{{ __('table.federasyon_bilgi') }}</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.directories') }}">
+                                    <span class="nav-main-link-name">Yönetim Kurulu</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.statute') }}">
+                                    <span class="nav-main-link-name">Tüzük</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.clubs') }}">
+                                    <span class="nav-main-link-name">Kulüpler</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.date') }}">
+                                    <span class="nav-main-link-name">Genel Kurul Tarihi</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.contact') }}">
+                                    <span class="nav-main-link-name">İletişim Bilgileri</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('federation.info.members') }}">
+                                    <span class="nav-main-link-name">Üye Kuruluşlar</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     @endif
 
@@ -83,6 +116,12 @@
                             </a>
                         </li>
                     @endif
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('calendar') }}">
+                            <i class="nav-main-link-icon si si-calendar"></i>
+                            <span class="nav-main-link-name">Takvim</span>
+                        </a>
+                    </li>
 
                     @if(hasRole('superadmin'))
 

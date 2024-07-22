@@ -33,6 +33,10 @@
         <br> <strong>{{ Carbon\Carbon::parse($end_date)->translatedFormat('d F Y l, H:i') }}</strong>
     </li>
     <li class="list-group-item">
+        Durum
+        <br> <strong>{{ $event->status }}</strong>
+    </li>
+    <li class="list-group-item">
         {{ __('events.form.end_notes') }}
         <br> <strong>{{ $event->end_notes }}</strong>
     </li>

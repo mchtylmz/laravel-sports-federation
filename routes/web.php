@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Club;
 use App\Models\Punishment;
 use App\Models\People;
+use App\Models\Director;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -18,8 +19,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('calendar', [HomeController::class, 'calendar'])->name('calendar');
 
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
+
     Route::post('profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
     Route::post('profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
 
@@ -103,20 +106,44 @@ Route::middleware('auth')->group(function () {
     Route::name('federation.')
         ->prefix('federations')
         ->middleware('role:superadmin,admin')
-        ->controller(\App\Http\Controllers\FederationController::class)
         ->group(function () {
 
-            Route::middleware('role:superadmin')->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('json', 'json')->name('json');
-                Route::get('detail/{federation:id?}', 'detail')->name('show');
-                Route::post('save/{federation:id?}', 'save')->name('save');
-                Route::post('delete/{federation:id}', 'delete')->name('delete');
-            });
+            Route::middleware('role:superadmin')
+                ->controller(\App\Http\Controllers\FederationController::class)
+                ->group(function () {
+                    Route::get('', 'index')->name('index');
+                    Route::get('json', 'json')->name('json');
+                    Route::get('detail/{federation:id?}', 'detail')->name('show');
+                    Route::post('save/{federation:id?}', 'save')->name('save');
+                    Route::post('delete/{federation:id}', 'delete')->name('delete');
+                    Route::get('notes/{federation:id}', 'notes')->name('notes');
+                    Route::post('notes/save/{federation:id}', 'noteSave')->name('notes.save');
+                    Route::post('notes/delete/{federation:id}', 'noteDelete')->name('notes.delete');
+                });
 
-            Route::middleware('role:admin')->group(function () {
-                Route::get('', 'info')->name('index');
-            });
+            Route::middleware('role:admin')
+                ->controller(\App\Http\Controllers\FederationInfoController::class)
+                ->name('info.')
+                ->prefix('info')
+                ->group(function () {
+                    Route::get('directories', 'directories')->name('directories');
+                    Route::post('directories/delete/{director:id}', 'directorDelete')->name('director.delete');
+                    Route::post('directories/save/{director:id?}', 'directorSave')->name('director.save');
+
+                    Route::get('statute', 'statute')->name('statute');
+                    Route::post('statute/save/{federation:id}', 'statuteSave')->name('statute.save');
+
+                    Route::get('clubs', 'clubs')->name('clubs');
+
+                    Route::get('date', 'date')->name('date');
+                    Route::post('date/save/{federation:id}', 'dateSave')->name('date.save');
+
+                    Route::get('contact', 'contact')->name('contact');
+                    Route::post('contact/save/{federation:id}', 'contactSave')->name('contact.save');
+
+                    Route::get('members', 'members')->name('members');
+                    Route::post('members/save/{federation:id}', 'membersSave')->name('members.save');
+                });
 
         });
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\View\View;
@@ -38,10 +39,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Facades\View::composer('*', function (View $view) {
             $view->with('site_title', settings()->site_title ?? config('app.name'));
+            $view->with('header_under_text', settings()->header_under_text ?? false);
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
             $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
         });
 
         Carbon::setlocale(app()->getLocale());
+
+        Paginator::useBootstrapFive();
     }
 }

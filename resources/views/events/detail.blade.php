@@ -68,6 +68,11 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="status">Durum</label>
+                <input type="text" class="form-control" id="status" name="status" placeholder="Durum." value="{{ $event->title ?? '' }}" required>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="end_notes">{{ __('events.event') }} {{ __('events.form.end_notes') }}</label>
                 <textarea id="content" class="form-control" name="end_notes" placeholder="{{ __('events.form.end_notes') }}..." rows="3">{{ $event->end_notes ?? '' }}</textarea>
             </div>

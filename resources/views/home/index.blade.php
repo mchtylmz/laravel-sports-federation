@@ -2,16 +2,10 @@
 
 @section('content')
 
-    <div class="row">
-
-        <div class="col-lg-12 py-3 bg-white mb-3">
-            <div id="js-calendar" data-route="{{ route('event.calendar') }}"></div>
+    <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 p-5">
+            <img src="{{ asset($site_logo) }}" onerror="this.src='{{ asset('uploads/no-img.png') }}'" class="w-100">
         </div>
-
     </div>
 
 @endsection
-@push('js')
-    <script src="{{ asset('assets/js/plugins/fullcalendar/index.global.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/be_comp_calendar.min.js') }}"></script>
-@endpush

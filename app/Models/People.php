@@ -24,6 +24,8 @@ class People extends Model
     public function casts()
     {
         return [
+            'birth_date' => 'date:Y-m-d',
+            'licensed_at' => 'date:Y-m-d',
             'registered_at' => 'date:Y-m-d',
             'created_at' => 'datetime:Y-m-d H:i',
             'updated_at' => 'datetime:Y-m-d H:i',

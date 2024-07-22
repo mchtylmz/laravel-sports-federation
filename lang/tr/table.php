@@ -23,6 +23,7 @@ return [
     'filter' => 'Filtrele',
     'region' => 'Bölge',
     'all' => 'Tümü',
+    'identity' => 'Kimlik',
 
     'description' => 'Açıklama',
     'reason' => 'Sebep',

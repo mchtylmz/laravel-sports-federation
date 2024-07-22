@@ -24,6 +24,7 @@ class SaveRequest extends BaseRequest
             'end_date' => ['date'],
             'end_time' => ['date_format:H:i'],
             'end_notes' => ['nullable', 'string'],
+            'status' => ['nullable', 'string'],
         ];
     }
 
@@ -39,6 +40,7 @@ class SaveRequest extends BaseRequest
             'end_date' => __('events.form.end_date'),
             'end_time' => __('events.form.end_time'),
             'end_notes' => __('events.form.end_notes'),
+            'status' => 'Durum'
         ];
     }
 }

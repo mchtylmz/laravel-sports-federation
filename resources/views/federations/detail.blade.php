@@ -31,6 +31,19 @@
                 <input type="text" class="form-control" id="branch_number" name="branch_number" placeholder="Branş Dosya No Liste.." value="{{ $federation->branch_number ?? '' }}">
             </div>
 
+            <div class="mb-3">
+                <label class="form-label" for="is_special">Özerk Durumu</label>
+                <select class="selectpicker form-control" id="is_special" name="is_special" required>
+                    <option value="0" @selected($federation->is_special == 0)>Özerk Değil, Hayır</option>
+                    <option value="1" @selected($federation->is_special == 1)>Özerk, Evet</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="website">Website Linki</label>
+                <input type="text" class="form-control" id="website" name="website" placeholder="Website Linki.." value="{{ $federation->website ?? '' }}">
+            </div>
+
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
                     <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}

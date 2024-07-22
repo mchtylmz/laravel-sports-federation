@@ -55,9 +55,12 @@
             eval('var text = row.' + this.field + '_text;');
             return text;
         }
+        function setNotes(value, row) {
+            return '<button type="button" class="btn btn-sm btn-alt-success" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" data-toggle="view" data-route="'+row.route_note+'"><i class="fa fa-fw fa-note-sticky ms-1 pl-0"></i> '+ row.notes_count+'</button>';
+        }
         function setImage(value, row) {
             eval('var image = row.' + this.field + '_image;');
-            return '<img alt="' + image + '" src="' + image + '" style="height: 48px; object-fit: contain;" />';
+            return '<img alt="' + image + '" src="' + image + '" style="height: 48px; object-fit: contain;" onerror="this.src=\'{{ asset('uploads/no-img.png') }}\'"/>';
         }
         function setActions(value, row) {
             return row.actions;

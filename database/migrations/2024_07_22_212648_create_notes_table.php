@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('federation_id');
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->tinyInteger('is_read')->default(0);
-            $table->timestamp('readed_at')->nullable();
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

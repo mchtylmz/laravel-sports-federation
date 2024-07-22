@@ -12,4 +12,11 @@ class HomeController extends Controller
             'title' => __('home.title')
         ]);
     }
+
+    public function calendar()
+    {
+        return view('home.calendar', [
+            'title' => 'Takvim'
+        ]);
+    }
 }

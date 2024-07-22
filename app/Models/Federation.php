@@ -25,4 +25,14 @@ class Federation extends Model
           'deleted_at' => 'datetime:Y-m-d H:i',
         ];
     }
+
+    public function directors()
+    {
+        return $this->hasMany(Director::class)->orderBy('sort', 'ASC');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class)->latest();
+    }
 }

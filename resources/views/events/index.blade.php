@@ -29,6 +29,9 @@
                         {{ __('table.is_national') }}
                     </th>
                 @endif
+                <th data-field="status" data-sortable="true">
+                    {{ __('table.status') }}
+                </th>
                 <th data-field="id" data-formatter="setActions">
                     {{ __('table.actions') }}
                 </th>

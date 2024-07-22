@@ -37,6 +37,12 @@
             </div>
 
 
+            <div class="mb-3">
+                <label class="form-label" for="header_under_text">Kayan Yazı</label>
+                <textarea rows="6" class="form-control" id="header_under_text" name="settings[header_under_text]" placeholder="Kayan Yazı.." required>{{ $header_under_text }}</textarea>
+            </div>
+
+
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
                     <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}

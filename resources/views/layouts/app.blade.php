@@ -76,6 +76,16 @@
     <!-- Main Container -->
     <main id="main-container">
         @include('layouts.parts.menu', ['mobile' => true])
+
+        @if($header_under_text)
+            <div class="bg-white-50 mb-3 p-3">
+                <!-- Soldan Sağa, Döngü İçinde -->
+                <marquee behavior="scroll" direction="left" scrollamount="14">
+                    <h5 class="mb-0">{{ $header_under_text }}</h5>
+                </marquee>
+            </div>
+        @endif
+
         <!-- Page Content -->
         <div class="content">
             @yield('content')

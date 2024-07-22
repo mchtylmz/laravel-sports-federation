@@ -41,6 +41,7 @@ class EventResource extends JsonResource
             'startStr' => Carbon::parse($this->start_date)->translatedFormat('d F Y l, H:i'),
             'end_notes' => $this->end_notes,
             'view_route' => route('event.show', $this->id) . '?format=json',
+            'status' => $this->status,
             'actions' => $actions
         ];
 

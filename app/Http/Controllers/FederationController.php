@@ -6,6 +6,7 @@ use App\Actions\UploadFile;
 use App\Http\Requests\Federation\SaveRequest;
 use App\Http\Resources\FederationResource;
 use App\Models\Federation;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class FederationController extends Controller
@@ -14,13 +15,6 @@ class FederationController extends Controller
     {
         return view('federations.index', [
             'title' => __('federations.title')
-        ]);
-    }
-
-    public function info()
-    {
-        return view('federations.info', [
-            'title' => user()?->federation()?->name
         ]);
     }
 
@@ -85,6 +79,41 @@ class FederationController extends Controller
         return response()->json([
             'message' => __('settings.federation_delete_success', ['name' => $federation->name]),
             'refresh' => true
+        ]);
+    }
+
+    public function notes(Federation $federation)
+    {
+        return response()->json([
+            'title' => $federation->name . ' - Notlar',
+            'notes' => $federation->notes,
+            'federation' => $federation,
+            'body' => view('federations.note_offcanvas', [
+                'notes' => $federation->notes,
+                'federation' => $federation,
+            ])->render()
+        ]);
+    }
+
+    public function noteSave(Request $request, Federation $federation)
+    {
+        $federation->notes()->create([
+            'title' => $request->string('title'),
+            'content' => $request->string('content'),
+        ]);
+
+        return response()->json([
+            'message' => 'Not Gönderildi',
+            'refresh' => true
+        ]);
+    }
+
+    public function noteDelete(Note $note)
+    {
+        $note->delete();
+
+        return response()->json([
+            'message' => 'Not silindi'
         ]);
     }
 }

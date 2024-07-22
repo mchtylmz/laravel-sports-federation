@@ -26,6 +26,7 @@
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" for="location">{{ __('table.location') }}</label>
                         <select class="selectpicker form-control" id="location" name="location" data-placeholder="{{ __('table.location') }}...." data-size="5" data-live-search="true">
+                            <option value="">{{ __('table.all') }}</option>
                             @foreach(places() as $places)
                                 <option value="{{ $places }}">{{ $places }}</option>
                             @endforeach

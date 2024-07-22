@@ -27,6 +27,12 @@
                 <th data-field="is_special" data-formatter="setText" data-sortable="true">
                     {{ __('table.is_special') }}
                 </th>
+                <th data-field="website"  data-sortable="true">
+                    Site
+                </th>
+                <th data-field="id" data-formatter="setNotes" data-sortable="true">
+                    Not
+                </th>
                 <th data-field="id" data-formatter="setActions">
                     {{ __('table.actions') }}
                 </th>
