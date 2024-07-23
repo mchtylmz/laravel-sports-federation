@@ -51,8 +51,9 @@ if (!function_exists('peoples')) {
 }
 
 if (!function_exists('federation_clubs')) {
-    function federation_clubs(int $federation_id)
+    function federation_clubs(int|null $federation_id)
     {
+        $federation_id = intval($federation_id);
         return \App\Models\Club::whereRaw(
             sprintf("FIND_IN_SET('%d', federation_id)", $federation_id)
         )->get();

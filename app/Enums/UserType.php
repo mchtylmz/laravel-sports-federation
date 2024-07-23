@@ -10,6 +10,8 @@ enum UserType: string
 
     case manager = 'manager';
 
+    case calendar = 'calendar';
+
     public static function names(): array
     {
         return array_column(self::cases(), 'name');
@@ -26,6 +28,7 @@ enum UserType: string
             self::manager->value => __('users.manager'),
             self::admin->value => __('users.admin'),
             self::superadmin->value => __('users.superadmin'),
+            self::calendar->value => __('users.calendar'),
         ];
     }
 

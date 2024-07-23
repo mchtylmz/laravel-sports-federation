@@ -19,6 +19,7 @@ class SaveRequest extends BaseRequest
             'document_number' => ['nullable', 'string'],
             'branch_number' => ['nullable', 'string'],
             'website' => ['nullable', 'string'],
+            'is_special' => ['required', 'in:0,1'],
         ];
     }
 }

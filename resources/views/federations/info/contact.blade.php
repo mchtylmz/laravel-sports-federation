@@ -24,6 +24,18 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email..." value="{{ $federation->getMeta('email') }}">
                     </div>
                 </div>
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label" for="fax">Fax</label>
+                        <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax..." value="{{ $federation->getMeta('fax') }}">
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label" for="website">Website</label>
+                        <input type="text" class="form-control" id="website" name="website" placeholder="Website..." value="{{ $federation->getMeta('website') }}">
+                    </div>
+                </div>
             </div>
 
             <div class="my-3 text-center submit">

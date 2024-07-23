@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     // middleware
     Route::name('event.')
         ->prefix('events')
-        ->middleware('role:admin,manager')
+        ->middleware('role:admin,manager,calendar')
         ->controller(\App\Http\Controllers\EventController::class)
         ->group(function () {
             Route::get('', 'index')->name('index');
@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
         ->controller(\App\Http\Controllers\EventController::class)
         ->group(function () {
             Route::get('calendar', 'calendar')->name('calendar');
-            Route::middleware('role:superadmin,admin,manager')
+            Route::middleware('role:superadmin,admin,manager,calendar')
                 ->get('detail/{event:id?}', 'detail')
                 ->name('show');
         });

@@ -73,12 +73,16 @@ class FederationInfoController extends Controller
 
     public function statuteSave(Request $request, Federation $federation)
     {
-        if ($request->hasFile('file')) {
-            $file = UploadFile::file($request->file('file'));
+        $files = [];
+        if ($metaFiles = json_decode($federation->getMeta('statute_files'), true)) {
+            $files = $metaFiles;
+        }
+        foreach ($request->file('file') as $file) {
+            $files[] = UploadFile::file($file);
         }
 
         $federation->setMeta([
-            'statute_file' => $file ?? ''
+            'statute_files' => json_encode($files)
         ]);
 
         return response()->json([
@@ -92,7 +96,9 @@ class FederationInfoController extends Controller
         $federation->setMeta([
             'fullname' => $request->string('fullname'),
             'phone' => $request->string('phone'),
-            'email' => $request->string('email')
+            'email' => $request->string('email'),
+            'fax' => $request->string('fax'),
+            'website' => $request->string('website'),
         ]);
 
         return response()->json([

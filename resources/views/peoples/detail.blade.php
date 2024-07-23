@@ -185,19 +185,28 @@
             </div>
 
             <div class="row people-racer" style="display: none">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="mb-3">
                         <label class="form-label" for="racer_section">Yarışma Dalı</label>
                         <input type="text" class="form-control" id="racer_section" name="racer_section" placeholder="Yarışma Dalı.." value="{{ $people->getMeta('racer_section') ?? '' }}">
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label class="form-label" for="racer_document">Muafiyet Belgesi</label>
+                        <input type="file" class="form-control" id="racer_document" accept="application/pdf" name="racer_document">
+                        @if($racer_document = $people->getMeta('racer_document'))
+                            <small><a target="_blank" href="{{ $racer_document }}">{{ $racer_document }}</a></small>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-lg-3">
                     <div class="mb-3">
                         <label class="form-label" for="racer_car_brand">Araç Markası</label>
                         <input type="text" class="form-control" id="racer_car_brand" name="racer_car_brand" placeholder="Araç Markası.." value="{{ $people->getMeta('racer_car_brand') ?? '' }}" @disabled(!hasRole('superadmin'))>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="mb-3">
                         <label class="form-label" for="racer_car_no">Araç Şasi No</label>
                         <input type="text" class="form-control" id="racer_car_no" name="racer_car_no" placeholder="Araç Şasi No.." value="{{ $people->getMeta('racer_car_no') ?? '' }}" @disabled(!hasRole('superadmin'))>

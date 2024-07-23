@@ -7,11 +7,11 @@
     </div>
 
     <x-block title="{{ $title }}">
-        <x-table route="{{ route('federation.json') }}" pagination="ajax">
+        <x-table route="{{ route('federation.json') }}">
             <x-slot name="columns">
-                <th data-field="id" data-width="5" data-sortable="true">
+                <!--<th data-field="id" data-width="5" data-sortable="true">
                     {{ __('table.id') }}
-                </th>
+                </th>-->
                 <th data-field="logo" data-formatter="setImage">
                     {{ __('table.logo') }}
                 </th>
@@ -27,12 +27,12 @@
                 <th data-field="is_special" data-formatter="setText" data-sortable="true">
                     {{ __('table.is_special') }}
                 </th>
-                <th data-field="website"  data-sortable="true">
+                <!--<th data-field="website"  data-sortable="true">
                     Site
                 </th>
                 <th data-field="id" data-formatter="setNotes" data-sortable="true">
                     Not
-                </th>
+                </th>-->
                 <th data-field="id" data-formatter="setActions">
                     {{ __('table.actions') }}
                 </th>

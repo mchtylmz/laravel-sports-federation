@@ -6,18 +6,22 @@ return [
     'manager' => 'Tesis Sorumlusu',
     'admin' => 'Federasyon Kullanıcısı',
     'superadmin' => 'Yönetici',
+    'calendar' => 'Takvim',
 
     'managers' => 'Tesis Sorumluları',
     'admins' => 'Federasyon Kullanıcıları',
     'superadmins' => 'Yöneticiler',
+    'calendars' => 'Takvim Kullanıcıları',
 
     'add_manager' => 'Tesis Sorumlusu Ekle',
     'add_admin' => 'Federasyon Kullanıcısı Ekle',
     'add_superadmin' => 'Yönetici Ekle',
+    'add_calendar' => 'Takvim Kullanıcısı Ekle',
 
     'edit_manager' => 'Tesis Sorumlusu Düzenle',
     'edit_admin' => 'Federasyon Kullanıcısı Düzenle',
     'edit_superadmin' => 'Yönetici Düzenle',
+    'edit_calendar' => 'Takvim Kullanıcısı  Düzenle',
 
     'add' => 'Kullanıcı Ekle',
 

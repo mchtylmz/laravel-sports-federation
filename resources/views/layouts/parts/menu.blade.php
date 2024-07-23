@@ -143,6 +143,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ route('user.index', 'calendar') }}">
+                                        <span class="nav-main-link-name">Takvim Kullanıcıları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
                                     <a class="nav-main-link" href="{{ route('user.index', 'superadmin') }}">
                                         <span class="nav-main-link-name">Yöneticiler</span>
                                     </a>

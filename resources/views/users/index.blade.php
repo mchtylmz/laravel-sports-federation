@@ -46,7 +46,7 @@
         </form>
         <hr>
 
-        <x-table route="{{ route('user.json', $userType) }}" pagination="ajax">
+        <x-table route="{{ route('user.json', $userType) }}">
             <x-slot name="columns">
                 <th data-field="id" data-width="5">
                     {{ __('table.id') }}

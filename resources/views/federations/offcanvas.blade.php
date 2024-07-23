@@ -55,6 +55,10 @@
                     <br> <strong>{{ $federation->branch_number }}</strong>
                 </li>
                 <li class="list-group-item">
+                    Özerk
+                    <br> <strong>{{ $federation->is_special == 1 ? __('table.yes') : __('table.no') }}</strong>
+                </li>
+                <li class="list-group-item">
                     Website
                     <br> <strong>{{ $federation->website }}</strong>
                 </li>
@@ -111,17 +115,15 @@
 
         <!-- -->
         <div class="tab-pane" id="btabs-tab2" role="tabpanel" aria-labelledby="btabs-tab2" tabindex="0">
-            @if($statute_file = $federation->getMeta('statute_file'))
-                <div class="mb-3 bg-white">
-                    <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
-                    @if(pathinfo($statute_file, PATHINFO_EXTENSION) == 'pdf')
-                        <iframe src="{{ asset($statute_file) }}#toolbar=0" style="width: 100%; height: 600px; border:0;"></iframe>
-                    @else
+            @if($statute_files = $federation->getMeta('statute_files'))
+                @foreach($statute_files as $statute_file)
+                    <div class="mb-3 bg-white">
+                        <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
                         <a target="_blank" href="{{ asset($statute_file) }}" class="btn btn-alt-info w-100 py-3 rounded-0">
                             <i class="fa fa-external-link mx-2 fa-faw"></i> Dosyayı Yeni Sekmede Aç
                         </a>
-                    @endif
-                </div>
+                    </div>
+                @endforeach
             @else
                 <div class="alert alert-danger">
                     Tüzük dosyası bulunmuyor!.
@@ -166,6 +168,10 @@
                 <li class="list-group-item">
                     Email
                     <br> <strong>{{ $federation->getMeta('email') }}</strong>
+                </li>
+                <li class="list-group-item">
+                    Fax
+                    <br> <strong>{{ $federation->getMeta('fax') }}</strong>
                 </li>
                 <li class="list-group-item">
                     Website

@@ -69,7 +69,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="status">Durum</label>
-                <input type="text" class="form-control" id="status" name="status" placeholder="Durum." value="{{ $event->title ?? '' }}" required>
+                <input type="text" class="form-control" id="status" name="status" placeholder="Durum.." value="{{ $event->status ?? '' }}" required>
             </div>
 
             <div class="mb-3">

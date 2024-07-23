@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('admin')
         ]);
+        User::create([
+            'role' => 'calendar',
+            'name' => 'calendar',
+            'username' => 'calendar',
+            'password' => Hash::make('calendar')
+        ]);
         $manager = User::create([
             'role' => 'manager',
             'name' => 'manager',

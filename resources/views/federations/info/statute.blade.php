@@ -9,9 +9,9 @@
                 <div class="col-lg-12">
                     <div class="mb-0">
                         <label class="form-label" for="file">Tüzük Dosya Yükle (PDF, WORD, EXCEL)</label>
-                        <input type="file" class="form-control" id="file" accept=".pdf,.xlsx,.xls,.doc,.docx" name="file" required>
+                        <input type="file" class="form-control" id="file" accept=".pdf,.xlsx,.xls,.doc,.docx" name="file[]" multiple required>
                     </div>
-                    <small>Dosya yüklenirse tüzük içeriği güncellenir.</small>
+                    <small>Dosya yüklenirse tüzük içeriği güncellenir. Birden fazla dosya eklenebilir.</small>
                 </div>
             </div>
 
@@ -25,17 +25,15 @@
 
     <hr>
 
-    @if($statute_file = $federation->getMeta('statute_file'))
-        <div class="mb-3 bg-white">
-            <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
-            @if(pathinfo($statute_file, PATHINFO_EXTENSION) == 'pdf')
-                <iframe src="{{ asset($statute_file) }}#toolbar=0" style="width: 100%; height: 720px; border:0;"></iframe>
-            @else
+    @if($statute_files = $federation->getMeta('statute_files'))
+        @foreach($statute_files as $statute_file)
+            <div class="mb-3 bg-white">
+                <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
                 <a target="_blank" href="{{ asset($statute_file) }}" class="btn btn-alt-info w-100 py-3 rounded-0">
                     <i class="fa fa-external-link mx-2 fa-faw"></i> Dosyayı Yeni Sekmede Aç
                 </a>
-            @endif
-        </div>
+            </div>
+        @endforeach
     @endif
 
 @endsection

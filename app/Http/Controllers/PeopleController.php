@@ -108,6 +108,9 @@ class PeopleController extends Controller
                 $metas['racer_car_brand'] = $request->get('racer_car_brand');
                 $metas['racer_car_no'] = $request->get('racer_car_no');
             }
+            if ($request->hasFile('racer_document')) {
+                $metas['racer_document'] = UploadFile::file($request->file('racer_document'));
+            }
         } elseif ($people->type == PeopleType::school) {
             $metas = [
                 'school_club_id' => $request->integer('school_club_id'),

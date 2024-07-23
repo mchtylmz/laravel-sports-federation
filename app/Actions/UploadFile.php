@@ -28,10 +28,10 @@ class UploadFile
     protected static function name(string $name, string $extension): string
     {
         return sprintf(
-            '%s_%d%s.%s',
+            '%s_%d-%s.%s',
             Str::slug(pathinfo($name, PATHINFO_FILENAME)),
-            time(),
-            Str::random(3),
+            date('YmdHi'),
+            Str::random(2),
             $extension
         );
     }

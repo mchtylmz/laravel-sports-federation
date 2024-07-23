@@ -107,6 +107,9 @@
                     <li class="list-group-item">
                         Araç Şasi No <br> <strong>{{ $people->getMeta('racer_car_no') }}</strong>
                     </li>
+                    <li class="list-group-item">
+                        Muafiyet Belgesi <br> <a target="_blank" href="{{ asset($people->getMeta('racer_document')) }}"><strong class="text-dark text-decoration-underline">Belgeyi Görüntüle</strong></a>
+                    </li>
                 @endif
 
                 @if($people->type == \App\Enums\PeopleType::school)
