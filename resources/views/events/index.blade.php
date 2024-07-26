@@ -7,7 +7,9 @@
     </div>
 
     <x-block title="{{ $title }}">
-        <x-table route="{{ route('event.json') }}">
+        <x-table route="{{ route('event.json') }}"
+                 export-pdf="{{ route('event.export.pdf') }}"
+                 export-excel="{{ route('event.export.excel') }}">
             <x-slot name="columns">
                 <th data-field="id" data-width="5">
                     {{ __('table.id') }}

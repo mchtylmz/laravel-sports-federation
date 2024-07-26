@@ -5,7 +5,9 @@
     'search' => true,
     'pagination' => 'server',
     'refresh' => true,
-    'id' => 'bootstrap-table'
+    'id' => 'bootstrap-table-' . time(),
+    'exportPdf' => false,
+    'exportExcel' => false,
 ])
 
 <div class="bootstrap-table">
@@ -13,6 +15,31 @@
         <i class="fa fa-fw fa-spinner fa-pulse fa-2x" style="--fa-animation-duration: 0.4s;" ></i>
     </div>
     <div class="table-responsive pb-3 d-none">
+        <div id="{{ $id }}-toolbar">
+            @if($exportPdf || $exportExcel)
+                <div class="dropdown mx-2">
+                    <a class="btn btn-secondary dropdown-toggle table-export" href="#" role="button" id="exportLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dışa Aktar
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @if($exportPdf)
+                            <li>
+                                <a target="_blank" class="dropdown-item py-2 table-export-pdf" href="{{ $exportPdf }}">
+                                    <i class="fa fa-file-pdf fa-fw mx-2"></i> PDF
+                                </a>
+                            </li>
+                        @endif
+                        @if($exportExcel)
+                            <li>
+                                <a target="_blank" class="dropdown-item py-2 table-export-excel" href="{{ $exportExcel }}">
+                                    <i class="fa fa-file-excel fa-fw mx-2"></i> Excel
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
+        </div>
         <table
             id="{{ $id }}"
             data-toggle="table"
@@ -28,6 +55,7 @@
             data-show-search-button="true"
             data-buttons-align="left"
             data-query-params="queryParams"
+            data-toolbar="#{{ $id }}-toolbar"
             {{ $attributes }}>
             <thead>
             <tr>
@@ -74,11 +102,31 @@
                 })
             }
 
+            exportAttribute(params);
+
             return params;
         }
         function setLoading() {
             $('[data-toggle="bootstrap-table-loading"]').addClass('d-none');
             $(this).closest('.table-responsive').removeClass('d-none');
+        }
+
+        function exportAttribute(params) {
+            let exportExcel = $('a.table-export-excel'),
+                exportPdf = $('.table-export-pdf'),
+                exportParams = jQuery.param(params);
+
+            exportParams = exportParams.toString().replaceAll('undefined', '');
+
+            if (exportExcel.length) {
+                let exportExcelHref = exportExcel.attr('href').split('?')[0];
+                exportExcel.attr('href', exportExcelHref + '?' + exportParams);
+            }
+
+            if (exportPdf.length) {
+                let exportPdfHref = exportPdf.attr('href').split('?')[0];
+                exportPdf.attr('href', exportPdfHref + '?' + exportParams);
+            }
         }
 
         let bsTable = $('table');

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EventExport;
 use App\Http\Requests\Event\SaveRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 use App\Models\Federation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EventController extends Controller
 {
@@ -18,14 +21,18 @@ class EventController extends Controller
         ]);
     }
 
-    public function json(Request $request)
+    public function json(Request $request, bool $filtered = true)
     {
         $event = user()->events()->orderBy('start_date', 'DESC')->orderBy('start_time');
-        if ($request->has('sort')) {
+        if ($request->get('sort')) {
             $event = $event->orderBy($request->get('sort'), $request->get('order', 'ASC'));
         }
         if ($request->get('search')) {
             $event->whereAny(['title', 'content', 'location', 'end_notes'], 'LIKE', '%' . $request->get('search'). '%');
+        }
+
+        if (!$filtered) {
+            return $event->get();
         }
 
         return response()->json([
@@ -33,6 +40,26 @@ class EventController extends Controller
             'totalNotFiltered' => $event->count(),
             'rows' => EventResource::collection($event->page()),
         ]);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $events = $this->json($request, false);
+
+        return Pdf::loadView('pdf.events', [
+            'events' => $events,
+            'federation' => user()?->federation()
+        ])->stream('events2.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $events = $this->json($request, false);
+
+        return Excel::download(
+            new EventExport($events),
+            sprintf('etkinlikler_%s.xlsx', date('Ymd_Hi'))
+        );
     }
 
     public function calendar(Request $request)
@@ -75,11 +102,11 @@ class EventController extends Controller
         if (!$event->id) {
             $event = user()->events()->create($validated);
         } else {
-            if ($event->isPassed()) {
+            /*if ($event->isPassed()) {
                 return response()->json([
                     'message' => __('events.not_edit')
                 ], 400);
-            }
+            }*/
 
             $event->update($validated);
         }

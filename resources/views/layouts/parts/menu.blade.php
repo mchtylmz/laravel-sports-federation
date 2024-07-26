@@ -30,6 +30,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('calendar') }}">
+                            <i class="nav-main-link-icon si si-calendar"></i>
+                            <span class="nav-main-link-name">Takvim</span>
+                        </a>
+                    </li>
+
                     @if(hasRole('superadmin'))
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('federation.index') }}">
@@ -116,12 +123,6 @@
                             </a>
                         </li>
                     @endif
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('calendar') }}">
-                            <i class="nav-main-link-icon si si-calendar"></i>
-                            <span class="nav-main-link-name">Takvim</span>
-                        </a>
-                    </li>
 
                     @if(hasRole('superadmin'))
 

@@ -9,7 +9,7 @@
         <div class="content content-full">
             <div class="row g-0 justify-content-center">
                 <div class="col-12 col-md-5 col-lg-5 col-xl-5 py-3 px-3 px-lg-3 text-start">
-                    <img src="{!! asset(settings()->login_logo3) !!}" alt="logo" class="w-100 p-3">
+                    <img src="{!! asset(settings()->login_logo3) !!}" alt="logo" class="w-100 p-3" style="max-height: 500px; object-fit: contain">
                 </div>
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 py-3 px-3 px-lg-3 text-center">
                     <!-- Header -->
@@ -49,7 +49,7 @@
                         <!-- Header -->
                         <div class="text-center mb-2">
                             <p class="mb-1">
-                                <img src="{!! asset(settings()->login_logo1) !!}" class="login-logo" alt="Logo" style="max-width: 112px">
+                                <img src="{!! asset(settings()->login_logo2) !!}" class="login-logo" alt="Logo" style="max-width: 112px">
                             </p>
                         </div>
                         <!-- END Header -->

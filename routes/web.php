@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('', 'index')->name('index');
             Route::get('json', 'json')->name('json');
+            Route::get('export/excel', 'exportExcel')->name('export.excel');
+            Route::get('export/pdf', 'exportPdf')->name('export.pdf');
             Route::post('save/{event:id?}', 'save')->name('save');
             Route::post('delete/{event:id}', 'delete')->name('delete');
         });

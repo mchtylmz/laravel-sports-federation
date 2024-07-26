@@ -21,7 +21,7 @@
         <br> <strong>{{ $event->location }}</strong>
     </li>
     <li class="list-group-item">
-        {{ __('events.form.is_national') }}
+        Uluslar Arası
         <br> <strong>{{ $event->is_national ? __('table.national')  : __('table.local') }}</strong>
     </li>
     <li class="list-group-item">
