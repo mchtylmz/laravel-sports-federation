@@ -29,7 +29,7 @@
     @stack('css')
 </head>
 <body>
-<div id="page-container" class="page-header-light main-content-boxed">
+<div id="page-container" class="page-header-light main-content-full">
     <!-- <div id="page-loader" class="show"></div> -->
 
     <!-- Header -->
@@ -87,7 +87,7 @@
         @endif
 
         <!-- Page Content -->
-        <div class="content">
+        <div class="content pt-{{ $header_under_text ? 2 : 4 }}">
             @yield('content')
         </div>
         <!-- END Page Content -->

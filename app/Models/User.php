@@ -64,4 +64,11 @@ class User extends Authenticatable
 
         return Federation::where('id', $federation_id)->first();
     }
+
+    public function permit(string $name): bool
+    {
+        $permissions = json_decode($this->permssions, true);
+
+        return in_array($name, $permissions);
+    }
 }

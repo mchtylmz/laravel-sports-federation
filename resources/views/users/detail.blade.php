@@ -110,7 +110,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="event_color">{{ __('users.form.event_color') }}</label>
-                <input type="color" class="form-control" id="event_color" name="event_color" placeholder="{{ __('users.form.event_color') }}.." value="{{ $user->event_color ?? '#DC1E1E' }}">
+                <input type="color" class="form-control" id="event_color" name="event_color" placeholder="{{ __('users.form.event_color') }}.." value="{{ $user->getMeta('event_color') }}">
             </div>
 
             <div class="mb-3">
@@ -126,6 +126,17 @@
                         <label class="form-check-label" for="passive">{{ __('table.passive') }}</label>
                     </div>
                 </div>
+            </div>
+
+            <hr>
+
+            @php
+            $permits = [
+
+            ];
+            @endphp
+            <div class="permissions">
+                <h5 class="bg-light p-3 w-100">İşlem İzinleri</h5>
             </div>
 
             <div class="mb-4 text-center">

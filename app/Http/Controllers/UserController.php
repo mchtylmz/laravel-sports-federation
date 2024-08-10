@@ -136,6 +136,7 @@ class UserController extends Controller
             ];
         }
 
+        $user->deleteMeta();
         $user->setMeta($metas);
         // metas
 

@@ -193,11 +193,13 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="mb-3">
+                        @php $racer_document = $people->getMeta('racer_document'); @endphp
                         <label class="form-label" for="racer_document">Muafiyet Belgesi</label>
-                        <input type="file" class="form-control" id="racer_document" accept="application/pdf" name="racer_document">
-                        @if($racer_document = $people->getMeta('racer_document'))
-                            <small><a target="_blank" href="{{ $racer_document }}">{{ $racer_document }}</a></small>
-                        @endif
+                        <select class="selectpicker form-control" id="racer_document" name="racer_document" data-placeholder="Seçiniz..." data-size="5" data-live-search="true" required>
+                            @foreach(['Evet', 'Hayır'] as $value)
+                                <option value="{{ $value }}" @selected($value == $racer_document)>{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-3">

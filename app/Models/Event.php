@@ -36,6 +36,11 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function groups()
+    {
+        return $this->hasMany(EventGroup::class);
+    }
+
     public function isPassed(string|null $date = null): bool
     {
         if (!$date) {

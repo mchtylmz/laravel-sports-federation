@@ -44,16 +44,6 @@
             </div>
 
             <div class="mb-3">
-                @php $clubFederations = explode(',', ($club->federation_id ?? ''))@endphp
-                <label class="form-label" for="federation_id">{{ __('table.federation') }}</label>
-                <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple required>
-                    @foreach(federations() as $federation)
-                        <option value="{{ $federation->id }}" @selected(in_array($federation->id, $clubFederations))>{{ $federation->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="mb-3">
                 <label class="form-label" for="status">{{ __('table.status') }}</label>
                 <div class="space-x-2">
                     @php $status = $club->status?->value ?? 'active'; @endphp
@@ -66,6 +56,16 @@
                         <label class="form-check-label" for="passive">{{ __('table.passive') }}</label>
                     </div>
                 </div>
+            </div>
+
+            <div class="mb-3">
+                @php $clubFederations = explode(',', ($club->federation_id ?? ''))@endphp
+                <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
+                <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple required>
+                    @foreach(federations() as $federation)
+                        <option value="{{ $federation->id }}" @selected(in_array($federation->id, $clubFederations))>{{ $federation->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-4 text-center">

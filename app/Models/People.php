@@ -46,4 +46,9 @@ class People extends Model
     {
         return $this->hasMany(Punishment::class)->latest();
     }
+
+    public function groups()
+    {
+        return $this->hasMany(EventGroup::class);
+    }
 }

@@ -21,18 +21,18 @@
                 <th data-field="document_number" data-sortable="true">
                     {{ __('table.document_number') }}
                 </th>
-                <th data-field="branch_number" data-sortable="true">
+                <!--<th data-field="branch_number" data-sortable="true">
                     {{ __('table.branch_number') }}
-                </th>
+                </th>-->
                 <th data-field="is_special" data-formatter="setText" data-sortable="true">
                     {{ __('table.is_special') }}
                 </th>
                 <!--<th data-field="website"  data-sortable="true">
                     Site
-                </th>
+                </th>-->
                 <th data-field="id" data-formatter="setNotes" data-sortable="true">
                     Not
-                </th>-->
+                </th>
                 <th data-field="id" data-formatter="setActions">
                     {{ __('table.actions') }}
                 </th>

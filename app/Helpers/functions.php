@@ -50,6 +50,27 @@ if (!function_exists('peoples')) {
     }
 }
 
+if (!function_exists('permits')) {
+    function permits(): array
+    {
+        return [
+          'user_'
+        ];
+    }
+}
+
+if (!function_exists('eventStatuses')) {
+    function eventStatuses(): array
+    {
+        return [
+            'Henüz tamamlanmadı',
+            'Tamamlandı',
+            'İptal Edildi',
+            'Ertelendi'
+        ];
+    }
+}
+
 if (!function_exists('federation_clubs')) {
     function federation_clubs(int|null $federation_id)
     {

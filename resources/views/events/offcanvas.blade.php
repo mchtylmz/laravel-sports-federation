@@ -36,6 +36,19 @@
         Durum
         <br> <strong>{{ $event->status }}</strong>
     </li>
+    @if($event->groups()->count())
+        <li class="list-group-item">
+        Etkinlik Kafilesi <br>
+        @foreach($event->groups as $group)
+                <strong>({{ $group->people?->type->title() }}) {{ $group->people?->fullname }}</strong> <br>
+            @endforeach
+        </li>
+    @else
+        <li class="list-group-item">
+            Etkinlik Kafilesi
+            <br> <strong>Hayır, Yok</strong>
+        </li>
+    @endif
     <li class="list-group-item">
         {{ __('events.form.end_notes') }}
         <br> <strong>{{ $event->end_notes }}</strong>

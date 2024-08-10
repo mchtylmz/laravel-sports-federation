@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'passive'])->default('active');
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->text('permissions')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

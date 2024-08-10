@@ -103,13 +103,11 @@ class PeopleController extends Controller
         } elseif ($people->type == PeopleType::racer) {
             $metas = [
                 'racer_section' => $request->get('racer_section'),
+                'racer_document' => $request->get('racer_document'),
             ];
             if (hasRole('superadmin')) {
                 $metas['racer_car_brand'] = $request->get('racer_car_brand');
                 $metas['racer_car_no'] = $request->get('racer_car_no');
-            }
-            if ($request->hasFile('racer_document')) {
-                $metas['racer_document'] = UploadFile::file($request->file('racer_document'));
             }
         } elseif ($people->type == PeopleType::school) {
             $metas = [

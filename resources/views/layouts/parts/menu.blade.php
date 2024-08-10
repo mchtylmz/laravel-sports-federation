@@ -145,7 +145,7 @@
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="{{ route('user.index', 'calendar') }}">
-                                        <span class="nav-main-link-name">Takvim Kullanıcıları</span>
+                                        <span class="nav-main-link-name">Etkinlik Kullanıcıları</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">

@@ -50,7 +50,7 @@
                     Dosya No
                     <br> <strong>{{ $federation->document_number }}</strong>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item d-none">
                     Branş Dosya No Liste
                     <br> <strong>{{ $federation->branch_number }}</strong>
                 </li>
@@ -158,7 +158,7 @@
         <div class="tab-pane" id="btabs-tab4" role="tabpanel" aria-labelledby="btabs-tab4" tabindex="0">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    Ad Soyad
+                    Federasyon Adı
                     <br> <strong>{{ $federation->getMeta('fullname') }}</strong>
                 </li>
                 <li class="list-group-item">

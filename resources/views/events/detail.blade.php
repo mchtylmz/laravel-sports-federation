@@ -68,8 +68,36 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="groups">Etkinlik Kafilesi</label>
+                <div class="space-x-2">
+                    <div class="form-check form-switch form-check-inline">
+                        <input class="form-check-input" type="radio" value="1" id="groups1" name="groups" @checked($event->groups()->count() ?: false)>
+                        <label class="form-check-label" for="groups1">Evet, var</label>
+                    </div>
+                    <div class="form-check form-switch form-check-inline">
+                        <input class="form-check-input" type="radio" value="0" id="groups0" name="groups" @checked($event->groups()->count() ?: true)>
+                        <label class="form-check-label" for="groups0">Hayır, Yok</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 groups-select" style="display: none">
+                <label class="form-label" for="people_ids">Kişi / Kişiler Seçiniz</label>
+                <select class="selectpicker form-control" id="people_ids" name="people_ids[]" data-placeholder="Kişi / Kişiler Seçiniz.." data-size="5" data-live-search="true" data-selected-text-format="count > 2" multiple>
+                    @if($peoples = peoples()))
+                    @foreach($peoples as $people)
+                        <option value="{{ $people->id }}" >({{ $people->type->title() }}) {{ $people->fullname }} {{ $people->license_no }}</option>
+                    @endforeach
+                    @endif
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="status">Durum</label>
-                <input type="text" class="form-control" id="status" name="status" placeholder="Durum.." value="{{ $event->status ?? '' }}" required>
+                <select class="selectpicker form-control" id="status" name="status" data-placeholder="Durum Seçiniz" data-size="5" data-live-search="true" required>
+                    @foreach(eventStatuses() as $status)
+                        <option value="{{ $status }}" @selected($status == ($event->status ?? ''))>{{ $status }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">
@@ -86,3 +114,19 @@
 
     </x-block>
 @endsection
+@push('js')
+    <script>
+        $(document).on('change', 'input[name=groups]', function (e) {
+            e.preventDefault();
+
+            if ($('#groups1').is(':checked')) {
+                $('.groups-select').show();
+                $('#people_ids').selectpicker();
+            } else {
+                $('.groups-select').hide();
+                $('.selectpicker').selectpicker('val', '');
+                $('#people_ids').selectpicker('destroy');
+            }
+        });
+    </script>
+@endpush

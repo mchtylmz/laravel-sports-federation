@@ -30,6 +30,15 @@ class EventController extends Controller
         if ($request->get('search')) {
             $event->whereAny(['title', 'content', 'location', 'end_notes'], 'LIKE', '%' . $request->get('search'). '%');
         }
+        if ($request->get('status')) {
+            $event->where('status', $request->get('status'));
+        }
+        if ($request->has('federation_id')) {
+            $event->whereRaw(sprintf(
+                "user_id IN(SELECT `owner_id` FROM `meta` WHERE `key` = 'federation_id' AND value = %d)",
+                $request->integer('federation_id')
+            ));
+        }
 
         if (!$filtered) {
             return $event->get();
@@ -71,6 +80,15 @@ class EventController extends Controller
         if (in_array(user()?->role, ['admin', 'manager'])) {
             $events->where('user_id', auth()->id());
         }
+        if ($request->get('status')) {
+            $events->where('status', $request->get('status'));
+        }
+        if ($request->get('federation_id')) {
+            $events->whereRaw(sprintf(
+                "user_id IN(SELECT `owner_id` FROM `meta` WHERE `key` = 'federation_id' AND value = %d)",
+                $request->integer('federation_id')
+            ));
+        }
 
         return response()->json(
             EventResource::collection($events->get())
@@ -109,6 +127,13 @@ class EventController extends Controller
             }*/
 
             $event->update($validated);
+        }
+
+        $event->groups()->delete();
+        foreach ($request->get('people_ids') as $people_id) {
+            $event->groups()->create([
+                'people_id' => $people_id
+            ]);
         }
 
         return response()->json([

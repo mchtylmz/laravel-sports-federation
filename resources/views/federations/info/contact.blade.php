@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="fullname">Ad Soyad</label>
+                        <label class="form-label" for="fullname">Federasyon Adı</label>
                         <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Ad Soyadd..." value="{{ $federation->getMeta('fullname') }}" required>
                     </div>
                 </div>
