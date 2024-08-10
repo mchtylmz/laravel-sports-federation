@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\Status;
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Zoha\Metable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Metable, SoftDeletes;
+    use HasFactory, Notifiable, Metable, SoftDeletes, Loggable;
 
     /**
      * The attributes that are mass assignable.

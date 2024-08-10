@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Enums\PeopleAdult;
 use App\Enums\PeopleType;
 use App\Enums\Status;
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Zoha\Metable;
 
 class People extends Model
 {
-    use HasFactory, Metable, SoftDeletes;
+    use HasFactory, Metable, SoftDeletes, Loggable;
 
     protected $guarded = [
         'id',

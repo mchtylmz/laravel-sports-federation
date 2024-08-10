@@ -31,6 +31,8 @@ class SettingController extends Controller
         if (!empty($data)) {
             settings()->set($data);
             settings()->save();
+
+            settingLog($data);
         }
 
         return response()->json([

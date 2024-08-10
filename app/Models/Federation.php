@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Zoha\Metable;
 
 class Federation extends Model
 {
-    use HasFactory, SoftDeletes, Metable;
+    use HasFactory, SoftDeletes, Metable, Loggable;
 
     protected $guarded = [
         'id',

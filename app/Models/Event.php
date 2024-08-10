@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Time;
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Zoha\Metable;
 
 class Event extends Model
 {
-    use HasFactory, Metable, SoftDeletes;
+    use HasFactory, Metable, SoftDeletes, Loggable;
 
     protected $guarded = [
         'id',

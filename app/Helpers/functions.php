@@ -71,6 +71,40 @@ if (!function_exists('eventStatuses')) {
     }
 }
 
+
+if (!function_exists('authLog')) {
+    function authLog(string $type): void
+    {
+        DB::table('logs')->insert([
+            'user_id'    => auth()->id(),
+            'log_date'   => now(),
+            'table_name' => '',
+            'log_type'   => $type,
+            'ip'         => request()->ip(),
+            'data_id'    => auth()->id(),
+            'data'       => json_encode([
+                'user_agent' => request()->userAgent()
+            ])
+        ]);
+    }
+}
+
+
+if (!function_exists('settingLog')) {
+    function settingLog(array $data = []): void
+    {
+        DB::table('logs')->insert([
+            'user_id'    => auth()->id(),
+            'log_date'   => now(),
+            'table_name' => 'settings',
+            'log_type'   => 'edit',
+            'ip'         => request()->ip(),
+            'data_id'    => 0,
+            'data'       => json_encode($data)
+        ]);
+    }
+}
+
 if (!function_exists('federation_clubs')) {
     function federation_clubs(int|null $federation_id)
     {

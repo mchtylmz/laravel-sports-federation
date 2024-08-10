@@ -12,11 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('logs', function (Blueprint $table) {
-            $table->id();
-            $table->string('type', 16)->nullable();
-
-            $table->text('payload')->nullable();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->dateTime('log_date');
+            $table->string('table_name',50)->nullable();
+            $table->string('log_type',50);
+            $table->string('ip')->nullable();
+            $table->unsignedBigInteger('data_id')->default(0);
+            $table->longText('data');
         });
     }
 

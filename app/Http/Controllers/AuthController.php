@@ -35,6 +35,7 @@ class AuthController extends Controller
         }
 
         user()->update(['last_login' => now()]);
+        authLog('login');
 
         request()->session()->regenerate(true);
 
@@ -78,6 +79,8 @@ class AuthController extends Controller
 
     public function logout()
     {
+        authLog('logout');
+
         Auth::logout();
         request()->session()->regenerate(true);
 
