@@ -47,6 +47,7 @@ class EventExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
                 'Bitiş',
                 'Uluslar Arası',
                 'Durum',
+                'Kafile',
                 'Not',
             ]
         ];
@@ -54,6 +55,16 @@ class EventExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
 
     public function map($row): array
     {
+        $groups = 'Hayır, Yok';
+        if ($row->groups()->count()) {
+            $peoples = [];
+            foreach ($row->groups as $group) {
+                $peoples[] = sprintf('(%s) %s', $group->people?->type?->title(), $group->people?->fullname);
+            }
+
+            $groups = implode(', ', $peoples);
+        }
+
         return [
             $row->user?->username . ' ' . $row->user?->name,
             $row->title,
@@ -63,6 +74,7 @@ class EventExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
             $row->end_date,
             $row->is_national ? 'Evet' : 'Hayır',
             $row->status,
+            $groups,
             $row->end_notes,
         ];
     }

@@ -78,11 +78,28 @@
         @include('layouts.parts.menu', ['mobile' => true])
 
         @if($header_under_text)
-            <div class="bg-white-50 mb-3 p-3">
+            <div class="bg-white-50 mb-{{ $note_count ? 0:3 }} p-3">
                 <!-- Soldan Sağa, Döngü İçinde -->
                 <marquee behavior="scroll" direction="left" scrollamount="14">
                     <h5 class="mb-0">{{ $header_under_text }}</h5>
                 </marquee>
+            </div>
+        @endif
+        @if($note_count)
+            <div class="bg-danger-light mt-0 mb-3 p-0 notes-warning">
+                <div class="container alert my-0">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-lg-6">
+                            <i class="fa fa-note-sticky fa-fw mx-2"></i>
+                            <strong>{{ $note_count }} okunmamış notunuz var!</strong>
+                        </div>
+                        <div class="col-lg-3">
+                            <a type="button" class="btn btn-sm btn-dark js-bs-tooltip-enabled w-100" href="{{ route('my.notes') }}">
+                                <i class="fa fa-fw fa-eye mx-2"></i> Görüntüle ve Oku
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         @endif
 

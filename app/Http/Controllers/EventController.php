@@ -58,7 +58,7 @@ class EventController extends Controller
         return Pdf::loadView('pdf.events', [
             'events' => $events,
             'federation' => user()?->federation()
-        ])->stream('events2.pdf');
+        ])->download('etkinlikler.pdf');
     }
 
     public function exportExcel(Request $request)
@@ -129,11 +129,13 @@ class EventController extends Controller
             $event->update($validated);
         }
 
-        $event->groups()->delete();
-        foreach ($request->get('people_ids') as $people_id) {
-            $event->groups()->create([
-                'people_id' => $people_id
-            ]);
+        if ($people_ids = $request->get('people_ids')) {
+            $event->groups()->delete();
+            foreach ($people_ids as $people_id) {
+                $event->groups()->create([
+                    'people_id' => $people_id
+                ]);
+            }
         }
 
         return response()->json([

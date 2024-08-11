@@ -32,7 +32,7 @@ class SettingController extends Controller
             settings()->set($data);
             settings()->save();
 
-            settingLog($data);
+            customLog('settings', $data);
         }
 
         return response()->json([

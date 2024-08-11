@@ -37,11 +37,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         Facades\View::composer('*', function (View $view) {
+            $note_count = 0;
+            if (auth()->check()) {
+                $note_count = cache()->remember(
+                    sprintf('user_note_count_%d', auth()->id()),
+                    86400,
+                    function () {
+                        return user()->federation()?->notes()->where('is_read', 0)->count();
+                    }
+                );
+            }
+
             $view->with('site_title', settings()->site_title ?? config('app.name'));
             $view->with('header_under_text', settings()->header_under_text ?? false);
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
             $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
+            $view->with('note_count', $note_count);
         });
 
         Carbon::setlocale(app()->getLocale());

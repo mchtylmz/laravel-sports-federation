@@ -12,7 +12,7 @@
             <!--people -->
             <div class="row mb-0">
                 <div class="col-lg-3 p-3 text-center">
-                    <img src="{{ asset($people->photo) }}" alt="{{ $people->fullname }}" class="w-100" style="max-height: 240px; object-fit: contain" />
+                    <img src="{{ asset($people->photo) }}" alt="{{ $people->fullname }}" onerror="this.src='{{ asset('uploads/no-img.png') }}'" class="w-100" style="max-height: 240px; object-fit: contain" />
                 </div>
                 <div class="col-lg-9">
                     <ul class="list-group list-group-flush">

@@ -132,5 +132,25 @@
         let bsTable = $('table');
         bsTable.on('load-success.bs.table', setLoading);
         bsTable.on('all.bs.table', setLoading);
+
+        $(document).on('click', '.table-export-pdf', function (e) {
+            $(this).prop('disabled', true);
+            $(this).html('<i class="fa fa-spinner fa-pulse fa-fw mx-2"></i> PDF');
+
+            setTimeout(() => {
+                $(this).prop('disabled', false);
+                $(this).html('<i class="fa fa-file-pdf fa-fw mx-2"></i> PDF');
+            }, 2000)
+        });
+
+        $(document).on('click', '.table-export-excel', function (e) {
+            $(this).prop('disabled', true);
+            $(this).html('<i class="fa fa-spinner fa-pulse fa-fw mx-2"></i> Excel');
+
+            setTimeout(() => {
+                $(this).prop('disabled', false);
+                $(this).html('<i class="fa fa-file-excel fa-fw mx-2"></i> Excel');
+            }, 2000)
+        });
     </script>
 @endpush

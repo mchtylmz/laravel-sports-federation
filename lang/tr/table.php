@@ -6,7 +6,7 @@ return [
     'photo' => 'Fotoğraf',
     'title' => 'Başlık',
     'document_number' => 'Dosya No',
-    'location' => 'Yer',
+    'location' => 'Tesis/Yer',
     'start_date' => 'Başlangıç',
     'end_date' => 'Bitiş',
     'edit' => 'Düzenle',

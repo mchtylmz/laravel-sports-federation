@@ -50,6 +50,13 @@ if (!function_exists('peoples')) {
     }
 }
 
+if (!function_exists('users')) {
+    function users()
+    {
+        return \App\Models\User::where('status', 'active')->get();
+    }
+}
+
 if (!function_exists('permits')) {
     function permits(): array
     {
@@ -90,16 +97,16 @@ if (!function_exists('authLog')) {
 }
 
 
-if (!function_exists('settingLog')) {
-    function settingLog(array $data = []): void
+if (!function_exists('customLog')) {
+    function customLog(string $table_name, array $data = [], int $data_id = 0): void
     {
         DB::table('logs')->insert([
             'user_id'    => auth()->id(),
             'log_date'   => now(),
-            'table_name' => 'settings',
+            'table_name' => $table_name,
             'log_type'   => 'edit',
             'ip'         => request()->ip(),
-            'data_id'    => 0,
+            'data_id'    => $data_id,
             'data'       => json_encode($data)
         ]);
     }

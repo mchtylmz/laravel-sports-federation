@@ -22,7 +22,18 @@ class Note extends Model
     {
         return [
             'created_at' => 'datetime:Y-m-d H:i',
-            'updated_at' => 'datetime:Y-m-d H:i'
+            'updated_at' => 'datetime:Y-m-d H:i',
+            'read_at' => 'datetime:Y-m-d H:i',
         ];
+    }
+
+    public function read()
+    {
+        $this->update([
+            'is_read' => 1,
+            'read_at' => now()
+        ]);
+
+        cache()->delete(sprintf('user_note_count_%d', auth()->id()));
     }
 }

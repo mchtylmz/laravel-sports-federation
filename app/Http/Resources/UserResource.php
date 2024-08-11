@@ -17,6 +17,8 @@ class UserResource extends JsonResource
         $actions = view('components.actions', [
             'edit' => $this->id !== auth()->id() ? route('user.show', [$this->role, $this->id]) : false,
             'view' => route('user.show', [$this->role, $this->id]),
+            'delete' => $this->id !== auth()->id() && hasRole('superadmin') ? route('user.delete', $this->id) : false,
+            'deleteMessage' => __('users.delete', ['name' => $this->name]),
             'id' => $this->id
         ])->render();
 

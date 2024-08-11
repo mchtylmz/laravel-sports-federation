@@ -28,6 +28,7 @@ return [
     'save_success' => ':name kullanıcısı kayıt edildi',
     'delete_success' => ':name kullanıcısı silindi',
     'delete' => ':name kullanıcısı siliniyor, işleme devam edilsin mi?',
+    'not_delete' => 'Kullanıcı silinemez!',
 
     'form' => [
         'username' => 'Kullanıcı Adı',

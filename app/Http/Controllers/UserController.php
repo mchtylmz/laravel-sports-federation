@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserType;
 use App\Http\Requests\User\SaveRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Club;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -144,6 +145,22 @@ class UserController extends Controller
         return response()->json([
             'message' => __('users.save_success', ['name' => $user->name]),
             'redirect' => route('user.index', $user->role)
+        ]);
+    }
+
+    public function delete(User $user)
+    {
+        if (!hasRole('superadmin') || $user->id == auth()->id()) {
+            return response()->json([
+                'message' => __('users.not_delete')
+            ], 400);
+        }
+
+        $user->delete();
+
+        return response()->json([
+            'message' => __('users.delete_success', ['name' => $user->name]),
+            'refresh' => true
         ]);
     }
 }

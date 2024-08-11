@@ -11,6 +11,8 @@ use App\Models\Club;
 use App\Models\Punishment;
 use App\Models\People;
 use App\Models\Director;
+use App\Models\Log;
+use App\Models\Note;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -20,6 +22,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('calendar', [HomeController::class, 'calendar'])->name('calendar');
+    Route::get('my-notes', [HomeController::class, 'myNotes'])->name('my.notes');
 
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
 
@@ -27,6 +30,17 @@ Route::middleware('auth')->group(function () {
     Route::post('profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    // middleware
+    Route::name('log.')
+        ->prefix('logs')
+        ->middleware('role:superadmin')
+        ->controller(\App\Http\Controllers\LogController::class)
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('json', 'json')->name('json');
+            Route::get('detail/{log:id?}', 'detail')->name('show');
+        });
 
     // middleware
     Route::name('user.')
@@ -38,6 +52,7 @@ Route::middleware('auth')->group(function () {
             Route::get('{usertype}/json', 'json')->name('json');
             Route::get('{usertype}/detail/{user:id?}', 'detail')->name('show');
             Route::post('{usertype}/save/{user:id?}', 'save')->name('save');
+            Route::post('delete/{user:id}', 'delete')->name('delete');
         });
 
     // middleware
@@ -120,7 +135,7 @@ Route::middleware('auth')->group(function () {
                     Route::post('delete/{federation:id}', 'delete')->name('delete');
                     Route::get('notes/{federation:id}', 'notes')->name('notes');
                     Route::post('notes/save/{federation:id}', 'noteSave')->name('notes.save');
-                    Route::post('notes/delete/{federation:id}', 'noteDelete')->name('notes.delete');
+                    Route::post('notes/delete/{note:id}', 'noteDelete')->name('notes.delete');
                 });
 
             Route::middleware('role:admin')

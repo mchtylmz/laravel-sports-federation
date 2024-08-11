@@ -97,7 +97,7 @@ class PeopleController extends Controller
             ];
         } elseif ($people->type == PeopleType::coach) {
             $metas = [
-                'referee_class' => $request->get('referee_class'),
+                'coach_class' => $request->get('coach_class'),
                 'coach_job' => $request->get('coach_job'),
             ];
         } elseif ($people->type == PeopleType::racer) {
@@ -120,6 +120,7 @@ class PeopleController extends Controller
         }
 
         $people->setMeta($metas ?? []);
+        customLog('people_meta', $metas ?? [], $people->id);
 
         return response()->json([
             'message' => __('peoples.save_success', ['fullname' => $people->fullname]),

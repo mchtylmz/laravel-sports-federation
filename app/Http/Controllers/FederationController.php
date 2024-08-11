@@ -89,7 +89,7 @@ class FederationController extends Controller
             'notes' => $federation->notes,
             'federation' => $federation,
             'body' => view('federations.note_offcanvas', [
-                'notes' => $federation->notes,
+                'notes' => $federation->notes()->latest()->take(12)->get(),
                 'federation' => $federation,
             ])->render()
         ]);
@@ -101,19 +101,28 @@ class FederationController extends Controller
             'title' => $request->string('title'),
             'content' => $request->string('content'),
         ]);
+        cache()->clear();
 
         return response()->json([
             'message' => 'Not Gönderildi',
-            'refresh' => true
+            'refresh' => true,
+            'title' => $federation->name . ' - Notlar',
+            'body' => view('federations.note_offcanvas', [
+                'notes' => $federation->notes()->latest()->take(12)->get(),
+                'federation' => $federation,
+            ])->render()
         ]);
     }
 
     public function noteDelete(Note $note)
     {
         $note->delete();
+        cache()->clear();
 
         return response()->json([
-            'message' => 'Not silindi'
+            'message' => 'Not silindi',
+            'refresh' => true,
+            'offcanvas' => true,
         ]);
     }
 }

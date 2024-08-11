@@ -32,7 +32,12 @@ class FederationResource extends JsonResource
             'is_special' => $this->is_special,
             'website' => $this->website,
             'route_note' => route('federation.notes', $this->id),
-            'notes_count' => $this->notes()->count(),
+            //'notes_count' => $this->notes()->count(),
+            'notes_count' => sprintf(
+                '%d / %d',
+                $this->notes()->where('is_read', 0)->count(),
+                $this->notes()->count()
+            ),
             'is_special_text' => $this->is_special == 1 ? __('table.yes') : __('table.no'),
             'actions' => $actions
         ];

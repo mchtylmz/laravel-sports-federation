@@ -22,6 +22,12 @@
             <p class="mb-0 text-muted fs-sm fw-medium">{{ user()?->role }}</p>
         </div>
         <div class="p-2">
+            @if(hasRole('admin'))
+                <a class="dropdown-item d-flex align-items-center justify-content-between"
+                   href="{{ route('my.notes') }}">
+                    <span class="fs-sm fw-medium">Notlarım</span>
+                </a>
+            @endif
             <a class="dropdown-item d-flex align-items-center justify-content-between"
                href="{{ route('profile') }}">
                 <span class="fs-sm fw-medium">{{ __('auth.profile.title') }}</span>

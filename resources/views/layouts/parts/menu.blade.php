@@ -156,6 +156,15 @@
                             </ul>
                         </li>
 
+                        @if(hasRole('superadmin'))
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('log.index') }}">
+                                    <i class="nav-main-link-icon si si-compass"></i>
+                                    <span class="nav-main-link-name">Loglar</span>
+                                </a>
+                            </li>
+                        @endif
+
                         <li class="nav-main-item d-block d-sm-none">
                             <a class="nav-main-link" href="{{ route('settings.index') }}">
                                 <i class="nav-main-link-icon si si-settings"></i>

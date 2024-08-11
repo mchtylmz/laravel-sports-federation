@@ -19,4 +19,14 @@ class HomeController extends Controller
             'title' => 'Takvim'
         ]);
     }
+
+    public function myNotes()
+    {
+        $notes = user()->federation()?->notes()->latest()->take(30)->get();
+
+        return view('home.my-notes', [
+            'title' => 'Notlarım',
+            'notes' => $notes
+        ]);
+    }
 }

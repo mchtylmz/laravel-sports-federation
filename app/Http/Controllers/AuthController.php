@@ -34,8 +34,8 @@ class AuthController extends Controller
             ], 401);
         }
 
-        user()->update(['last_login' => now()]);
         authLog('login');
+        user()->update(['last_login' => now()]);
 
         request()->session()->regenerate(true);
 

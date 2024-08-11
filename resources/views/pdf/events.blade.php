@@ -27,13 +27,13 @@
             text-align: center;
         }
     </style>
-    <title>Hello, world!</title>
+    <title>Etkinlikler!</title>
 </head>
 <body>
 
 @if($federation)
     <center>
-        <img src="{{ public_path($federation?->logo) }}" style="height: 150px; object-fit: contain" />
+        <img src="{{ public_path($federation?->logo) }}" style="height: 150px; object-fit: contain; max-width: 480px" />
         <h2>{{ $federation->name }}</h2>
     </center>
 @endif

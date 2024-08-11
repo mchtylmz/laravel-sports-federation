@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +22,13 @@ class Log extends Model
      * @var array|string[]
      */
     protected $appends = ['dateHumanize', 'json_data'];
+
+    public function casts()
+    {
+        return [
+            'log_date' => 'datetime:Y-m-d H:i',
+        ];
+    }
 
     /**
      * @return mixed

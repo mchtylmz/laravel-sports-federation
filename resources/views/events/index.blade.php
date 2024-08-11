@@ -11,9 +11,6 @@
                  export-pdf="{{ route('event.export.pdf') }}"
                  export-excel="{{ route('event.export.excel') }}">
             <x-slot name="columns">
-                <th data-field="id" data-width="5">
-                    {{ __('table.id') }}
-                </th>
                 <th data-field="title" data-sortable="true" data-width="25" data-align="left">
                     {{ __('table.title') }}
                 </th>
