@@ -32,6 +32,9 @@ class LogController extends Controller
         if ($request->get('log_type')) {
             $log->where('log_type', $request->get('log_type'));
         }
+        if ($request->get('table_name')) {
+            $log->where('table_name', $request->get('table_name'));
+        }
         if ($request->get('start_date')) {
             $log->where('log_date', '>=', $request->date('start_date', 'Y-m-d 00:00:00'));
         }

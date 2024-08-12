@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         return view('home.my-notes', [
             'title' => 'Notlarım',
-            'notes' => $notes
+            'notes' => $notes ?? []
         ]);
     }
 }

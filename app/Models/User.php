@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\PermitEnum;
 use App\Enums\Status;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,7 +51,8 @@ class User extends Authenticatable
             'created_at' => 'datetime:Y-m-d H:i',
             'updated_at' => 'datetime:Y-m-d H:i',
             'deleted_at' => 'datetime:Y-m-d H:i',
-            'status' => Status::class
+            'status' => Status::class,
+            'permit' => PermitEnum::class,
         ];
     }
 
@@ -64,12 +66,5 @@ class User extends Authenticatable
         $federation_id = $this->getMeta('federation_id');
 
         return Federation::where('id', $federation_id)->first();
-    }
-
-    public function permit(string $name): bool
-    {
-        $permissions = json_decode($this->permssions, true);
-
-        return in_array($name, $permissions);
     }
 }

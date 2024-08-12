@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 {{ hasRole('admin') ? 'd-block' : 'd-none' }}">
                 <label class="form-label" for="groups">Etkinlik Kafilesi</label>
                 <div class="space-x-2">
                     <div class="form-check form-switch form-check-inline">

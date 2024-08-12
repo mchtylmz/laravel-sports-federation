@@ -22,6 +22,17 @@ if (!function_exists('role')) {
     }
 }
 
+if (!function_exists('permit')) {
+    function permit(string $name = ''): bool
+    {
+        if (auth()?->user()?->permit == 'no' || !hasRole('superadmin')) {
+            return true;
+        }
+
+        return auth()?->user()?->permit == $name;
+    }
+}
+
 if (!function_exists('user')) {
     function user()
     {
@@ -50,19 +61,17 @@ if (!function_exists('peoples')) {
     }
 }
 
+if (!function_exists('permitCases')) {
+    function permitCases()
+    {
+        return \App\Enums\PermitEnum::cases();
+    }
+}
+
 if (!function_exists('users')) {
     function users()
     {
         return \App\Models\User::where('status', 'active')->get();
-    }
-}
-
-if (!function_exists('permits')) {
-    function permits(): array
-    {
-        return [
-          'user_'
-        ];
     }
 }
 
@@ -74,6 +83,16 @@ if (!function_exists('eventStatuses')) {
             'Tamamlandı',
             'İptal Edildi',
             'Ertelendi'
+        ];
+    }
+}
+
+if (!function_exists('eventPlaces')) {
+    function eventPlaces(): array
+    {
+        return [
+            ...places(),
+            ...\App\Models\Event::distinct('location')->pluck('location')->toArray()
         ];
     }
 }

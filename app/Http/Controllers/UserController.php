@@ -108,6 +108,8 @@ class UserController extends Controller
             unset($data['password']);
         }
 
+        $data['permit'] = $request->get('permit', 'no');
+
         // section-4
         if (!$user?->id) {
             $user = User::create($data);

@@ -5,6 +5,19 @@
         <form class="js-validation-form repeater" action="{{ route('user.save', [$userType, $user?->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            @if($userType == 'superadmin')
+                <div class="mb-3">
+                    <label class="form-label" for="permit">Yetki</label>
+                    <select class="selectpicker form-control" id="permit" name="permit" data-placeholder="Yetki Seçiniz...." data-size="5" data-live-search="true" required>
+                        @foreach(permitCases() as $permit)
+                            <option value="{{ $permit->value }}" @selected($user?->id == $permit->value)>{{ $permit->title() }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @else
+                <input type="hidden" name="permit" value="no">
+            @endif
+
             <div class="mb-3">
                 <label class="form-label" for="username">{{ __('users.form.username') }}</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="{{ __('users.form.username') }}.." value="{{ $user->username ?? '' }}" required>
@@ -126,17 +139,6 @@
                         <label class="form-check-label" for="passive">{{ __('table.passive') }}</label>
                     </div>
                 </div>
-            </div>
-
-            <hr>
-
-            @php
-            $permits = [
-
-            ];
-            @endphp
-            <div class="permissions">
-                <h5 class="bg-light p-3 w-100">İşlem İzinleri</h5>
             </div>
 
             <div class="mb-4 text-center">

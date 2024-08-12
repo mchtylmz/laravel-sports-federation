@@ -67,67 +67,6 @@
             });
         }
 
-        static federationNoteForm() {
-            $('form.note-form').validate({
-                submitHandler: function (form, e) {
-                    e.preventDefault();
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    let dataType = $(form).data('type');
-                    if (!dataType) {
-                        dataType = 'json';
-                    }
-
-                    $.ajax({
-                        type: $(form).attr('method'),
-                        url: $(form).attr('action'),
-                        data: new FormData(form),
-                        dataType: dataType,
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        enctype: 'multipart/form-data',
-                        beforeSend: function () {
-                            $(form).find('[type=submit]').loading('show');
-                        },
-                        success: function (response) {
-                            if (response.message) {
-                                alert.fire({
-                                    text: response.message,
-                                    icon: 'success'
-                                });
-                            }
-
-                            if (response.title !== undefined) {
-                                $('.offcanvas-title').html(response.title);
-                            }
-                            if (response.body !== undefined) {
-                                $('.offcanvas-body').html(response.body);
-                            }
-
-                            setTimeout(() => {
-                                let bsTable = $('[data-toggle="table"]');
-                                if (bsTable.length) {
-                                    bsTable.bootstrapTable('refresh');
-                                }
-                            }, 500);
-                        },
-                        error: function (response) {
-                            alert.fire({
-                                text: response.responseJSON.message,
-                                icon: 'error'
-                            });
-                        }
-                    }).always(function () {
-                        $(form).find('[type=submit]').loading('hide');
-                    });
-                }
-            });
-        }
-
         static initHelper() {
             // toggle password
             jQuery(document).on('click', '[data-toggle="password"]', function (e) {
@@ -254,7 +193,67 @@
                         $('.offcanvas-title').html(response.title);
                         $('.offcanvas-body').html(response.body);
 
-                        e.federationNoteForm();
+                        let formNote = $('form.note-form');
+                        if (formNote.length) {
+                            formNote.validate({
+                                submitHandler: function (form, e) {
+                                    e.preventDefault();
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    let dataType = $(form).data('type');
+                                    if (!dataType) {
+                                        dataType = 'json';
+                                    }
+
+                                    $.ajax({
+                                        type: $(form).attr('method'),
+                                        url: $(form).attr('action'),
+                                        data: new FormData(form),
+                                        dataType: dataType,
+                                        processData: false,
+                                        contentType: false,
+                                        cache: false,
+                                        enctype: 'multipart/form-data',
+                                        beforeSend: function () {
+                                            $(form).find('[type=submit]').loading('show');
+                                        },
+                                        success: function (response) {
+                                            if (response.message) {
+                                                alert.fire({
+                                                    text: response.message,
+                                                    icon: 'success'
+                                                });
+                                            }
+
+                                            if (response.title !== undefined) {
+                                                $('.offcanvas-title').html(response.title);
+                                            }
+                                            if (response.body !== undefined) {
+                                                $('.offcanvas-body').html(response.body);
+                                            }
+
+                                            setTimeout(() => {
+                                                let bsTable = $('[data-toggle="table"]');
+                                                if (bsTable.length) {
+                                                    bsTable.bootstrapTable('refresh');
+                                                }
+                                            }, 500);
+                                        },
+                                        error: function (response) {
+                                            alert.fire({
+                                                text: response.responseJSON.message,
+                                                icon: 'error'
+                                            });
+                                        }
+                                    }).always(function () {
+                                        $(form).find('[type=submit]').loading('hide');
+                                    });
+                                }
+                            });
+                        }
                     },
                     error: function (response) {
                         alert.fire({

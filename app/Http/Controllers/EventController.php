@@ -80,6 +80,9 @@ class EventController extends Controller
         if (in_array(user()?->role, ['admin', 'manager'])) {
             $events->where('user_id', auth()->id());
         }
+        if ($request->get('location')) {
+            $events->where('location', $request->get('location'));
+        }
         if ($request->get('status')) {
             $events->where('status', $request->get('status'));
         }

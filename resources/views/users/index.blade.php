@@ -56,6 +56,11 @@
                         {{ __('table.federation') }}
                     </th>
                 @endif
+                @if($userType == 'superadmin')
+                    <th data-field="permit" data-formatter="setText"  data-width="10" data-align="left">
+                        Yetki
+                    </th>
+                @endif
                 <th data-field="username" data-sortable="true" data-width="15" data-align="left">
                     {{ __('table.username') }}
                 </th>

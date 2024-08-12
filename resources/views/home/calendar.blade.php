@@ -5,10 +5,11 @@
     <div class="row">
 
         <div class="col-lg-12 py-3 bg-white mb-1">
-            @if(hasRole('superadmin'))
+
                 <form class="js-filter-event">
                     <div class="row align-items-end justify-content-start">
-                        <div class="col-lg-3 mb-1">
+                        @if(hasRole('superadmin', 'calendar'))
+                        <div class="col-lg-2 mb-1">
                             <label class="form-label" for="federation_id">Federasyon / Branş</label>
                             <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
                                 <option value="">Tüm Federasyonlar / Branşlar</option>
@@ -17,12 +18,22 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-3 mb-1">
+                        @endif
+                        <div class="col-lg-2 mb-1">
                             <label class="form-label" for="status">Durum</label>
                             <select class="selectpicker form-control" id="status" name="status" data-placeholder="Tüm Durumlar" data-size="5" data-live-search="true">
                                 <option value="">Tüm Durumlar</option>
                                 @foreach(eventStatuses() as $status)
                                     <option value="{{ $status }}">{{ $status }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-1">
+                            <label class="form-label" for="location">Tesis/Yer</label>
+                            <select class="selectpicker form-control" id="location" name="location" data-placeholder="Tüm Tesisler" data-size="5" data-live-search="true">
+                                <option value="">Tüm Tesisler</option>
+                                @foreach(eventPlaces() as $place)
+                                    <option value="{{ $place }}">{{ $place }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,7 +46,6 @@
                     </div>
                 </form>
                 <hr>
-            @endif
 
             <div id="js-calendar" data-route="{{ route('event.calendar') }}"></div>
         </div>
