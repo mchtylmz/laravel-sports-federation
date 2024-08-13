@@ -43,6 +43,11 @@ class People extends Model
         return $this->name . ' ' . $this->surname;
     }
 
+    public function federation()
+    {
+        return $this->belongsTo(Federation::class);
+    }
+
     public function punishments()
     {
         return $this->hasMany(Punishment::class)->latest();

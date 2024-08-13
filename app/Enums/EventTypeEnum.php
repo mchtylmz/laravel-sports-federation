@@ -2,14 +2,10 @@
 
 namespace App\Enums;
 
-enum PermitEnum: string
+enum EventTypeEnum: string
 {
-    case no = 'no';
-    case tescil = 'tescil';
-    case muafiyet = 'muafiyet';
-    case mudur = 'mudur';
-
-    //case okul = 'okul';
+    case event = 'event';
+    case federation_date = 'federation_date';
 
     public static function names(): array
     {
@@ -24,11 +20,8 @@ enum PermitEnum: string
     public static function titles(): array
     {
         return [
-            self::no->value => 'Tüm Yetkiler',
-            self::tescil->value => 'Tescil',
-            self::muafiyet->value => 'Muafiyet',
-            self::mudur->value => 'Müdür Müsteşarı',
-            //self::okul->value => 'Okul',
+            self::event->value => 'event',
+            self::federation_date->value => 'federation_date'
         ];
     }
 

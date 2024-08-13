@@ -37,7 +37,7 @@
                         </a>
                     </li>
 
-                    @if(hasRole('superadmin'))
+                    @if(hasRole('superadmin') && permitIf('superadmin', ['mudur']))
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('federation.index') }}">
                             <i class="nav-main-link-icon si si-flag"></i>
@@ -61,7 +61,7 @@
                             </li>
                             <li class="nav-main-item">
                                 <a class="nav-main-link" href="{{ route('federation.info.statute') }}">
-                                    <span class="nav-main-link-name">Tüzük</span>
+                                    <span class="nav-main-link-name">Belgeler</span>
                                 </a>
                             </li>
                             <li class="nav-main-item">
@@ -90,28 +90,32 @@
 
                     @if(hasRole('superadmin', 'admin'))
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('club.index') }}">
-                            <i class="nav-main-link-icon si si-briefcase"></i>
-                            <span class="nav-main-link-name">{{ __('table.kulupler') }}</span>
-                        </a>
-                    </li>
+                        @if(permitIf(role(), ['tescil', 'mudur']))
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ route('club.index') }}">
+                                    <i class="nav-main-link-icon si si-briefcase"></i>
+                                    <span class="nav-main-link-name">{{ __('table.kulupler') }}</span>
+                                </a>
+                            </li>
+                        @endif
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('people.index') }}">
-                            <i class="nav-main-link-icon si si-feed"></i>
-                            <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
-                        </a>
-                    </li>
+                        @if(permitIf(role(), ['muafiyet', 'mudur']))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('people.index') }}">
+                                <i class="nav-main-link-icon si si-feed"></i>
+                                <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
+                            </a>
+                        </li>
+                        @endif
 
-                    @if(hasRole('superadmin', 'admin'))
+                        @if(permitIf(role(), ['mudur']))
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ route('punishment.index') }}">
                                 <i class="nav-main-link-icon si si-ban"></i>
                                 <span class="nav-main-link-name">{{ __('table.ceza') }}</span>
                             </a>
                         </li>
-                    @endif
+                        @endif
 
                     @endif
 
@@ -124,7 +128,7 @@
                         </li>
                     @endif
 
-                    @if(hasRole('superadmin'))
+                    @if(hasRole('superadmin') && permitIf(role(), ['mudur']))
 
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
@@ -156,14 +160,12 @@
                             </ul>
                         </li>
 
-                        @if(hasRole('superadmin'))
-                            <li class="nav-main-item">
-                                <a class="nav-main-link" href="{{ route('log.index') }}">
-                                    <i class="nav-main-link-icon si si-compass"></i>
-                                    <span class="nav-main-link-name">Loglar</span>
-                                </a>
-                            </li>
-                        @endif
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('log.index') }}">
+                                <i class="nav-main-link-icon si si-compass"></i>
+                                <span class="nav-main-link-name">Loglar</span>
+                            </a>
+                        </li>
 
                         <li class="nav-main-item d-block d-sm-none">
                             <a class="nav-main-link" href="{{ route('settings.index') }}">

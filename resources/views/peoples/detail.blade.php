@@ -5,6 +5,19 @@
         <form class="js-validation-form" action="{{ route('people.save', $people->id ?? '') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            @if(hasRole('superadmin'))
+                <div class="mb-3">
+                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
+                    <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" required>
+                        @foreach(federations() as $federation)
+                            <option value="{{ $federation->id }}" @selected($people->federation_id == $federation->id)>{{ $federation->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @else
+                <input type="hidden" name="federation_id" value="{{ user()->$federation()?->id }}">
+            @endif
+
             <div class="mb-0">
                 <label class="form-label" for="type">Kişi Tipi</label>
                 <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tipi Seçiniz..." data-size="5" data-live-search="true" required>
@@ -68,7 +81,7 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label class="form-label" for="identity">Pasaport/Kimlik Bilgisi</label>
-                        <input type="text" class="form-control" id="identity" name="identity" placeholder="Pasaport/Kimlik Bilgisi.." value="{{ $people->identity ?? '' }}">
+                        <input type="text" class="form-control" id="identity" name="identity" placeholder="Pasaport/Kimlik  Bilgisi.." value="{{ $people->identity ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">

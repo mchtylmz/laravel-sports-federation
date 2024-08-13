@@ -8,10 +8,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="mb-0">
-                        <label class="form-label" for="file">Tüzük Dosya Yükle (PDF, WORD, EXCEL)</label>
+                        <label class="form-label" for="file">Belge Dosya Yükle (PDF, WORD, EXCEL)</label>
                         <input type="file" class="form-control" id="file" accept=".pdf,.xlsx,.xls,.doc,.docx" name="file[]" multiple required>
                     </div>
-                    <small>Dosya yüklenirse tüzük içeriği güncellenir. Birden fazla dosya eklenebilir.</small>
+                    <small>Dosya yüklenirse Belge içeriği güncellenir. Birden fazla dosya eklenebilir.</small>
                 </div>
             </div>
 

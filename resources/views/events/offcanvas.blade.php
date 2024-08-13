@@ -7,6 +7,12 @@
         {{ __('events.form.user_name') }}
         <br> <strong>{{ $event->user?->name }} ({{ $event->user?->username }})</strong>
     </li>
+    @if($event->user?->role == 'admin')
+        <li class="list-group-item">
+            Federasyon / Branş
+            <br> <strong>{{ $event->user?->federation()?->name }}</strong>
+        </li>
+    @endif
     <li class="list-group-item">
         {{ __('events.form.title') }}
         <br>

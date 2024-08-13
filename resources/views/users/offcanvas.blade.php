@@ -1,5 +1,9 @@
 <ul class="list-group list-group-flush">
     <li class="list-group-item">
+        Yetki
+        <br> <strong>{{ $user->permit->title() }}</strong>
+    </li>
+    <li class="list-group-item">
         {{ __('users.form.username') }}
         <br> <strong>{{ $user->username }}</strong>
     </li>

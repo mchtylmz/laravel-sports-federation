@@ -21,7 +21,7 @@
                             Yönetim Kurulu
                         </button>
                         <button class="dropdown-item" data-bs-toggle="tab" data-bs-target="#btabs-tab2" role="tab">
-                            Tüzük
+                            Belgeler
                         </button>
                         <button class="dropdown-item" data-bs-toggle="tab" data-bs-target="#btabs-tab3" role="tab">
                             Genel Kurul Tarihi
@@ -126,7 +126,7 @@
                 @endforeach
             @else
                 <div class="alert alert-danger">
-                    Tüzük dosyası bulunmuyor!.
+                    Belgeler dosyası bulunmuyor!.
                 </div>
             @endif
         </div>

@@ -32,6 +32,12 @@ class Federation extends Model
         return $this->hasMany(Director::class)->orderBy('sort', 'ASC');
     }
 
+
+    public function peoples()
+    {
+        return $this->hasMany(People::class)->orderBy('name', 'ASC');
+    }
+
     public function notes()
     {
         return $this->hasMany(Note::class)->latest();

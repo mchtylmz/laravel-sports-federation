@@ -1,4 +1,4 @@
-@if(hasRole('superadmin'))
+@if(hasRole('superadmin') && permitIf(role(), ['mudur']))
     <!-- settings Dropdown -->
     <a type="button" class="btn btn-sm btn-alt-secondary" href="{{ route('settings.index') }}">
         <i class="fa fa-fw fa-cog"></i>

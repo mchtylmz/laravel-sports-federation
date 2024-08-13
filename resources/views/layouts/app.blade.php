@@ -25,7 +25,12 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
 
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/style.css') }}">
-
+    <style>
+        .nav-link.active {
+            background-color: #2356d7 !important;
+            color: #FFF !important;
+        }
+    </style>
     @stack('css')
 </head>
 <body>
@@ -144,7 +149,7 @@
 <script src="{{ asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
-<script src="{{ asset('assets/js/app.js') }}?v=0.2"></script>
+<script src="{{ asset('assets/js/app.js') }}?v={{ config('app.version') }}"></script>
 <script>
     function calculateAge(birthdate, minAge = 0) {
         const birthDateObj = new Date(birthdate);

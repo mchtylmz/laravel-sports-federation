@@ -14,17 +14,25 @@ class PunishmentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $actions = view('components.actions', [
+        $actionsData = [
             'delete' => route('punishment.delete', $this->id),
             'deleteMessage' => __('punishments.delete', ['reason' => $this->reason]),
             'id' => $this->id
-        ])->render();
+        ];
+
+        if (hasRole('superadmin') && userPermit(['mudur'])) {
+            unset($actionsData['edit'], $actionsData['delete']);
+        }
+
+        $actions = view('components.actions', $actionsData)->render();
 
         return [
             'id' => $this->id,
             'name' => $this->people?->name,
             'surname' => $this->people?->surname,
             'fullname' => $this->people?->fullname,
+            'federation_id' => $this->people?->federation?->id,
+            'federation_name' => $this->people?->federation?->name,
             'photo' => $this->people?->photo,
             'photo_image' => asset($this->people?->photo),
             'reason' => $this->reason,

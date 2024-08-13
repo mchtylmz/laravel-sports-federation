@@ -4,6 +4,9 @@
             <button class="nav-link active px-5" id="btabs-people-tab" data-bs-toggle="tab" data-bs-target="#btabs-people" role="tab" aria-controls="btabs-people" aria-selected="false" tabindex="-1">Kişi Bilgileri</button>
         </li>
         <li class="nav-item" role="presentation">
+            <button class="nav-link px-5" id="btabs-federations-tab" data-bs-toggle="tab" data-bs-target="#btabs-federations" role="tab" aria-controls="btabs-federations" aria-selected="true">Federasyonlar</button>
+        </li>
+        <li class="nav-item" role="presentation">
             <button class="nav-link px-5" id="btabs-punishment-tab" data-bs-toggle="tab" data-bs-target="#btabs-punishment" role="tab" aria-controls="btabs-punishment" aria-selected="true">Disiplin Cezaları</button>
         </li>
     </ul>
@@ -156,6 +159,33 @@
                 </div>
             @endif
             <!--punishment -->
+        </div>
+        <div class="tab-pane" id="btabs-federations" role="tabpanel" aria-labelledby="btabs-federations" tabindex="0">
+            <!--federations -->
+            @php
+                $peoples = \App\Models\People::where('identity', $people->identity)
+                ->orWhere('id', $people->id)
+                ->groupBy('federation_id')
+                ->get();
+            @endphp
+            @if($peoples)
+                <ul class="list-group list-group-flush">
+                @foreach($peoples as $people)
+                    <li class="list-group-item">
+                        <img src="{!! asset($people->federation?->logo) !!}"
+                             style="height: 64px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
+                             onerror="this.src='{{ asset('uploads/no-img.png') }}'"
+                             alt="{{ $people->federation?->name }}">
+                        <strong>{{ $people->federation?->name }}</strong>
+                    </li>
+                @endforeach
+                </ul>
+            @else
+                <div class="alert alert-warning">
+                    Kayıt bulunmuyor!.
+                </div>
+            @endif
+            <!--federations -->
         </div>
     </div>
 </div>

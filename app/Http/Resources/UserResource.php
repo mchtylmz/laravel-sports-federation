@@ -14,13 +14,19 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $actions = view('components.actions', [
+        $actionsData = [
             'edit' => $this->id !== auth()->id() ? route('user.show', [$this->role, $this->id]) : false,
             'view' => route('user.show', [$this->role, $this->id]),
             'delete' => $this->id !== auth()->id() && hasRole('superadmin') ? route('user.delete', $this->id) : false,
             'deleteMessage' => __('users.delete', ['name' => $this->name]),
             'id' => $this->id
-        ])->render();
+        ];
+
+        if (userPermit(['mudur'])) {
+            unset($actionsData['edit'], $actionsData['delete']);
+        }
+
+        $actions = view('components.actions', $actionsData)->render();
 
         return [
             'id' => $this->id,

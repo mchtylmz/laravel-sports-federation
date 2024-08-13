@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Enums\EventTypeEnum;
+use App\Models\Club;
+use App\Models\Event;
+use App\Models\Federation;
 use App\Models\People;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'superadmin',
             'password' => Hash::make('superadmin')
         ]);
-        User::create([
+        $admin = User::create([
             'role' => 'admin',
             'name' => 'admin',
             'username' => 'admin',
@@ -48,22 +52,62 @@ class DatabaseSeeder extends Seeder
             ])
         ]);
 
+        $federation = Federation::create([
+            'name' => 'Futbol Federasyonu'
+        ]);
+        $admin->setMeta([
+            'federation_id' => $federation->id
+        ]);
+
         People::create([
+            'federation_id' => $federation->id,
             'type' => 'player',
             'name' => 'Oyuncu 1',
             'surname' => 'Oyuncu'
         ]);
 
         People::create([
+            'federation_id' => $federation->id,
             'type' => 'referee',
             'name' => 'Hakem 1',
             'surname' => 'Hakem'
         ]);
 
         People::create([
+            'federation_id' => $federation->id,
             'type' => 'coach',
             'name' => 'Antrenör 1',
             'surname' => 'Antrenör'
+        ]);
+
+        Club::create([
+            'federation_id' => $federation->id,
+            'name' => 'Futbol Kulübü',
+            'user_name' => 'Kulüb yönetici ismi'
+        ]);
+
+        Event::insert([
+            [
+                'user_id' => $manager->id,
+                'type' => EventTypeEnum::event,
+                'title' => 'Saha tanıtım etkinliği',
+                'start_date' => now()->subHours(2),
+                'end_date' => now()->subHours(1),
+            ],
+            [
+                'user_id' => $admin->id,
+                'type' => EventTypeEnum::event,
+                'title' => 'Futbol etkinliği',
+                'start_date' => now()->subDays(2),
+                'end_date' => now()->subDays(2),
+            ],
+            [
+                'user_id' => $admin->id,
+                'type' => EventTypeEnum::federation_date,
+                'title' => 'Genel Kurul Tarihi',
+                'start_date' => now()->addDay(),
+                'end_date' => now()->addDay(),
+            ],
         ]);
 
         settings()->set([

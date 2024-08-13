@@ -22,14 +22,29 @@ if (!function_exists('role')) {
     }
 }
 
-if (!function_exists('permit')) {
-    function permit(string $name = ''): bool
+if (!function_exists('permitIf')) {
+    function permitIf(string $role, array $names): bool
     {
-        if (auth()?->user()?->permit == 'no' || !hasRole('superadmin')) {
+        if (in_array($role, ['admin', 'manager', 'calendar'])) {
             return true;
         }
 
-        return auth()?->user()?->permit == $name;
+        if (user()?->permit?->name == 'no') {
+            return true;
+        }
+
+        return userPermit($names);
+    }
+}
+
+if (!function_exists('userPermit')) {
+    function userPermit(array $names): bool
+    {
+        if (in_array(user()?->permit?->name, $names)) {
+            return true;
+        }
+
+        return false;
     }
 }
 
@@ -43,6 +58,10 @@ if (!function_exists('user')) {
 if (!function_exists('federations')) {
     function federations()
     {
+        if (hasRole('admin')) {
+            return \App\Models\Federation::where('id', user()->federation()?->id)->get();
+        }
+
         return \App\Models\Federation::all();
     }
 }
@@ -50,6 +69,12 @@ if (!function_exists('federations')) {
 if (!function_exists('clubs')) {
     function clubs()
     {
+        if (hasRole('admin')) {
+            return \App\Models\Club::where('status', 'active')
+                ->whereRaw(sprintf("FIND_IN_SET('%s', federation_id) > 0", user()->federation()?->id))
+                ->get();
+        }
+
         return \App\Models\Club::where('status', 'active')->get();
     }
 }
@@ -57,6 +82,12 @@ if (!function_exists('clubs')) {
 if (!function_exists('peoples')) {
     function peoples()
     {
+        if (hasRole('admin')) {
+            return \App\Models\People::where('status', 'active')
+                ->where('federation_id', user()->federation()?->id)
+                ->get();
+        }
+
         return \App\Models\People::where('status', 'active')->get();
     }
 }

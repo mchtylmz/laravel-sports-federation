@@ -108,9 +108,16 @@
 
 
             <div class="mb-4 text-center">
-                <button type="submit" class="btn btn-alt-primary px-4">
-                    <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}
-                </button>
+
+                @if(userPermit(['mudur']))
+                    <button type="button" class="btn btn-alt-primary px-4" disabled>
+                        <i class="fa fa-close mx-2 fa-faw"></i> {{ __('table.save') }}
+                    </button>
+                @else
+                    <button type="submit" class="btn btn-alt-primary px-4">
+                        <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}
+                    </button>
+                @endif
             </div>
         </form>
     </x-block>

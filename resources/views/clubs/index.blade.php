@@ -38,11 +38,9 @@
                 <th data-field="id" data-width="5">
                     {{ __('table.id') }}
                 </th>
-                @if(hasRole('superadmin') && false)
-                    <th data-field="federation_count" data-sortable="true" data-width="15" data-align="center">
-                        {{ __('table.federation') }}
-                    </th>
-                @endif
+                <th data-field="federation_names" data-formatter="setHtml" data-width="15">
+                    {{ __('table.federation') }}
+                </th>
                 <th data-field="name" data-sortable="true" data-width="25" data-align="left">
                     {{ __('clubs.form.name') }}
                 </th>

@@ -149,11 +149,11 @@ class EventController extends Controller
 
     public function delete(Event $event)
     {
-        if ($event->isPassed()) {
+        /*if ($event->isPassed()) {
             return response()->json([
                 'message' => __('events.not_edit')
             ], 400);
-        }
+        }*/
 
         $event->delete();
 

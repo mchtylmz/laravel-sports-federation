@@ -25,6 +25,9 @@ class PeopleController extends Controller
         if ($request->has('sort')) {
             $people = People::orderBy($request->get('sort'), $request->get('order', 'ASC'));
         }
+        if (hasRole('admin')) {
+            $people = $people->where('federation_id', user()->federation()?->id);
+        }
         if ($search = $request->get('search')) {
             $people->whereAny(
                 ['name', 'surname', 'phone', 'email', 'nationality', 'identity', 'license_no'],

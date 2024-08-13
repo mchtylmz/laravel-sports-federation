@@ -154,6 +154,7 @@ Route::middleware('auth')->group(function () {
 
                     Route::get('date', 'date')->name('date');
                     Route::post('date/save/{federation:id}', 'dateSave')->name('date.save');
+                    Route::post('date/delete', 'dateDelete')->name('date.delete');
 
                     Route::get('contact', 'contact')->name('contact');
                     Route::post('contact/save/{federation:id}', 'contactSave')->name('contact.save');

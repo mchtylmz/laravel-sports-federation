@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Actions\UploadFile;
+use App\Enums\EventTypeEnum;
 use App\Http\Requests\Federation\DirectorSaveRequest;
 use App\Http\Requests\Federation\SaveRequest;
 use App\Models\Director;
+use App\Models\Event;
 use App\Models\Federation;
 use Illuminate\Http\Request;
 
@@ -56,7 +58,7 @@ class FederationInfoController extends Controller
         $federation = Federation::findOrFail(user()?->federation()?->id);
 
         return view('federations.info.statute', [
-            'title' => 'Tüzük',
+            'title' => 'Belgeler',
             'federation' => $federation
         ]);
     }
@@ -109,22 +111,48 @@ class FederationInfoController extends Controller
 
     public function date()
     {
-        $federation = Federation::findOrFail(user()?->federation()?->id);
+        $dates = user()->events()->where('type', EventTypeEnum::federation_date)->latest()->get();
 
         return view('federations.info.date', [
             'title' => 'Genel Kurul Tarihleri',
-            'federation' => $federation
+            'dates' => $dates
         ]);
     }
 
     public function dateSave(Request $request, Federation $federation)
     {
-        $federation->setMeta([
-            'meet_dates' => json_encode($request->get('meet_dates'))
-        ]);
+        foreach ($request->get('meet_dates') as $meet_date) {
+            list($date, $description, $id) = array_values($meet_date);
+            user()->events()->updateOrCreate(
+                [
+                    'id' => intval($id)
+                ],
+                [
+                    'user_id' => user()->id,
+                    'start_date' => date('Y-m-d', strtotime($date)),
+                    'end_date' => date('Y-m-d', strtotime($date)),
+                    'type' => EventTypeEnum::federation_date,
+                    'title' => 'Genel Kurul Tarihi',
+                    'content' => $description
+                ]
+            );
+        }
 
         return response()->json([
             'message' => 'Kayıt başarıyla güncellendi',
+            'refresh' => true
+        ]);
+    }
+
+    public function dateDelete(Request $request)
+    {
+        $event = Event::find($request->get('id', 0));
+        if ($event) {
+            $event->delete();
+        }
+
+        return response()->json([
+            'message' => 'Genel kurul tarihi silindi',
             'refresh' => true
         ]);
     }

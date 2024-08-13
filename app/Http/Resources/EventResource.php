@@ -29,7 +29,11 @@ class EventResource extends JsonResource
             'id' => $this->id,
             'user_username' => $this->user?->username,
             'user_name' => $this->user?->name,
-            'title' => '('.$this->user?->name.') ' . $this->title,
+            'title' => sprintf(
+                '(%s) %s',
+                !empty($this->user?->role == 'admin') ? $this->user?->federation()?->name : $this->user?->name,
+                $this->title
+            ), // '('.$this->user?->name.') ' . $this->title,
             'content' => $this->content,
             'location' => $this->location,
             'is_national' => $this->is_national,

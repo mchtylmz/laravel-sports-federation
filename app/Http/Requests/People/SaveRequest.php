@@ -21,6 +21,7 @@ class SaveRequest extends BaseRequest
             'type' => ['required', Rule::in(PeopleType::values())],
             'gender' => ['required', Rule::in(Gender::values())],
             'photo' => ['nullable', 'image'],
+            'federation_id' => ['nullable', 'integer'],
             'license_no' => ['required', 'string'],
             'name' => ['required', 'string'],
             'surname' => ['required', 'string'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Federation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use function Laravel\Prompts\spin;
@@ -28,11 +29,31 @@ class ClubResource extends JsonResource
             ];
         }
 
+        if (userPermit(['tescil'])) {
+            unset($actionsData['edit']);
+        }
+        if (userPermit(['mudur'])) {
+            unset($actionsData['edit'], $actionsData['delete']);
+        }
+
         $actions = view('components.actions', $actionsData)->render();
+
+        $federation_names = '';
+        if ($ids = explode(',', $this->federation_id)) {
+            if ($federations = Federation::whereIn('id', $ids)->get()) {
+                $federation_names = [];
+                foreach ($federations as $federation) {
+                    $federation_names[] = $federation->name;
+                }
+            }
+            $federation_names = implode('<br>', $federation_names);
+        }
 
         return [
             'id' => $this->id,
             'federation_id' => $this->federation_id,
+            'federation_names' => $federation_names,
+            'federation_names_html' => $federation_names,
             'federation_count' => count(explode(',', $this->federation_id)),
             'name' => $this->name,
             'location' => $this->location,

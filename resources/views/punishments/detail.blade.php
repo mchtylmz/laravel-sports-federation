@@ -10,7 +10,7 @@
                 <select class="selectpicker form-control" id="people_id" name="people_id" data-placeholder="Kişi Seç...." data-size="5" data-live-search="true" required>
                     @if($peoples = peoples()))
                         @foreach($peoples as $people)
-                            <option value="{{ $people->id }}" @selected($punishment->people_id == $people->id)>{{ $people->name }}</option>
+                            <option value="{{ $people->id }}" @selected($punishment->people_id == $people->id)>{{ $people->fullname }}</option>
                         @endforeach
                     @endif
                 </select>

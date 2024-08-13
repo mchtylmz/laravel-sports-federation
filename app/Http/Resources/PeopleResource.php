@@ -15,16 +15,24 @@ class PeopleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $actions = view('components.actions', [
+        $actionsData = [
             'view' => route('people.show', $this->id),
             'edit' => route('people.show', $this->id),
             'delete' => route('people.delete', $this->id),
             'deleteMessage' => __('peoples.delete', ['name' => $this->name]),
             'id' => $this->id
-        ])->render();
+        ];
+
+        if (hasRole('superadmin') && userPermit(['mudur'])) {
+            unset($actionsData['edit'], $actionsData['delete']);
+        }
+
+        $actions = view('components.actions', $actionsData)->render();
 
         return [
             'id' => $this->id,
+            'federation_id' => $this->federation?->id,
+            'federation_name' => $this->federation?->name,
             'type' => $this->type->value,
             'type_text' => $this->type->title(),
             'photo' => $this->photo,

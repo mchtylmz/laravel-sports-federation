@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Punishment\SaveRequest;
 use App\Http\Resources\PunishmentResource;
+use App\Models\People;
 use App\Models\Punishment;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,6 +23,9 @@ class PunishmentController extends Controller
         $punishment = Punishment::orderBy('reason');
         if ($request->has('sort')) {
             $punishment = Punishment::orderBy($request->get('sort'), $request->get('order', 'ASC'));
+        }
+        if (hasRole('admin')) {
+            $punishment = $punishment->whereIn('people_id', People::where('federation_id', user()->federation()?->id)->pluck('id')->toArray());
         }
         if ($search = $request->get('search')) {
             $punishment->whereAny(['reason', 'description'], 'LIKE', '%' . $search . '%')
