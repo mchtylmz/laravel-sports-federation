@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+    @php
+    //$muafiyet = hasRole('superadmin') && userPermit(['muafiyet']);
+    $muafiyet = hasRole('superadmin');
+    @endphp
+
     <x-block title="{{ $title }}">
 
         <form class="js-validation-form" action="{{ route('people.save', $people->id ?? '') }}" method="POST" enctype="multipart/form-data">
@@ -15,7 +20,7 @@
                     </select>
                 </div>
             @else
-                <input type="hidden" name="federation_id" value="{{ user()->$federation()?->id }}">
+                <input type="hidden" name="federation_id" value="{{ user()->federation()?->id }}">
             @endif
 
             <div class="mb-0">
@@ -208,24 +213,48 @@
                     <div class="mb-3">
                         @php $racer_document = $people->getMeta('racer_document'); @endphp
                         <label class="form-label" for="racer_document">Muafiyet Belgesi</label>
-                        <select class="selectpicker form-control" id="racer_document" name="racer_document" data-placeholder="Seçiniz..." data-size="5" data-live-search="true" required>
+                        <select class="selectpicker form-control" id="racer_document" name="racer_document" data-placeholder="Seçiniz..." data-size="5" data-live-search="true" @disabled(!$muafiyet)>
                             @foreach(['Evet', 'Hayır'] as $value)
                                 <option value="{{ $value }}" @selected($value == $racer_document)>{{ $value }}</option>
                             @endforeach
                         </select>
+                        @if(!$muafiyet)
+                            <small><i class="fas fa-times"></i> Düzenleme yapılamaz</small>
+                        @endif
+                    </div>
+
+                    <div class="mb-3 racer_document_file" style="display: none">
+                        @php
+                            $racer_document_file = $people->getMeta('racer_document_file');
+                            $explode = explode('/', $racer_document_file);
+                        @endphp
+                        <label class="form-label" for="racer_document">Muafiyet Belgesi</label>
+                        <input type="file" class="form-control" name="racer_document_file" accept=".pdf,.xls,.xlsx,.doc,.docx">
+                        @if($racer_document_file)
+                            <a target="_blank" class="border text-dark w-100"
+                               href="{{ asset($racer_document_file) }}">
+                                <strong>{{ $explode[count($explode) - 1] ?? $racer_document_file }}</strong>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="mb-3">
                         <label class="form-label" for="racer_car_brand">Araç Markası</label>
-                        <input type="text" class="form-control" id="racer_car_brand" name="racer_car_brand" placeholder="Araç Markası.." value="{{ $people->getMeta('racer_car_brand') ?? '' }}" @disabled(!hasRole('superadmin'))>
+                        <input type="text" class="form-control" id="racer_car_brand" name="racer_car_brand" placeholder="Araç Markası.." value="{{ $people->getMeta('racer_car_brand') ?? '' }}" @disabled(!$muafiyet)>
                     </div>
+                    @if(!$muafiyet)
+                        <small><i class="fas fa-times"></i> Düzenleme yapılamaz</small>
+                    @endif
                 </div>
                 <div class="col-lg-3">
                     <div class="mb-3">
                         <label class="form-label" for="racer_car_no">Araç Şasi No</label>
-                        <input type="text" class="form-control" id="racer_car_no" name="racer_car_no" placeholder="Araç Şasi No.." value="{{ $people->getMeta('racer_car_no') ?? '' }}" @disabled(!hasRole('superadmin'))>
+                        <input type="text" class="form-control" id="racer_car_no" name="racer_car_no" placeholder="Araç Şasi No.." value="{{ $people->getMeta('racer_car_no') ?? '' }}" @disabled(!$muafiyet)>
                     </div>
+                    @if(!$muafiyet)
+                        <small><i class="fas fa-times"></i> Düzenleme yapılamaz</small>
+                    @endif
                 </div>
             </div>
 
@@ -274,6 +303,16 @@
 @endsection
 @push('js')
     <script>
+        function racer_document_file($this) {
+            let value = $this.val();
+            console.log(value)
+            if (value === 'Evet') {
+                $('.racer_document_file').show();
+            } else {
+                $('.racer_document_file').hide();
+            }
+        }
+
         $(document).ready(function() {
             $('select[name=type]').trigger('change');
             $('input[name=birth_date]').trigger('change');
@@ -290,6 +329,11 @@
             $('.people-school').hide();
 
             $('.people-' + peopleType).show();
+        });
+        $(document).on('change', 'select[name=racer_document]', function (e) {
+            e.preventDefault();
+
+            racer_document_file($(this));
         });
         $(document).on('change', 'input[name=birth_date]', function (e) {
             e.preventDefault();
@@ -316,7 +360,12 @@
             adult.selectpicker();
             adult.selectpicker('val', '');
         });
-
-
     </script>
+    @if($racer_document == 'Evet')
+        <script>
+            $(document).ready(function() {
+                racer_document_file($('#racer_document'));
+            });
+        </script>
+    @endif
 @endpush

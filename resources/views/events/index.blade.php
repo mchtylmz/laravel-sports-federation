@@ -7,6 +7,51 @@
     </div>
 
     <x-block title="{{ $title }}">
+        <form class="js-filter-table mb-3">
+            <div class="row align-items-end justify-content-start">
+                <input type="hidden" name="type" value="event">
+                @if(hasRole('superadmin', 'calendar') && permitIf(role(), ['mudur', 'tescil']))
+                    <div class="col-lg-2 mb-1">
+                        <label class="form-label" for="federation_id">Federasyon / Branş</label>
+                        <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
+                            <option value="">Tüm Federasyonlar / Branşlar</option>
+                            @foreach(federations() as $federation)
+                                <option value="{{ $federation->id }}">{{ $federation->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+                <div class="col-lg-2 mb-1">
+                    <label class="form-label" for="status">Durum</label>
+                    <select class="selectpicker form-control" id="status" name="status" data-placeholder="Tüm Durumlar" data-size="5" data-live-search="true">
+                        <option value="">Tüm Durumlar</option>
+                        @foreach(eventStatuses() as $status)
+                            <option value="{{ $status }}">{{ $status }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-2 mb-1">
+                    <label class="form-label" for="location">Tesis/Yer</label>
+                    <select class="selectpicker form-control" id="location" name="location" data-placeholder="Tüm Tesisler" data-size="5" data-live-search="true">
+                        <option value="">Tüm Tesisler</option>
+                        @foreach(eventPlaces() as $place)
+                            <option value="{{ $place }}">{{ $place }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-3 mb-1">
+                    <label class="form-label" for="date">Etkinlik Tarihi</label>
+                    <input type="text" class="js-flatpickr form-control" id="date" name="date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                </div>
+
+                <div class="col-lg-2 mb-1">
+                    <button type="submit" class="btn btn-alt-success w-100 js-filter-event-submit">
+                        <i class="fa fa-fw fa-filter"></i> {{ __('table.filter') }}
+                    </button>
+                </div>
+            </div>
+        </form>
+
         <x-table route="{{ route('event.json') }}"
                  export-pdf="{{ route('event.export.pdf') }}"
                  export-excel="{{ route('event.export.excel') }}">

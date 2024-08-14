@@ -31,7 +31,12 @@
 </head>
 <body>
 
-@if($federation)
+<div style="text-align: right">
+    <small>{{ now()->format('Y-m-d H:i') }}</small>
+    <br>
+</div>
+
+@if(!empty($federation))
     <center>
         <img src="{{ public_path($federation?->logo) }}" style="height: 150px; object-fit: contain; max-width: 480px" />
         <h2>{{ $federation->name }}</h2>
@@ -79,9 +84,6 @@
 
 <br>
 <br>
-<div style="text-align: right">
-    <small>{{ now()->format('Y-m-d H:i') }}</small>
-</div>
 
 </body>
 </html>

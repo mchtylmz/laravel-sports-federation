@@ -37,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
         Facades\View::composer('*', function (View $view) {
             $note_count = 0;
             if (auth()->check()) {

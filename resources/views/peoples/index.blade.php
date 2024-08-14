@@ -23,17 +23,13 @@
                     <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tpi Seçiniz...." data-size="5" data-live-search="true">
                         @if(permitIf(role(), ['mudur']))
                             <option value="">{{ __('table.all') }}</option>
-                            @foreach(\App\Enums\PeopleType::titles() as $key => $title)
-                                <option value="{{ $key }}">{{ $title }}</option>
+                            @foreach(\App\Enums\PeopleType::titles() as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
                             @endforeach
                         @else
                             <option value="{{ \App\Enums\PeopleType::racer }}">{{ \App\Enums\PeopleType::racer->title() }}</option>
                         @endif
                     </select>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <label class="form-label" for="license_no">Lisans No</label>
-                    <input type="text" class="form-control" id="license_no" name="license_no" placeholder="XXX..">
                 </div>
                 <div class="col-lg-3 mb-3">
                     <label class="form-label" for="club_id">Kulüp</label>
@@ -48,12 +44,16 @@
                     <label class="form-label" for="gender">Cinsiyet</label>
                     <select class="selectpicker form-control" id="gender" name="gender" data-placeholder="Cinsiyet Seçiniz...." data-size="5" data-live-search="true">
                         <option value="">{{ __('table.all') }}</option>
-                        @foreach(\App\Enums\Gender::titles() as $key => $title)
-                            <option value="{{ $key }}">{{ $title }}</option>
+                        @foreach(\App\Enums\Gender::titles() as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-3 mb-3">
+                <div class="col-lg-2 mb-3">
+                    <label class="form-label" for="license_no">Lisans No</label>
+                    <input type="text" class="form-control" id="license_no" name="license_no" placeholder="XXX..">
+                </div>
+                <div class="col-lg-2 mb-3">
                     <label class="form-label" for="identity">Pasaport/Kimlik</label>
                     <input type="text" class="form-control" id="identity" name="identity" placeholder="XXX..">
                 </div>
@@ -61,7 +61,7 @@
                     <label class="form-label" for="birth_date">Doğum Tarihi</label>
                     <input type="text" class="js-flatpickr form-control" id="birth_date" name="birth_date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
                 </div>
-                <div class="col-lg-3 mb-3">
+                <div class="col-lg-2 mb-3">
                     <button type="submit" class="btn btn-alt-success w-100 js-filter-submit">
                         <i class="fa fa-fw fa-filter"></i> {{ __('table.filter') }}
                     </button>

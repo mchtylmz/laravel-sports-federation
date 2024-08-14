@@ -101,6 +101,12 @@
                     params[row.name] = row.value;
                 })
             }
+            let eventForm = $('form.js-filter-event');
+            if (eventForm.length) {
+                eventForm.serializeArray().forEach(function (row, index) {
+                    params[row.name] = row.value;
+                })
+            }
 
             exportAttribute(params);
 

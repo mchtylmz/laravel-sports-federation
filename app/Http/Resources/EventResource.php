@@ -17,13 +17,18 @@ class EventResource extends JsonResource
     {
         $isPast = now()->format('Y-m-d') < $this->start_date?->format('Y-m-d');
 
-        $actions = view('components.actions', [
+        $actionsData = [
             'view' => route('event.show', $this->id),
             'edit' => route('event.show', $this->id),
             'delete' => $isPast ? route('event.delete', $this->id) : false,
             'deleteMessage' => __('events.delete', ['title' => $this->title]),
             'id' => $this->id
-        ])->render();
+        ];
+        if ($request->get('action') == 'lite') {
+            unset($actionsData['edit'], $actionsData['delete']);
+        }
+
+        $actions = view('components.actions', $actionsData)->render();
 
         $data = [
             'id' => $this->id,
@@ -31,7 +36,7 @@ class EventResource extends JsonResource
             'user_name' => $this->user?->name,
             'title' => sprintf(
                 '(%s) %s',
-                !empty($this->user?->role == 'admin') ? $this->user?->federation()?->name : $this->user?->name,
+                !empty($this->user?->role == 'admin') ? $this->user?->federation()?->name : $this->location,
                 $this->title
             ), // '('.$this->user?->name.') ' . $this->title,
             'content' => $this->content,

@@ -47,6 +47,14 @@ class PeopleController extends Controller
         if ($gender = $request->get('gender')) {
             $people->where('gender', $gender);
         }
+        if ($identity = $request->get('identity')) {
+            $people->where('identity', $identity);
+        }
+        if ($request->get('birth_date') && $dates = explode(' - ', $request->get('birth_date'))) {
+            $start_date = $dates[0] ?? false;
+            $end_date = $dates[1] ?? false;
+            $people->whereBetween('birth_date', [$start_date, $end_date]);
+        }
 
         return response()->json([
             'total' => $people->count(),
@@ -105,12 +113,16 @@ class PeopleController extends Controller
             ];
         } elseif ($people->type == PeopleType::racer) {
             $metas = [
-                'racer_section' => $request->get('racer_section'),
-                'racer_document' => $request->get('racer_document'),
+                'racer_section' => $request->get('racer_section')
             ];
             if (hasRole('superadmin')) {
+                $metas['racer_document'] = $request->get('racer_document');
                 $metas['racer_car_brand'] = $request->get('racer_car_brand');
                 $metas['racer_car_no'] = $request->get('racer_car_no');
+
+                if ($request->hasFile('racer_document_file')) {
+                    $metas['racer_document_file'] = UploadFile::file($request->file('racer_document_file'));
+                }
             }
         } elseif ($people->type == PeopleType::school) {
             $metas = [

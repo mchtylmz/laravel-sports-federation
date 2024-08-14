@@ -1,3 +1,13 @@
+@php
+    $peoples = \App\Models\People::where('identity', $people->identity ?? 0)
+        ->orWhere('id', $people->id)
+        ->groupBy('type')
+        ->get();
+
+    $punishments = \App\Models\Punishment::whereIn('people_id', collect($peoples)->pluck('id')->all())
+        ->latest()
+        ->get();
+@endphp
 <div class="block border p-0">
     <ul class="nav nav-tabs nav-tabs-alt" role="tablist">
         <li class="nav-item" role="presentation">
@@ -111,8 +121,16 @@
                         Araç Şasi No <br> <strong>{{ $people->getMeta('racer_car_no') }}</strong>
                     </li>
                     <li class="list-group-item">
-                        Muafiyet Belgesi <br> <strong>{{ $people->getMeta('racer_document') }}</strong>
+                        Muafiyet <br> <strong>{{ $people->getMeta('racer_document') }}</strong>
                     </li>
+                    @if($file = $people->getMeta('racer_document_file'))
+                        <li class="list-group-item">
+                            Muafiyet Belgesi <br>
+                            <a target="_blank" class="text-dark text-decoration-underline" href="{{ asset($file) }}">
+                                <strong>{{ $file }}</strong>
+                            </a>
+                        </li>
+                    @endif
                 @endif
 
                 @if($people->type == \App\Enums\PeopleType::school)
@@ -138,20 +156,25 @@
         </div>
         <div class="tab-pane" id="btabs-punishment" role="tabpanel" aria-labelledby="btabs-punishment" tabindex="0">
             <!--punishment -->
-            @if($punishments = $people->punishments()->count())
-                @foreach($people->punishments as $punishment)
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+            @if(count($punishments))
+                @foreach($punishments as $punishment)
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item bg-light p-2">
+                            {{ $punishment->people?->federation?->name }}
+                        </li>
+                        <li class="list-group-item p-2">
+                            Lisans No <br> <strong>{{ $punishment->people?->license_no }}</strong>
+                        </li>
+                        <li class="list-group-item p-2">
                             Ceza Sebebi <br> <strong>{{ $punishment->reason }}</strong>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item p-2">
                             Ceza Açıklama <br> <strong>{{ $punishment->description }}</strong>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item p-2">
                             Kayıt Tarihi <br> <strong>{{ $punishment->created_at->format('Y-m-d H:i') }}</strong>
                         </li>
                     </ul>
-                    <hr>
                 @endforeach
             @else
                 <div class="alert alert-warning">
@@ -162,21 +185,33 @@
         </div>
         <div class="tab-pane" id="btabs-federations" role="tabpanel" aria-labelledby="btabs-federations" tabindex="0">
             <!--federations -->
-            @php
-                $peoples = \App\Models\People::where('identity', $people->identity)
-                ->orWhere('id', $people->id)
-                ->groupBy('federation_id')
-                ->get();
-            @endphp
             @if($peoples)
                 <ul class="list-group list-group-flush">
-                @foreach($peoples as $people)
+                @foreach($peoples as $people_other)
                     <li class="list-group-item">
-                        <img src="{!! asset($people->federation?->logo) !!}"
-                             style="height: 64px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
-                             onerror="this.src='{{ asset('uploads/no-img.png') }}'"
-                             alt="{{ $people->federation?->name }}">
-                        <strong>{{ $people->federation?->name }}</strong>
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-lg-9">
+                                <img src="{!! asset($people_other->federation?->logo) !!}"
+                                     style="width: 360px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
+                                     onerror="this.src='{{ asset('uploads/no-img.png') }}'"
+                                     alt="{{ $people_other->federation?->name }}">
+                                <p class="mb-0 mt-1">
+                                    <span>Lisans No: {{ $people_other->license_no }}</span>
+                                    <br>
+                                    <strong>{{ $people_other->federation?->name }}</strong>
+                                    <br>
+                                    <span>{{ $people_other->type?->title() }}</span>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                @if(hasRole('superadmin') && $people_other->id != $people->id)
+                                    <button type="button" class="btn btn-info btn-sm w-100 show-people-other"
+                                            data-toggle="view" data-route="{{ route('people.show', $people_other->id) }}?format=json">
+                                        <i class="fa fa-fw fa-eye me-1"></i> Görüntüle
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
                     </li>
                 @endforeach
                 </ul>

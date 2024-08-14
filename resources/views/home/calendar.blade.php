@@ -3,22 +3,22 @@
 @section('content')
 
     <div class="block border p-0">
-        <ul class="nav nav-tabs nav-tabs-alt align-items-center border-bottom bg-light-subtle" role="tablist">
+        <ul class="nav nav-tabs nav-tabs-alt align-items-center border bg-light-subtle" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active px-5" id="btabs-calendar-tab" data-bs-toggle="tab" data-bs-target="#btabs-calendar" role="tab" aria-controls="btabs-calendar" aria-selected="false" tabindex="-1">
+                <button class="nav-link active px-5 home-calendar" id="btabs-calendar-tab" data-bs-toggle="tab" data-bs-target="#btabs-calendar" role="tab" aria-controls="btabs-calendar" aria-selected="false" tabindex="-1">
                     Etkinlikler Takvim
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link px-5" id="btabs-list-tab" data-bs-toggle="tab" data-bs-target="#btabs-list" role="tab" aria-controls="btabs-list" aria-selected="true">
+                <button class="nav-link px-5 home-calendar" id="btabs-list-tab" data-bs-toggle="tab" data-bs-target="#btabs-list" role="tab" aria-controls="btabs-list" aria-selected="true">
                     Etkinlikler Liste
                 </button>
             </li>
         </ul>
         <div class="block-content tab-content overflow-hidden">
             <!-- -->
-            <div class="tab-pane active show" id="btabs-calendar" role="tabpanel" aria-labelledby="btabs-calendar" tabindex="0">
-                <form class="js-filter-event">
+            <div class="tab-pane active show pb-3" id="btabs-calendar" role="tabpanel" aria-labelledby="btabs-calendar" tabindex="0">
+                <form class="js-filter-event mb-3">
                     <div class="row align-items-end justify-content-start">
                         @if(hasRole('superadmin', 'calendar') && permitIf(role(), ['mudur', 'tescil']))
                             <div class="col-lg-2 mb-1">
@@ -27,6 +27,17 @@
                                     <option value="">Tüm Federasyonlar / Branşlar</option>
                                     @foreach(federations() as $federation)
                                         <option value="{{ $federation->id }}">{{ $federation->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+                        @if(hasRole('superadmin', 'calendar', 'admin'))
+                            <div class="col-lg-2 mb-1">
+                                <label class="form-label" for="type">Etkinlik Tipi</label>
+                                <select class="selectpicker form-control" id="type" name="type" data-placeholder="Tümü" data-size="5" data-live-search="true">
+                                    <option value="">Tümü</option>
+                                    @foreach(eventTypeCases() as $type)
+                                        <option value="{{ $type->name }}">{{ $type->title() }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,15 +68,56 @@
                         </div>
                     </div>
                 </form>
-                <hr>
                 <div id="js-calendar" data-route="{{ route('event.calendar') }}"></div>
-                <br>
             </div>
             <!-- -->
 
             <!-- -->
-            <div class="tab-pane" id="btabs-list" role="tabpanel" aria-labelledby="btabs-list" tabindex="0">
-tablo
+            <div class="tab-pane pb-3" id="btabs-list" role="tabpanel" aria-labelledby="btabs-list" tabindex="0">
+                <form class="js-filter-event mb-3">
+                    <div class="row align-items-end justify-content-start">
+                        <div class="col-lg-3 mb-1">
+                            <label class="form-label" for="date">Etkinlik Tarihi</label>
+                            <input type="text" class="js-flatpickr form-control" id="date" name="date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                        </div>
+
+                        <div class="col-lg-2 mb-1">
+                            <button type="submit" class="btn btn-alt-success w-100 js-filter-event-submit">
+                                <i class="fa fa-fw fa-filter"></i> {{ __('table.filter') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <x-table route="{{ route('event.json') }}?action=lite"
+                         export-pdf="{{ route('event.export.pdf') }}"
+                         export-excel="{{ route('event.export.excel') }}">
+                    <x-slot name="columns">
+                        <th data-field="title" data-sortable="true" data-width="25" data-align="left">
+                            {{ __('table.title') }}
+                        </th>
+                        <th data-field="location" data-sortable="true">
+                            {{ __('table.location') }}
+                        </th>
+                        <th data-field="start_date" data-sortable="true">
+                            {{ __('table.start_date') }}
+                        </th>
+                        <th data-field="end_date" data-sortable="true">
+                            {{ __('table.end_date') }}
+                        </th>
+                        @if(hasRole('admin'))
+                            <th data-field="is_national" data-sortable="true" data-formatter="setText">
+                                {{ __('table.is_national') }}
+                            </th>
+                        @endif
+                        <th data-field="status" data-sortable="true">
+                            {{ __('table.status') }}
+                        </th>
+                        <th data-field="id" data-formatter="setActions">
+                            {{ __('table.actions') }}
+                        </th>
+                    </x-slot>
+                </x-table>
             </div>
             <!-- -->
 

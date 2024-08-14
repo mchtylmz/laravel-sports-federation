@@ -49,6 +49,24 @@
                 <input type="text" class="form-control" id="site_title" name="settings[site_title]" placeholder="Başlığı.." value="{{ $site_title }}" required>
             </div>
 
+           <div class="row align-items-start">
+               <div class="col-lg-6">
+                   <div class="mb-3">
+                       <label class="form-label" for="phone">Telefon Numarası</label>
+                       <input type="text" class="form-control" id="phone" name="settings[phone]" placeholder="Telefon.." value="{{ settings()->phone ?? '' }}">
+                   </div>
+                   <div class="mb-3">
+                       <label class="form-label" for="email">Email Adresi</label>
+                       <input type="text" class="form-control" id="email" name="settings[email]" placeholder="Email.." value="{{ settings()->email ?? '' }}">
+                   </div>
+               </div>
+               <div class="col-lg-6">
+                   <div class="mb-3">
+                       <label class="form-label" for="address">Adres</label>
+                       <textarea rows="4" class="form-control" id="address" name="settings[address]" placeholder="Adres..">{{ settings()->address }}</textarea>
+                   </div>
+               </div>
+           </div>
 
             <div class="mb-3">
                 <label class="form-label" for="header_under_text">Kayan Yazı</label>

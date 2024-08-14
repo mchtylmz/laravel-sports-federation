@@ -22,6 +22,14 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('calendar', [HomeController::class, 'calendar'])->name('calendar');
+
+    Route::get('json', [\App\Http\Controllers\EventController::class, 'json'])
+        ->prefix('events')->name('event.json');
+    Route::get('export/excel', [\App\Http\Controllers\EventController::class, 'exportExcel'])
+        ->prefix('events')->name('event.export.excel');
+    Route::get('export/pdf', [\App\Http\Controllers\EventController::class, 'exportPdf'])
+        ->prefix('events')->name('event.export.pdf');
+
     Route::get('my-notes', [HomeController::class, 'myNotes'])->name('my.notes');
 
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
@@ -62,9 +70,6 @@ Route::middleware('auth')->group(function () {
         ->controller(\App\Http\Controllers\EventController::class)
         ->group(function () {
             Route::get('', 'index')->name('index');
-            Route::get('json', 'json')->name('json');
-            Route::get('export/excel', 'exportExcel')->name('export.excel');
-            Route::get('export/pdf', 'exportPdf')->name('export.pdf');
             Route::post('save/{event:id?}', 'save')->name('save');
             Route::post('delete/{event:id}', 'delete')->name('delete');
         });

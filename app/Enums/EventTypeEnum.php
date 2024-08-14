@@ -20,8 +20,8 @@ enum EventTypeEnum: string
     public static function titles(): array
     {
         return [
-            self::event->value => 'event',
-            self::federation_date->value => 'federation_date'
+            self::event->value => 'Etkinlik',
+            self::federation_date->value => 'Federasyon Genel Kurul Tarihi'
         ];
     }
 

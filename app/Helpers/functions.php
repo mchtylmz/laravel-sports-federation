@@ -99,6 +99,13 @@ if (!function_exists('permitCases')) {
     }
 }
 
+if (!function_exists('eventTypeCases')) {
+    function eventTypeCases()
+    {
+        return \App\Enums\EventTypeEnum::cases();
+    }
+}
+
 if (!function_exists('users')) {
     function users()
     {

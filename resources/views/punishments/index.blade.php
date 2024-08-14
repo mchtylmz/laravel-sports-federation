@@ -23,8 +23,8 @@
                     <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tpi Seçiniz...." data-size="5" data-live-search="true">
                         @if(permitIf(role(), ['mudur']))
                             <option value="">{{ __('table.all') }}</option>
-                            @foreach(\App\Enums\PeopleType::titles() as $key => $title)
-                                <option value="{{ $key }}">{{ $title }}</option>
+                            @foreach(\App\Enums\PeopleType::titles() as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
                             @endforeach
                         @else
                             <option value="{{ \App\Enums\PeopleType::racer }}">{{ \App\Enums\PeopleType::racer->title() }}</option>

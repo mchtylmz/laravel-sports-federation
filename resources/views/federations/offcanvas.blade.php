@@ -40,6 +40,7 @@
             <img src="{{ asset($federation->logo) }}"
                  alt="{{ $federation->name }}"
                  class="w-100"
+                 onerror="this.src='{{ asset('uploads/no-img.png') }}'"
                  style="max-height: 240px; object-fit: contain" />
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
@@ -57,10 +58,6 @@
                 <li class="list-group-item">
                     Özerk
                     <br> <strong>{{ $federation->is_special == 1 ? __('table.yes') : __('table.no') }}</strong>
-                </li>
-                <li class="list-group-item">
-                    Website
-                    <br> <strong>{{ $federation->website }}</strong>
                 </li>
                 <li class="list-group-item">
                     Kayıt Tarihi
@@ -126,7 +123,7 @@
                 @endforeach
             @else
                 <div class="alert alert-danger">
-                    Belgeler dosyası bulunmuyor!.
+                    Belgeler bulunmuyor!.
                 </div>
             @endif
         </div>
@@ -134,15 +131,22 @@
 
         <!-- -->
         <div class="tab-pane" id="btabs-tab3" role="tabpanel" aria-labelledby="btabs-tab3" tabindex="0">
-            @if($dates = json_decode($federation->getMeta('meet_dates')))
+            @php
+                $user_ids = \App\Models\User::whereMeta('federation_id', $federation->id)->pluck('id')->toArray();
+                $events = \App\Models\Event::where('type', \App\Enums\EventTypeEnum::federation_date)
+                        ->whereIn('user_id', $user_ids)
+                        ->latest()
+                        ->get();
+            @endphp
+            @if($events)
                 <ul class="list-group list-group-flush">
-                    @foreach(collect($dates)->sortByDesc('date') as $date)
+                    @foreach($events as $event)
                         <li class="list-group-item">
                             Kurul Tarihi / Açıklama
                             <br>
-                            <strong>{{ $date->date }}</strong>
+                            <strong>{{ $event->start_date?->format('Y-m-d') }}</strong>
                             <br>
-                            <span>{{ $date->description }}</span>
+                            <span>{{ $event->content }}</span>
                         </li>
                     @endforeach
                 </ul>
@@ -176,6 +180,38 @@
                 <li class="list-group-item">
                     Website
                     <br> <strong>{{ $federation->getMeta('website') }}</strong>
+                </li>
+                <li class="list-group-item">
+                    <i class="fab fa-facebook-square me-2 fa-fw"></i> Facebook
+                    <br>
+                    <a target="_blank" class="text-dark text-decoration-underline"
+                       href="https://facebook.com/{{ $federation->getMeta('social_facebook') }}">
+                        <strong>{{ $federation->getMeta('social_facebook') }}</strong>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fab fa-x me-2 fa-fw"></i> X (Twitter)
+                    <br>
+                    <a target="_blank" class="text-dark text-decoration-underline"
+                       href="https://twitter.com/{{ $federation->getMeta('social_x') }}">
+                        <strong>{{ $federation->getMeta('social_x') }}</strong>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fab fa-instagram me-2 fa-fw"></i> Instagram
+                    <br>
+                    <a target="_blank" class="text-dark text-decoration-underline"
+                       href="https://instagram.com/{{ $federation->getMeta('social_instagram') }}">
+                        <strong>{{ $federation->getMeta('social_instagram') }}</strong>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fab fa-youtube me-2 fa-fw"></i> Youtube
+                    <br>
+                    <a target="_blank" class="text-dark text-decoration-underline"
+                       href="https://youtube.com/{{ $federation->getMeta('social_youtube') }}">
+                        <strong>{{ $federation->getMeta('social_youtube') }}</strong>
+                    </a>
                 </li>
             </ul>
         </div>

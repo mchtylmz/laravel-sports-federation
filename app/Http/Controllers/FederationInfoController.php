@@ -101,6 +101,10 @@ class FederationInfoController extends Controller
             'email' => $request->string('email'),
             'fax' => $request->string('fax'),
             'website' => $request->string('website'),
+            'social_facebook' => $request->string('facebook'),
+            'social_x' => $request->string('x'),
+            'social_instagram' => $request->string('instagram'),
+            'social_youtube' => $request->string('youtube'),
         ]);
 
         return response()->json([

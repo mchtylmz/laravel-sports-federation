@@ -36,7 +36,7 @@ class EventExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
     {
         return [
             [
-                user()?->federation()?->name
+                hasRole('admin') ? user()->federation()?->name : 'Etkinlikler'
             ],
             [
                 'Kullanıcı',

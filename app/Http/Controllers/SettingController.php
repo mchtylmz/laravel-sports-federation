@@ -37,7 +37,7 @@ class SettingController extends Controller
 
         return response()->json([
             'message' => __('settings.general_save_success'),
-            'refresh' => true
+            'redirect' => route('settings.index')
         ]);
     }
 }

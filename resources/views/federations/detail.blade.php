@@ -39,7 +39,7 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 d-none">
                 <label class="form-label" for="website">Website Linki</label>
                 <input type="text" class="form-control" id="website" name="website" placeholder="Website Linki.." value="{{ $federation->website ?? '' }}">
             </div>

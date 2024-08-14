@@ -23,31 +23,50 @@ class EventController extends Controller
 
     public function json(Request $request, bool $filtered = true)
     {
-        $event = user()->events()->orderBy('start_date', 'DESC')->orderBy('start_time');
+        $events = Event::orderBy('start_date', 'DESC')->orderBy('start_time');
+        if (hasRole('admin')) {
+            $events = $events->where('user_id', user()->id);
+        }
         if ($request->get('sort')) {
-            $event = $event->orderBy($request->get('sort'), $request->get('order', 'ASC'));
+            $events = $events->orderBy($request->get('sort'), $request->get('order', 'ASC'));
         }
         if ($request->get('search')) {
-            $event->whereAny(['title', 'content', 'location', 'end_notes'], 'LIKE', '%' . $request->get('search'). '%');
+            $events->whereAny(['title', 'content', 'location', 'end_notes'], 'LIKE', '%' . $request->get('search'). '%');
         }
         if ($request->get('status')) {
-            $event->where('status', $request->get('status'));
+            $events->where('status', $request->get('status'));
         }
-        if ($request->has('federation_id')) {
-            $event->whereRaw(sprintf(
+        if ($request->get('federation_id')) {
+            $events->whereRaw(sprintf(
                 "user_id IN(SELECT `owner_id` FROM `meta` WHERE `key` = 'federation_id' AND value = %d)",
                 $request->integer('federation_id')
             ));
         }
+        if (in_array(user()?->role, ['admin', 'manager'])) {
+            $events->where('user_id', auth()->id());
+        }
+        if ($request->get('location')) {
+            $events->where('location', $request->get('location'));
+        }
+        if ($request->get('type')) {
+            $events->where('type', $request->get('type'));
+        }
+        if ($request->get('date') && $dates = explode(' - ', $request->get('date'))) {
+            $start_date = $dates[0] ?? false;
+            $end_date = $dates[1] ?? false;
+            if ($start_date && $end_date) {
+                $events->whereBetween('start_date', [$start_date, $end_date]);
+            }
+        }
 
         if (!$filtered) {
-            return $event->get();
+            return $events->get();
         }
 
         return response()->json([
-            'total' => $event->count(),
-            'totalNotFiltered' => $event->count(),
-            'rows' => EventResource::collection($event->page()),
+            'total' => $events->count(),
+            'totalNotFiltered' => $events->count(),
+            'rows' => EventResource::collection($events->page()),
         ]);
     }
 
@@ -85,6 +104,9 @@ class EventController extends Controller
         }
         if ($request->get('status')) {
             $events->where('status', $request->get('status'));
+        }
+        if ($request->get('type')) {
+            $events->where('type', $request->get('type'));
         }
         if ($request->get('federation_id')) {
             $events->whereRaw(sprintf(
