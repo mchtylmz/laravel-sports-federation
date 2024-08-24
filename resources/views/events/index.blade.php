@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-lg-3 mb-1">
                     <label class="form-label" for="date">Etkinlik Tarihi</label>
-                    <input type="text" class="js-flatpickr form-control" id="date" name="date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                    <input type="text" class="daterangepicker form-control mt-0" style="position: unset !important;" placeholder="GG-AA-YYYY" autocomplete="off" id="date" name="date">
                 </div>
 
                 <div class="col-lg-2 mb-1">

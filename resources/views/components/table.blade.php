@@ -16,28 +16,30 @@
     </div>
     <div class="table-responsive pb-3 d-none">
         <div id="{{ $id }}-toolbar">
-            @if($exportPdf || $exportExcel)
-                <div class="dropdown mx-2">
-                    <a class="btn btn-secondary dropdown-toggle table-export" href="#" role="button" id="exportLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dışa Aktar
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        @if($exportPdf)
-                            <li>
-                                <a target="_blank" class="dropdown-item py-2 table-export-pdf" href="{{ $exportPdf }}">
-                                    <i class="fa fa-file-pdf fa-fw mx-2"></i> PDF
-                                </a>
-                            </li>
-                        @endif
-                        @if($exportExcel)
-                            <li>
-                                <a target="_blank" class="dropdown-item py-2 table-export-excel" href="{{ $exportExcel }}">
-                                    <i class="fa fa-file-excel fa-fw mx-2"></i> Excel
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+            @if(hasRole(['admin', 'calendar', 'manager']) || (hasRole('superadmin') && userPermit(['no', 'muafiyet', 'tescil'])))
+                @if($exportPdf || $exportExcel)
+                    <div class="dropdown mx-2">
+                        <a class="btn btn-secondary dropdown-toggle table-export" href="#" role="button" id="exportLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dışa Aktar
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @if($exportPdf)
+                                <li>
+                                    <a target="_blank" class="dropdown-item py-2 table-export-pdf" href="{{ $exportPdf }}">
+                                        <i class="fa fa-file-pdf fa-fw mx-2"></i> PDF
+                                    </a>
+                                </li>
+                            @endif
+                            @if($exportExcel)
+                                <li>
+                                    <a target="_blank" class="dropdown-item py-2 table-export-excel" href="{{ $exportExcel }}">
+                                        <i class="fa fa-file-excel fa-fw mx-2"></i> Excel
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                @endif
             @endif
         </div>
         <table

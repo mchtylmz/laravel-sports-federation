@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('branch_number')->nullable();
             $table->string('website')->nullable();
             $table->tinyInteger('is_special')->default(0);
+            $table->text('people_types')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

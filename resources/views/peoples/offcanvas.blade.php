@@ -38,7 +38,7 @@
                             <br> <strong>{{ $people->license_no }}</strong>
                         </li>
                         <li class="list-group-item">
-                            Ad Soyad
+                            İsim Soyisim
                             <br> <strong>{{ $people->fullname }}</strong>
                         </li>
                         <li class="list-group-item">
@@ -190,9 +190,9 @@
                 @foreach($peoples as $people_other)
                     <li class="list-group-item">
                         <div class="row justify-content-between align-items-center">
-                            <div class="col-lg-9">
+                            <div class="col-lg-9 {{ !hasRole('superadmin') ? 'd-flex align-items-center gap-2':'' }}">
                                 <img src="{!! asset($people_other->federation?->logo) !!}"
-                                     style="width: 360px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
+                                     style="max-width: 320px; height: 108px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
                                      onerror="this.src='{{ asset('uploads/no-img.png') }}'"
                                      alt="{{ $people_other->federation?->name }}">
                                 <p class="mb-0 mt-1">

@@ -93,6 +93,30 @@ class FederationInfoController extends Controller
         ]);
     }
 
+    public function statuteDelete(Request $request, Federation $federation)
+    {
+        $newFiles = [];
+        $id = $request->integer('id', 0);
+
+        $files = json_decode($federation->getMeta('statute_files') ?? null, true);
+
+        foreach($files as $key => $file) {
+            if ($key == $id) {
+                continue;
+            }
+            $newFiles[] = $file;
+        }
+
+        $federation->setMeta([
+            'statute_files' => json_encode($newFiles)
+        ]);
+
+        return response()->json([
+            'message' => 'Kayıt başarıyla silindi',
+            'refresh' => true
+        ]);
+    }
+
     public function contactSave(Request $request, Federation $federation)
     {
         $federation->setMeta([

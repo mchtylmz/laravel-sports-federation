@@ -8,6 +8,8 @@ enum Status: string
 
     case passive = 'passive';
 
+    case pending = 'pending';
+
     public static function names(): array
     {
         return array_column(self::cases(), 'name');
@@ -22,7 +24,8 @@ enum Status: string
     {
         return [
             self::active->value => __('table.active'),
-            self::passive->value => __('table.passive')
+            self::passive->value => __('table.passive'),
+            self::pending->value => __('table.pending'),
         ];
     }
 

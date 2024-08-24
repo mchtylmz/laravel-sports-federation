@@ -60,6 +60,20 @@
                     <br> <strong>{{ $federation->is_special == 1 ? __('table.yes') : __('table.no') }}</strong>
                 </li>
                 <li class="list-group-item">
+                    Kişi Tipleri
+                    <br>
+                    <strong>
+                        @php $peopleTypesTitles = [];
+                        foreach (\App\Enums\PeopleType::titles() as $key => $value) {
+                            if (in_array($key, $federation->people_types_json)) {
+                                $peopleTypesTitles[] = $value;
+                            }
+                        }
+                        echo implode(', ', $peopleTypesTitles);
+                        @endphp
+                    </strong>
+                </li>
+                <li class="list-group-item">
                     Kayıt Tarihi
                     <br> <strong>{{ $federation->created_at?->format('Y-m-d') }}</strong>
                 </li>
@@ -167,19 +181,35 @@
                 </li>
                 <li class="list-group-item">
                     Telefon
-                    <br> <strong>{{ $federation->getMeta('phone') }}</strong>
+                    <br>
+                    <a class="text-dark text-decoration-underline"
+                       href="tel:{{ $federation->getMeta('phone') }}">
+                        <strong>{{ $federation->getMeta('phone') }}</strong>
+                    </a>
                 </li>
                 <li class="list-group-item">
                     Email
-                    <br> <strong>{{ $federation->getMeta('email') }}</strong>
+                    <br>
+                    <a  class="text-dark text-decoration-underline"
+                       href="mailto:{{ $federation->getMeta('email') }}">
+                        <strong>{{ $federation->getMeta('email') }}</strong>
+                    </a>
                 </li>
                 <li class="list-group-item">
                     Fax
-                    <br> <strong>{{ $federation->getMeta('fax') }}</strong>
+                    <br>
+                    <a class="text-dark text-decoration-underline"
+                       href="tel:{{ $federation->getMeta('fax') }}">
+                        <strong>{{ $federation->getMeta('fax') }}</strong>
+                    </a>
                 </li>
                 <li class="list-group-item">
                     Website
-                    <br> <strong>{{ $federation->getMeta('website') }}</strong>
+                    <br>
+                    <a target="_blank" class="text-dark text-decoration-underline"
+                       href="{{ $federation->getMeta('website') }}">
+                        <strong>{{ $federation->getMeta('website') }}</strong>
+                    </a>
                 </li>
                 <li class="list-group-item">
                     <i class="fab fa-facebook-square me-2 fa-fw"></i> Facebook

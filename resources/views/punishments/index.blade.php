@@ -1,30 +1,40 @@
 @extends('layouts.app')
 @section('content')
     <div class="text-end mb-3">
-        <a type="button" class="btn btn-info" href="{{ route('punishment.show') }}">
-            <i class="fa fa-fw fa-plus"></i> {{ __('punishments.add') }}
-        </a>
+        @if(hasRole('admin') || (hasRole('superadmin') && !userPermit(['mudur'])))
+            <a type="button" class="btn btn-info" href="{{ route('punishment.show') }}">
+                <i class="fa fa-fw fa-plus"></i> {{ __('punishments.add') }}
+            </a>
+        @endif
     </div>
 
     <x-block title="{{ $title }}">
         <form class="js-filter-table">
             <div class="row align-items-end justify-content-start">
-                <div class="col-lg-3 mb-3">
-                    <label class="form-label" for="federation_id">Federasyon / Branş</label>
-                    <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
-                        <option value="">Tüm Federasyonlar / Branşlar</option>
-                        @foreach(federations() as $federation)
-                            <option value="{{ $federation->id }}">{{ $federation->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if(hasRole('superadmin'))
+                    <div class="col-lg-3 mb-3">
+                        <label class="form-label" for="federation_id">Federasyon / Branş</label>
+                        <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
+                            <option value="">Tüm Federasyonlar / Branşlar</option>
+                            @foreach(federations() as $federation)
+                                <option value="{{ $federation->id }}">{{ $federation->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="col-lg-3 mb-3">
                     <label class="form-label" for="type">Kişi Tpi</label>
                     <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tpi Seçiniz...." data-size="5" data-live-search="true">
                         @if(permitIf(role(), ['mudur']))
                             <option value="">{{ __('table.all') }}</option>
                             @foreach(\App\Enums\PeopleType::titles() as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
+                                @if(hasRole('admin'))
+                                    @if(in_array($key, user()?->federation()->people_types_json ?? []))
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endif
                             @endforeach
                         @else
                             <option value="{{ \App\Enums\PeopleType::racer }}">{{ \App\Enums\PeopleType::racer->title() }}</option>
@@ -50,6 +60,9 @@
                 </th>
                 <th data-field="photo" data-formatter="setImage" data-width="10">
                     {{ __('table.photo') }}
+                </th>
+                <th data-field="license_no" data-width="10" data-align="left">
+                    {{ __('peoples.license_no') }}
                 </th>
                 <th data-field="fullname" data-sortable="true" data-width="15" data-align="left">
                     {{ __('table.name') }}

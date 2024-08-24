@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\Status;
 use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,12 +20,19 @@ class PeopleResource extends JsonResource
             'view' => route('people.show', $this->id),
             'edit' => route('people.show', $this->id),
             'delete' => route('people.delete', $this->id),
-            'deleteMessage' => __('peoples.delete', ['name' => $this->name]),
+            'deleteMessage' => __('peoples.delete', ['name' => $this->fullname]),
             'id' => $this->id
         ];
 
         if (hasRole('superadmin') && userPermit(['mudur'])) {
             unset($actionsData['edit'], $actionsData['delete']);
+        }
+
+        if ($this->status == Status::pending) {
+            unset($actionsData['edit']);
+            $actionsData['id'] = $this->id;
+            $actionsData['approve'] = route('people.approve', $this->id);
+            $actionsData['approveMessage'] = __('peoples.approve_message', ['name' => $this->fullname]);
         }
 
         $actions = view('components.actions', $actionsData)->render();
@@ -53,8 +61,8 @@ class PeopleResource extends JsonResource
             'father_name' => $this->father_name,
             'gender' => $this->gender?->value,
             'gender_text' => $this->gender?->title(),
-            'status' => $this->status?->value,
-            'status_text' => $this->status?->title(),
+            'status' => $this->when($this->status, $this->status?->value, ''),
+            'status_text' => $this->status ? $this->status?->title() : '',
             'player_club_id' => $this->getMeta('player_club_id'),
             'player_club_id_text' => Club::find($this->getMeta('player_club_id'))?->name,
             'referee_class' => $this->getMeta('referee_class'),

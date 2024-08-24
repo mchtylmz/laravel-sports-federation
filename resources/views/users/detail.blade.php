@@ -9,8 +9,8 @@
                 <div class="mb-3">
                     <label class="form-label" for="permit">Yetki</label>
                     <select class="selectpicker form-control" id="permit" name="permit" data-placeholder="Yetki Seçiniz...." data-size="5" data-live-search="true" required>
-                        @foreach(permitCases() as $permit)
-                            <option value="{{ $permit->value }}" @selected($user?->id == $permit->value)>{{ $permit->title() }}</option>
+                        @foreach(permitCases() as $key => $permit)
+                            <option value="{{ $permit->value }}" @selected($user?->permit?->value == $permit->value)>{{ $permit->title() }}</option>
                         @endforeach
                     </select>
                 </div>

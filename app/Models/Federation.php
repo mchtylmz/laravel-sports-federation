@@ -42,4 +42,9 @@ class Federation extends Model
     {
         return $this->hasMany(Note::class)->latest();
     }
+
+    public function getPeopleTypesJsonAttribute()
+    {
+        return json_decode($this->people_types, true);
+    }
 }

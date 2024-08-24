@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/bootstrap-select/dist/css/bootstrap-select.css') }}" />
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <!-- Stylesheets -->
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
 
@@ -38,16 +40,24 @@
     <!-- <div id="page-loader" class="show"></div> -->
 
     <!-- Header -->
-    <header id="page-header">
+    <header id="page-header" style="background: linear-gradient(90deg, rgba(62,165,59,1) 0%, rgba(253,237,62,1) 20%, rgba(1,160,227,1) 40%, rgba(43,42,41,1) 60%, rgba(227,50,35,1) 80%, rgba(57,49,133,1) 100%);padding-bottom: 4px;">
         <!-- Header Content -->
-        <div class="content-header">
+        <div class="content-header" style="background-color: white">
             <!-- Left Section -->
             <div class="d-flex align-items-center">
-                <!-- Logo -->
-                <a class="fw-semibold fs-5 tracking-wider text-dual me-3" href="{{ route('home') }}">
-                    <img src="{{ asset($site_logo) }}" class="header-logo" alt="logo">
-                </a>
-                <!-- END Logo -->
+                @if(!hasRole('admin'))
+                    <!-- Logo -->
+                    <a class="fw-semibold fs-5 tracking-wider text-dual me-3" href="{{ route('home') }}">
+                        <img src="{{ asset($site_logo) }}" class="header-logo" alt="logo">
+                    </a>
+                    <!-- END Logo -->
+                @else
+                    <!-- Logo -->
+                    <a class="fw-semibold fs-5 tracking-wider text-dual me-3" href="{{ route('home') }}">
+                        {{ user()->federation()?->name ?? '' }}
+                    </a>
+                    <!-- END Logo -->
+                @endif
 
                 {{--- @include('layouts.parts.theme-switcher') ---}}
             </div>
@@ -149,6 +159,8 @@
 <script src="{{ asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src="{{ asset('assets/js/app.js') }}?v={{ config('app.version') }}"></script>
 <script>
     function calculateAge(birthdate, minAge = 0) {

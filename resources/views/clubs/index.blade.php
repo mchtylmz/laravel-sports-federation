@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    @if(hasRole('superadmin'))
+    @if(hasRole('superadmin') && !userPermit(['mudur']))
         <div class="text-end mb-3">
             <a type="button" class="btn btn-info" href="{{ route('club.show') }}">
                 <i class="fa fa-fw fa-plus"></i> {{ __('clubs.create') }}
@@ -52,6 +52,9 @@
                 </th>
                 <th data-field="user_info" data-formatter="setHtml">
                     {{ __('clubs.form.user') }}
+                </th>
+                <th data-field="tombala" data-sortable="true">
+                    Tombala
                 </th>
                 <th data-field="status" data-formatter="setHtml" data-sortable="true">
                     {{ __('table.status') }}

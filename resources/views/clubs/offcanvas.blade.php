@@ -22,6 +22,14 @@
         {{ __('clubs.form.status') }} <br>
         <strong class="status {{ $club->status->value }}">{{ __('table.' . $club->status->value) }}</strong>
     </li>
+    <li class="list-group-item">
+        Tombala <br>
+        @if(!empty($club->tombala_file))
+            <a target="_blank" class="text-dark w-100" href="{{ asset($club->tombala_file) }}">
+                <strong>Belgeyi Görüntüle</strong>
+            </a>
+        @endif
+    </li>
 </ul>
 
 <h5 class="bg-light-subtle p-3 mt-3 mb-0">{{ __('federations.title') }}</h5>
@@ -30,6 +38,7 @@
         <li class="list-group-item">
             <img src="{!! asset($federation->logo) !!}"
                  style="height: 64px; object-fit: contain; margin-right: 10px; border: solid 1px #eee;"
+                 onerror="this.src='{{ asset('uploads/no-img.png') }}'"
                  alt="{{ $federation->name }}">
             <strong>{{ $federation->name }}</strong>
         </li>

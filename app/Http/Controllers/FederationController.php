@@ -59,6 +59,7 @@ class FederationController extends Controller
         if ($request->hasFile('logo')) {
             $validated['logo'] = UploadFile::image($request->file('logo'));
         }
+        $validated['people_types'] = json_encode($request->get('people_types'));
 
         if (!$federation->id) {
             $federation = Federation::create($validated);
@@ -123,6 +124,32 @@ class FederationController extends Controller
             'message' => 'Not silindi',
             'refresh' => true,
             'offcanvas' => true,
+        ]);
+    }
+
+    public function select(Request $request)
+    {
+        $federation = Federation::find($request->integer('id'));
+        if (empty($federation)) {
+            return response()->json([
+                'status' => 'error'
+            ], 404);
+        }
+
+        $peopleTypes = [];
+        foreach (\App\Enums\PeopleType::titles() as $key => $value) {
+            if (in_array($key, $federation->people_types_json ?? [])) {
+                $peopleTypes[] = [
+                    'value' => $key,
+                    'text' => $value
+                ];
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'types' => $peopleTypes,
+            'clubs' => federation_clubs($federation->id, ['id', 'name'])
         ]);
     }
 }

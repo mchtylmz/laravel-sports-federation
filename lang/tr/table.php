@@ -14,7 +14,7 @@ return [
     'actions' => 'İşlemler',
     'federation' => 'Federasyon',
     'username' => 'Kullanıcı Adı',
-    'name' => 'Ad Soyad',
+    'name' => 'İsim Soyisim',
     'email' => 'E-posta',
     'phone' => 'Telefon',
     'identity_number' => 'Kimlik',
@@ -25,6 +25,8 @@ return [
     'all' => 'Tümü',
     'identity' => 'Kimlik',
 
+    'pending' => 'Beklemede',
+
     'description' => 'Açıklama',
     'reason' => 'Sebep',
     'federation_count' => 'Federasyon Sayısı',
@@ -32,7 +34,7 @@ return [
     'yes' => 'Evet',
     'no' => 'Hayır',
 
-    'national' => 'Uluslar Arası',
+    'national' => 'Uluslararası',
     'local' => 'Yerel',
 
     'status' => 'Durum',
@@ -41,7 +43,7 @@ return [
 
     'branch_number' => 'Branş Dosya No',
     'is_special' => 'Özerk',
-    'is_national' => 'Uluslar Arası',
+    'is_national' => 'Uluslararası',
 
     'ok' => 'Tamam',
     'cancel' => 'Vazgeç',

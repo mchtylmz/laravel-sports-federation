@@ -26,6 +26,15 @@ return [
         'submit' => 'Giriş Yap'
     ],
 
+    'register' => [
+        'title' => 'Kayıt Ol',
+        'username' => 'Kullanıcı adı',
+        'password' => 'Parola',
+        'submit' => 'Kayıt Ol',
+        'success' => ':fullname kaydı başarıyla yapılmıştır, teşekkür ederiz.',
+        'error_license_no' => ':license_no lisans numarası kullanılıyor, bu lisans numarasıyla kayıtlı kişi bulunuyor!.',
+    ],
+
     'profile' => [
         'title' => 'Hesap Bilgilerim',
         'name' => 'İsim Soyisim',

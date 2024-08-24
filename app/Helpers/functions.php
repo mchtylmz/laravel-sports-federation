@@ -117,7 +117,7 @@ if (!function_exists('eventStatuses')) {
     function eventStatuses(): array
     {
         return [
-            'Henüz tamamlanmadı',
+            'Yeni Etkinlik',
             'Tamamlandı',
             'İptal Edildi',
             'Ertelendi'
@@ -158,7 +158,7 @@ if (!function_exists('customLog')) {
     function customLog(string $table_name, array $data = [], int $data_id = 0): void
     {
         DB::table('logs')->insert([
-            'user_id'    => auth()->id(),
+            'user_id'    => auth()->check() ? auth()->id() : $data_id,
             'log_date'   => now(),
             'table_name' => $table_name,
             'log_type'   => 'edit',
@@ -170,12 +170,18 @@ if (!function_exists('customLog')) {
 }
 
 if (!function_exists('federation_clubs')) {
-    function federation_clubs(int|null $federation_id)
+    function federation_clubs(int|null $federation_id, array $select = [])
     {
         $federation_id = intval($federation_id);
-        return \App\Models\Club::whereRaw(
+
+        $clubs = \App\Models\Club::whereRaw(
             sprintf("FIND_IN_SET('%d', federation_id)", $federation_id)
-        )->get();
+        );
+        if (!empty($select) && is_array($select) && !in_array('*', $select)) {
+            $clubs->select($select);
+        }
+
+        return $clubs->get();
     }
 }
 

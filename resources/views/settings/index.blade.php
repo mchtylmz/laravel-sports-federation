@@ -49,6 +49,7 @@
                 <input type="text" class="form-control" id="site_title" name="settings[site_title]" placeholder="Başlığı.." value="{{ $site_title }}" required>
             </div>
 
+
            <div class="row align-items-start">
                <div class="col-lg-6">
                    <div class="mb-3">
@@ -74,6 +75,11 @@
             </div>
 
             <hr>
+
+            <div class="mb-3">
+                <label class="form-label" for="register_title">Kayıt Ol Ana Başlık</label>
+                <input type="text" class="form-control" id="register_title" name="settings[register_title]" placeholder="Başlığı.." value="{{ settings()->register_title }}" required>
+            </div>
 
             <div class="mb-3">
                 <label class="form-label" for="login_title">Giriş Yap Ana Başlık</label>

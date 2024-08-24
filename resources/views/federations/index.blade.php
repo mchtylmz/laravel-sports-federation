@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="text-end mb-3">
-        <a type="button" class="btn btn-info" href="{{ route('federation.show') }}">
-            <i class="fa fa-fw fa-plus"></i> {{ __('settings.federation_add') }}
-        </a>
+       @if(!userPermit(['mudur']))
+            <a type="button" class="btn btn-info" href="{{ route('federation.show') }}">
+                <i class="fa fa-fw fa-plus"></i> {{ __('settings.federation_add') }}
+            </a>
+       @endif
     </div>
 
     <x-block title="{{ $title }}">

@@ -28,6 +28,7 @@ class PunishmentResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'license_no' => $this->people?->license_no,
             'name' => $this->people?->name,
             'surname' => $this->people?->surname,
             'fullname' => $this->people?->fullname,

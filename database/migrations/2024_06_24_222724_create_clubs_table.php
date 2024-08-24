@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('location')->nullable();
             $table->string('region')->nullable();
             $table->enum('status', ['active', 'passive'])->default('active');
+            $table->text('tombala_file')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->date('registered_at')->nullable();
             $table->date('licensed_at')->nullable();
             $table->string('license_no')->nullable();
-            $table->enum('status', ['active', 'passive'])->default('active');
+            $table->enum('status', ['active', 'passive', 'pending'])->default('active');
 
             $table->timestamps();
             $table->softDeletes();

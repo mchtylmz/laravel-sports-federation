@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadFile;
 use App\Http\Requests\Club\SaveRequest;
 use App\Http\Resources\ClubResource;
 use App\Http\Resources\EventResource;
@@ -20,7 +21,7 @@ class ClubController extends Controller
 
     public function detail(Club $club)
     {
-        if (request()->input('format') !== 'json' && !hasRole('superadmin')) {
+        if (request()->input('format') !== 'json' && !hasRole(['superadmin', 'admin'])) {
             abort(403);
         }
 
@@ -70,12 +71,24 @@ class ClubController extends Controller
 
     public function save(SaveRequest $request, Club $club)
     {
-        if (!hasRole('superadmin')) {
+        if (!hasRole('superadmin', 'admin')) {
             abort(403);
         }
 
         $validated = $request->validated();
-        $validated['federation_id'] = implode(',', $validated['federation_id']);
+        if (array_key_exists('federation_id', $validated)) {
+            $validated['federation_id'] = implode(',', $validated['federation_id']);
+        }
+
+        if ($tombala = $request->get('tombala')) {
+            if ($tombala == 'Evet' && $request->hasFile('tombala_file')) {
+                $validated['tombala_file'] = UploadFile::file($request->file('tombala_file'));
+            }
+            elseif ($tombala == 'Hayır') {
+                $validated['tombala_file'] = null;
+            }
+        }
+
 
         if (!$club->id) {
             $club = Club::create($validated);

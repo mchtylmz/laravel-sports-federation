@@ -27,7 +27,17 @@
                 <label class="form-label" for="type">Kişi Tipi</label>
                 <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tipi Seçiniz..." data-size="5" data-live-search="true" required>
                     @foreach(\App\Enums\PeopleType::titles() as $key => $value)
-                        <option value="{{ $key }}" @selected($key == $people->type?->value)>{{ $value }}</option>
+                        @if(hasRole('admin'))
+                            @if(in_array($key, user()?->federation()->people_types_json ?? []))
+                            <option value="{{ $key }}" @selected($key == $people->type?->value)>{{ $value }}</option>
+                           @endif
+                        @elseif(hasRole('superadmin') && userPermit(['muafiyet']))
+                            @if($key == \App\Enums\PeopleType::racer->value)
+                                <option value="{{ $key }}" @selected($key == $people->type?->value)>{{ $value }}</option>
+                            @endif
+                        @else
+                            <option value="{{ $key }}" @selected($key == $people->type?->value)>{{ $value }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -55,14 +65,14 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="name">Ad</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Ad.." value="{{ $people->name ?? '' }}" required>
+                        <label class="form-label" for="name">İsim</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="İsim.." value="{{ $people->name ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="surname">Soyad</label>
-                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyad.." value="{{ $people->surname ?? '' }}" required>
+                        <label class="form-label" for="surname">Soyisim</label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyisim.." value="{{ $people->surname ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -144,6 +154,9 @@
                         <label class="form-label" for="status">Durum</label>
                         <select class="selectpicker form-control" id="status" name="status" data-placeholder="Durum Seçiniz..." data-size="5" data-live-search="true" required>
                             @foreach(\App\Enums\Status::titles() as $key => $value)
+                                @if(!hasRole('superadmin') && $key == 'pending')
+                                    @continue
+                                @endif
                                 <option value="{{ $key }}" @selected($key == $people->status?->value)>{{ $value }}</option>
                             @endforeach
                         </select>
@@ -305,7 +318,7 @@
     <script>
         function racer_document_file($this) {
             let value = $this.val();
-            console.log(value)
+
             if (value === 'Evet') {
                 $('.racer_document_file').show();
             } else {

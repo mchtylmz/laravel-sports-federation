@@ -76,9 +76,9 @@
             <div class="tab-pane pb-3" id="btabs-list" role="tabpanel" aria-labelledby="btabs-list" tabindex="0">
                 <form class="js-filter-event mb-3">
                     <div class="row align-items-end justify-content-start">
-                        <div class="col-lg-3 mb-1">
+                        <div class="col-lg-3 mb-1 form-group">
                             <label class="form-label" for="date">Etkinlik Tarihi</label>
-                            <input type="text" class="js-flatpickr form-control" id="date" name="date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                            <input type="text" class="daterangepicker form-control" style="position: unset !important;" placeholder="GG-AA-YYYY" autocomplete="off" id="date" name="date">
                         </div>
 
                         <div class="col-lg-2 mb-1">

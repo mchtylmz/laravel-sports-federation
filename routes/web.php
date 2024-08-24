@@ -17,6 +17,11 @@ use App\Models\Note;
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('auth', [AuthController::class, 'auth'])->name('auth');
+
+    Route::get('register', [AuthController::class, 'register'])->name('register');
+    Route::post('register/save', [AuthController::class, 'registerSave'])->name('register.save');
+
+    Route::post('register/federation/select', [\App\Http\Controllers\FederationController::class, 'select'])->name('register.federation.select');
 });
 
 Route::middleware('auth')->group(function () {
@@ -66,11 +71,12 @@ Route::middleware('auth')->group(function () {
     // middleware
     Route::name('event.')
         ->prefix('events')
-        ->middleware('role:admin,manager,calendar')
+        ->middleware('role:superadmin,admin,manager,calendar')
         ->controller(\App\Http\Controllers\EventController::class)
         ->group(function () {
             Route::get('', 'index')->name('index');
             Route::post('save/{event:id?}', 'save')->name('save');
+            Route::post('status/save/{event:id}', 'statusSave')->name('status.save');
             Route::post('delete/{event:id}', 'delete')->name('delete');
         });
 
@@ -94,7 +100,7 @@ Route::middleware('auth')->group(function () {
             Route::get('', 'index')->name('index');
             Route::get('json', 'json')->name('json');
             Route::get('detail/{club:id?}', 'detail')->name('show');
-            Route::middleware('role:superadmin')->post('save/{club:id?}', 'save')->name('save');
+            Route::post('save/{club:id?}', 'save')->name('save');
             Route::middleware('role:superadmin')->post('delete/{club:id}', 'delete')->name('delete');
         });
 
@@ -118,10 +124,12 @@ Route::middleware('auth')->group(function () {
         ->controller(\App\Http\Controllers\PeopleController::class)
         ->group(function () {
             Route::get('', 'index')->name('index');
+            Route::get('pending', 'pending')->name('pending');
             Route::get('json', 'json')->name('json');
             Route::get('detail/{people:id?}', 'detail')->name('show');
             Route::post('save/{people:id?}', 'save')->name('save');
             Route::post('delete/{people:id}', 'delete')->name('delete');
+            Route::post('approve/{people:id}', 'approve')->name('approve');
         });
 
     // middleware
@@ -154,6 +162,7 @@ Route::middleware('auth')->group(function () {
 
                     Route::get('statute', 'statute')->name('statute');
                     Route::post('statute/save/{federation:id}', 'statuteSave')->name('statute.save');
+                    Route::post('statute/delete/{federation:id}', 'statuteDelete')->name('statute.delete');
 
                     Route::get('clubs', 'clubs')->name('clubs');
 

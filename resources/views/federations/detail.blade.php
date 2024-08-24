@@ -44,6 +44,18 @@
                 <input type="text" class="form-control" id="website" name="website" placeholder="Website Linki.." value="{{ $federation->website ?? '' }}">
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">Bilgi Bankası Kişi Tipleri</label>
+                <div class="people_types">
+                    @foreach(\App\Enums\PeopleType::titles() as $key => $value)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="type_{{ $key }}" value="{{ $key }}" name="people_types[]" multiple @checked(in_array($key, $federation->people_types_json ?? []))>
+                            <label class="form-check-label" for="type_{{ $key }}">{{ $value }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
                     <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}

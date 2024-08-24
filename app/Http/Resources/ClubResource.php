@@ -28,10 +28,13 @@ class ClubResource extends JsonResource
                 'id' => $this->id
             ];
         }
-
-        if (userPermit(['tescil'])) {
-            unset($actionsData['edit']);
+        if (hasRole('admin')) {
+            $actionsData = [
+                ...$actionsData,
+                'edit' => route('club.show', $this->id)
+            ];
         }
+
         if (userPermit(['mudur'])) {
             unset($actionsData['edit'], $actionsData['delete']);
         }
@@ -63,6 +66,7 @@ class ClubResource extends JsonResource
             'user_email' => $this->user_email,
             'user_info' => sprintf('%s - %s', $this->user_name, $this->user_phone ?: $this->user_email),
             'user_info_html' => sprintf('%s <br> %s', $this->user_name, $this->user_phone ?: $this->user_email),
+            'tombala' => $this->when(!empty($this->tombala), 'Evet', 'Hayır'),
             'status' => $this->status,
             'status_text' => trans('table.'.$this->status->value),
             'status_html' => sprintf('<span class="status %s">%s</span>', $this->status->value, trans('table.'.$this->status->value)),

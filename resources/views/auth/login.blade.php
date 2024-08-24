@@ -4,7 +4,16 @@
     <!-- Sign In Section -->
     <div class="bg-body-extra-light">
         <div class="login-card py-4 px-5" style="background-color: rgba(89,109,124)">
-            <h2 class="fw-medium px-0 px-sm-5 mb-0 text-white">{!! settings()->login_title ?? '' !!}</h2>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-10">
+                    <h2 class="fw-medium px-0 px-sm-5 mb-0 text-white mb-0">{!! settings()->login_title ?? '' !!}</h2>
+                </div>
+                <div class="col-lg-2">
+                    <a href="{{ route('register') }}" class="btn w-100 btn-light text-dark mb-0 py-2">
+                        <i class="fa fa-fw fa-user-plus me-1"></i> {{ __('auth.register.title') }}
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="content content-full">
             <div class="row g-0 justify-content-center">

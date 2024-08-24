@@ -10,7 +10,13 @@
                 <select class="selectpicker form-control" id="people_id" name="people_id" data-placeholder="Kişi Seç...." data-size="5" data-live-search="true" required>
                     @if($peoples = peoples()))
                         @foreach($peoples as $people)
-                            <option value="{{ $people->id }}" @selected($punishment->people_id == $people->id)>{{ $people->fullname }}</option>
+                            @if(hasRole('admin'))
+                                @if(in_array($people->type->value, user()?->federation()->people_types_json ?? []))
+                                <option value="{{ $people->id }}" @selected($punishment->people_id == $people->id)>{{ $people->type->title() }} - Lisans No: {{ $people->license_no }} - {{ $people->fullname }}</option>
+                                @endif
+                            @else
+                                <option value="{{ $people->id }}" @selected($punishment->people_id == $people->id)>{{ $people->type->title() }} - Lisans No: {{ $people->license_no }} - {{ $people->fullname }}</option>
+                            @endif
                         @endforeach
                     @endif
                 </select>

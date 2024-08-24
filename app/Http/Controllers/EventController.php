@@ -54,8 +54,12 @@ class EventController extends Controller
         if ($request->get('date') && $dates = explode(' - ', $request->get('date'))) {
             $start_date = $dates[0] ?? false;
             $end_date = $dates[1] ?? false;
+
             if ($start_date && $end_date) {
-                $events->whereBetween('start_date', [$start_date, $end_date]);
+                $events->whereBetween('start_date', [
+                    Carbon::createFromFormat('d/m/Y', $start_date)->toDateString(),
+                    Carbon::createFromFormat('d/m/Y', $end_date)->toDateString()
+                ]);
             }
         }
 
@@ -166,6 +170,28 @@ class EventController extends Controller
         return response()->json([
             'message' => __('events.save_success', ['title' => $event->title]),
             'redirect' => route('event.index')
+        ]);
+    }
+
+    public function statusSave(Request $request, Event $event)
+    {
+        if (!$request->get('status')) {
+            return response()->json([
+                'message' => 'Bilgi güncellenemedi!'
+            ], 400);
+        }
+
+        $event->update([
+            'status' => $request->get('status')
+        ]);
+
+        return response()->json([
+            'title' => $event->title,
+            'message' => 'Etkinlik durumu güncellendi',
+            'event' => $event,
+            'body' => view('events.offcanvas', [
+                'event' => $event
+            ])->render()
         ]);
     }
 

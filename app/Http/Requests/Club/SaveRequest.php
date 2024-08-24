@@ -16,7 +16,7 @@ class SaveRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'federation_id' => ['required'],
+            'federation_id' => ['nullable'],
             'name' => ['required', 'string'],
             'user_name' => ['required', 'string'],
             'user_phone' => ['nullable', 'string'],

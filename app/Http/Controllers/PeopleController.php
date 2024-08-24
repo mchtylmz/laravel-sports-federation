@@ -19,6 +19,14 @@ class PeopleController extends Controller
         ]);
     }
 
+    public function pending()
+    {
+        return view('peoples.index', [
+            'title' => __('peoples.pending'),
+            'status_type' => 2
+        ]);
+    }
+
     public function json(Request $request)
     {
         $people = People::orderBy('name');
@@ -27,6 +35,10 @@ class PeopleController extends Controller
         }
         if (hasRole('admin')) {
             $people = $people->where('federation_id', user()->federation()?->id);
+            $people = $people->whereIn('type', user()?->federation()->people_types_json ?? []);
+        }
+        if (hasRole('superadmin') && userPermit(['muafiyet'])) {
+            $people = $people->where('type', PeopleType::racer->value);
         }
         if ($search = $request->get('search')) {
             $people->whereAny(
@@ -49,6 +61,15 @@ class PeopleController extends Controller
         }
         if ($identity = $request->get('identity')) {
             $people->where('identity', $identity);
+        }
+        if ($status = $request->get('status')) {
+            $people->where('status', $status);
+        }
+        if ($racer_car_no = $request->integer('racer_car_no')) {
+            $people->whereMeta('racer_car_no', $racer_car_no);
+        }
+        if ($status_type = $request->integer('status_type')) {
+            $people->whereIn('status', $status_type == 2 ? ['pending'] : ['active', 'passive']);
         }
         if ($request->get('birth_date') && $dates = explode(' - ', $request->get('birth_date'))) {
             $start_date = $dates[0] ?? false;
@@ -149,6 +170,16 @@ class PeopleController extends Controller
 
         return response()->json([
             'message' => __('peoples.delete_success', ['fullname' => $people->fullname]),
+            'refresh' => true
+        ]);
+    }
+
+    public function approve(People $people)
+    {
+        $people->update(['status' => 'active']);
+
+        return response()->json([
+            'message' => __('peoples.approve_success', ['name' => $people->fullname]),
             'refresh' => true
         ]);
     }

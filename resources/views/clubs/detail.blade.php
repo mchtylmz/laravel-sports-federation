@@ -43,6 +43,31 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        @php $tombala_file = !empty($club->tombala_file) ? 'Evet' : 'Hayır'; @endphp
+                        <label class="form-label" for="tombala">Tombala</label>
+                        <select class="selectpicker form-control" id="tombala" name="tombala" data-placeholder="Seçiniz..." data-size="5" data-live-search="true">
+                            @foreach(['Evet', 'Hayır'] as $value)
+                                <option value="{{ $value }}" @selected($value == $tombala_file)>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3 tombala_file" style="display: none">
+                        <label class="form-label" for="tombala_file">Tombala Belgesi</label>
+                        <input type="file" class="form-control" name="tombala_file" accept=".pdf,.xls,.xlsx,.doc,.docx">
+                        @if(!empty($club->tombala_file))
+                            <a target="_blank" class="border text-dark w-100" href="{{ asset($club->tombala_file) }}">
+                                <strong>Belgeyi Görüntüle</strong>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label class="form-label" for="status">{{ __('table.status') }}</label>
                 <div class="space-x-2">
@@ -58,15 +83,18 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                @php $clubFederations = explode(',', ($club->federation_id ?? ''))@endphp
-                <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
-                <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple required>
-                    @foreach(federations() as $federation)
-                        <option value="{{ $federation->id }}" @selected(in_array($federation->id, $clubFederations))>{{ $federation->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+
+            @if(hasRole('superadmin'))
+                <div class="mb-3">
+                    @php $clubFederations = explode(',', ($club->federation_id ?? ''))@endphp
+                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
+                    <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple required readonly>
+                        @foreach(federations() as $federation)
+                            <option value="{{ $federation->id }}" @selected(in_array($federation->id, $clubFederations))>{{ $federation->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
@@ -77,3 +105,29 @@
 
     </x-block>
 @endsection
+@push('js')
+    <script>
+        function tombala_file($this) {
+            let value = $this.val();
+
+            if (value === 'Evet') {
+                $('.tombala_file').show();
+            } else {
+                $('.tombala_file').hide();
+            }
+        }
+
+        $(document).on('change', 'select[name=tombala]', function (e) {
+            e.preventDefault();
+
+            tombala_file($(this));
+        });
+    </script>
+    @if(!empty($club->tombala_file))
+        <script>
+            $(document).ready(function() {
+                tombala_file($('select[name=tombala]'));
+            });
+        </script>
+    @endif
+@endpush

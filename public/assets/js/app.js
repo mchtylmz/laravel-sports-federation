@@ -118,9 +118,6 @@
                                 id: id
                             },
                             dataType: 'json',
-                            processData: false,
-                            contentType: false,
-                            cache: false,
                             enctype: 'multipart/form-data',
                             beforeSend: function () {
                                 btn.loading('show');
@@ -193,9 +190,9 @@
                         $('.offcanvas-title').html(response.title);
                         $('.offcanvas-body').html(response.body);
 
-                        let formNote = $('form.note-form');
-                        if (formNote.length) {
-                            formNote.validate({
+
+                        function formOffcanvas(vForm) {
+                            vForm.validate({
                                 submitHandler: function (form, e) {
                                     e.preventDefault();
                                     $.ajaxSetup({
@@ -235,6 +232,16 @@
                                                 $('.offcanvas-body').html(response.body);
                                             }
 
+                                            let formNote = $('form.note-form');
+                                            if (formNote.length) {
+                                                formOffcanvas(formNote);
+                                            }
+
+                                            let formEventStatus = $('form.event-status-form');
+                                            if (formEventStatus.length) {
+                                                formOffcanvas(formEventStatus);
+                                            }
+
                                             setTimeout(() => {
                                                 let bsTable = $('[data-toggle="table"]');
                                                 if (bsTable.length) {
@@ -254,6 +261,17 @@
                                 }
                             });
                         }
+
+                        let formNote = $('form.note-form');
+                        if (formNote.length) {
+                            formOffcanvas(formNote);
+                        }
+
+                        let formEventStatus = $('form.event-status-form');
+                        if (formEventStatus.length) {
+                            formOffcanvas(formEventStatus);
+                        }
+
                     },
                     error: function (response) {
                         alert.fire({
@@ -293,10 +311,68 @@
                 timerProgressBar: true
             });
 
+            $('.daterangepicker').daterangepicker({
+                autoUpdateInput: false,
+                alwaysShowCalendars: true,
+                showWeekNumbers: true,
+                showDropdowns: true,
+                showCustomRangeLabel: true,
+                applyClass: "btn btn-xs btn-info",
+                cancelClass: "btn btn-xs btn-secondary",
+                ranges: {
+                    'Bugün': [moment(), moment()],
+                    'Dün': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Son 7 gün': [moment().subtract(6, 'days'), moment()],
+                    'Son 30 gün': [moment().subtract(29, 'days'), moment()],
+                    'Bu ay': [moment().startOf('month'), moment().endOf('month')],
+                    'Geçen ay': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                "locale": {
+                    "format": "DD/MM/YYYY",
+                    "separator": " - ",
+                    "applyLabel": "Uygula",
+                    "cancelLabel": "Vazgeç",
+                    "fromLabel": "Dan",
+                    "toLabel": "a",
+                    "customRangeLabel": "Seç",
+                    "daysOfWeek": [
+                        "Pt",
+                        "Sl",
+                        "Çr",
+                        "Pr",
+                        "Cm",
+                        "Ct",
+                        "Pz"
+                    ],
+                    "monthNames": [
+                        "Ocak",
+                        "Şubat",
+                        "Mart",
+                        "Nisan",
+                        "Mayıs",
+                        "Haziran",
+                        "Temmuz",
+                        "Ağustos",
+                        "Eylül",
+                        "Ekim",
+                        "Kasım",
+                        "Aralık"
+                    ],
+                    "firstDay": 1
+                }
+            });
+            $('.daterangepicker').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
+
+            $('.daterangepicker').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+            });
+
             $('.dropify').dropify({
                 messages: {
-                    'default': 'Bir dosyayı buraya sürükleyip bırakın veya tıklayın',
-                    'replace': 'Değiştirmek için sürükleyip bırakın veya tıklayın',
+                    'default': 'Bir fotoğraf seçin',
+                    'replace': 'Değiştirmek için tıklayın',
                     'remove':  'Kaldır',
                     'error':   'Hata! Yanlış bir şey oldu.'
                 },

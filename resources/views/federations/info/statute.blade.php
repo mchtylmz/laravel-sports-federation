@@ -26,9 +26,18 @@
     <hr>
 
     @if($statute_files = $federation->getMeta('statute_files'))
-        @foreach($statute_files as $statute_file)
+        @foreach($statute_files as $key => $statute_file)
             <div class="mb-3 bg-white">
-                <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
+                <div class="row align-items-center justify-content-between px-3">
+                    <div class="col-lg-9">
+                        <h4 class="p-3 mb-1">Dosya: @php echo explode('/', $statute_file)[1] ?? ''; @endphp</h4>
+                    </div>
+                    <div class="col-lg-2 px-2">
+                        <button type="submit" class="btn btn-alt-danger px-4 w-100" data-toggle="delete" data-route="{{ route('federation.info.statute.delete', $federation->id) }}" data-message="İlgili belge silinecektir, işleme devam edilsin mi?" data-id="{{ $key }}">
+                                <i class="fa fa-trash-alt me-1 fa-fw"></i> Kaldır / Sil
+                            </button>
+                    </div>
+                </div>
                 <a target="_blank" href="{{ asset($statute_file) }}" class="btn btn-alt-info w-100 py-3 rounded-0">
                     <i class="fa fa-external-link mx-2 fa-faw"></i> Dosyayı Yeni Sekmede Aç
                 </a>

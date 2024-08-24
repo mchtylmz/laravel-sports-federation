@@ -26,7 +26,7 @@
                     <div class="space-x-2">
                         <div class="form-check form-switch form-check-inline">
                             <input class="form-check-input" type="radio" value="1" id="is_national1" name="is_national" @checked($event->is_national ?? false)>
-                            <label class="form-check-label" for="is_national1">Uluslar Arası</label>
+                            <label class="form-check-label" for="is_national1">Uluslararası</label>
                         </div>
                         <div class="form-check form-switch form-check-inline">
                             <input class="form-check-input" type="radio" value="0" id="is_national0" name="is_national" @checked($event->is_national ?? true)>

@@ -1,30 +1,40 @@
 @extends('layouts.app')
 @section('content')
     <div class="text-end mb-3">
-        <a type="button" class="btn btn-info" href="{{ route('people.show') }}">
-            <i class="fa fa-fw fa-plus"></i> {{ __('peoples.add') }}
-        </a>
+        @if(hasRole('admin') || (hasRole('superadmin') && !userPermit(['mudur'])))
+            <a type="button" class="btn btn-info" href="{{ route('people.show') }}">
+                <i class="fa fa-fw fa-plus"></i> {{ __('peoples.add') }}
+            </a>
+        @endif
     </div>
 
     <x-block title="{{ $title }}">
         <form class="js-filter-table">
             <div class="row align-items-end justify-content-start">
-                <div class="col-lg-3 mb-3">
-                    <label class="form-label" for="federation_id">Federasyon / Branş</label>
-                    <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
-                        <option value="">Tüm Federasyonlar / Branşlar</option>
-                        @foreach(federations() as $federation)
-                            <option value="{{ $federation->id }}">{{ $federation->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if(hasRole('superadmin'))
+                    <div class="col-lg-3 mb-3">
+                        <label class="form-label" for="federation_id">Federasyon / Branş</label>
+                        <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="Tüm Federasyonlar / Branşlar" data-size="5" data-live-search="true">
+                            <option value="">Tüm Federasyonlar / Branşlar</option>
+                            @foreach(federations() as $federation)
+                                <option value="{{ $federation->id }}">{{ $federation->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="col-lg-3 mb-3">
                     <label class="form-label" for="type">Kişi Tpi</label>
                     <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tpi Seçiniz...." data-size="5" data-live-search="true">
                         @if(permitIf(role(), ['mudur']))
                             <option value="">{{ __('table.all') }}</option>
                             @foreach(\App\Enums\PeopleType::titles() as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
+                                @if(hasRole('admin'))
+                                    @if(in_array($key, user()?->federation()->people_types_json ?? []))
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endif
                             @endforeach
                         @else
                             <option value="{{ \App\Enums\PeopleType::racer }}">{{ \App\Enums\PeopleType::racer->title() }}</option>
@@ -57,9 +67,13 @@
                     <label class="form-label" for="identity">Pasaport/Kimlik</label>
                     <input type="text" class="form-control" id="identity" name="identity" placeholder="XXX..">
                 </div>
+                <div class="col-lg-2 mb-3">
+                    <label class="form-label" for="racer_car_no">Araç Şasi No</label>
+                    <input type="text" class="form-control" id="racer_car_no" name="racer_car_no" placeholder="XXX..">
+                </div>
                 <div class="col-lg-3 mb-3">
                     <label class="form-label" for="birth_date">Doğum Tarihi</label>
-                    <input type="text" class="js-flatpickr form-control" id="birth_date" name="birth_date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                    <input type="text" class="daterangepicker form-control mt-0" style="position: unset !important;" placeholder="GG-AA-YYYY" autocomplete="off" id="birth_date" name="birth_date">
                 </div>
                 <div class="col-lg-2 mb-3">
                     <button type="submit" class="btn btn-alt-success w-100 js-filter-submit">
@@ -67,6 +81,8 @@
                     </button>
                 </div>
             </div>
+
+            <input type="hidden" name="status_type" value="{{ $status_type ?? 1 }}">
         </form>
         <hr>
 
@@ -81,7 +97,7 @@
                 <th data-field="type" data-formatter="setText" data-width="5">
                     {{ __('peoples.type') }}
                 </th>
-                <th data-field="photo" data-formatter="setImage" data-width="10">
+                <th data-field="photo" data-formatter="setImage" data-width="5">
                     {{ __('table.photo') }}
                 </th>
                 <th data-field="nationality" data-sortable="true" data-align="left">
@@ -96,8 +112,13 @@
                 <th data-field="email" data-sortable="true">
                     {{ __('table.email') }}
                 </th>
+                <!--
                 <th data-field="gender" data-formatter="setText" data-sortable="true">
                     {{ __('table.gender') }}
+                </th>
+                -->
+                <th data-field="status" data-formatter="setText" data-sortable="true">
+                    {{ __('table.status') }}
                 </th>
                 <th data-field="id" data-formatter="setActions">
                     {{ __('table.actions') }}

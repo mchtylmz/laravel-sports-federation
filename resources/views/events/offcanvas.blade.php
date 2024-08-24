@@ -27,7 +27,7 @@
         <br> <strong>{{ $event->location }}</strong>
     </li>
     <li class="list-group-item">
-        Uluslar Arası
+        Uluslararası
         <br> <strong>{{ $event->is_national ? __('table.national')  : __('table.local') }}</strong>
     </li>
     <li class="list-group-item">
@@ -40,7 +40,24 @@
     </li>
     <li class="list-group-item">
         Durum
-        <br> <strong>{{ $event->status }}</strong>
+        <br>
+        @if($event->user_id == user()->id)
+            <form class="event-status-form" action="{{ route('event.status.save', $event->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group">
+                    <select class="form-select" id="status" name="status" required>
+                        @foreach(eventStatuses() as $status)
+                            <option value="{{ $status }}" @selected($status == $event->status)>{{ $status }}</option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-alt-success px-3" type="submit">
+                        <i class="fa fa-save me-1 fa-fw"></i> Kaydet
+                    </button>
+                </div>
+            </form>
+        @else
+            <strong>{{ $event->status }}</strong>
+        @endif
     </li>
     @if($event->groups()->count())
         <li class="list-group-item">
