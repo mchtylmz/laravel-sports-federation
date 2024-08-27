@@ -65,7 +65,7 @@
                     <strong>
                         @php $peopleTypesTitles = [];
                         foreach (\App\Enums\PeopleType::titles() as $key => $value) {
-                            if (in_array($key, $federation->people_types_json)) {
+                            if (in_array($key, $federation->people_types_json ?? [])) {
                                 $peopleTypesTitles[] = $value;
                             }
                         }

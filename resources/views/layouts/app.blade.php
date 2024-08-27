@@ -32,6 +32,10 @@
             background-color: #2356d7 !important;
             color: #FFF !important;
         }
+        .nav-main-link.nav-main-link-submenu::before {
+            right: -0.44rem !important;
+            display: none;
+        }
     </style>
     @stack('css')
 </head>

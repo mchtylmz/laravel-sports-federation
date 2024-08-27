@@ -106,12 +106,12 @@
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                                aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon si si-feed"></i>
-                                <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }}</span>
+                                <span class="nav-main-link-name">{{ __('table.bilgi_bankasi') }} {{ !empty($people_wait_count) ? '('.$people_wait_count.')':'' }}</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="{{ route('people.pending') }}">
-                                        <span class="nav-main-link-name">Onay Bekleyenler</span>
+                                        <span class="nav-main-link-name">Onay Bekleyenler {{ !empty($people_wait_count) ? '('.$people_wait_count.')':'' }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">

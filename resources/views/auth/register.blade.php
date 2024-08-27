@@ -220,6 +220,13 @@
 
 
                             <div class="row justify-content-center mt-4 mb-0 pb-5 submit-div" style="display: none">
+                                <div class="col-lg-12 mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="term" value="1" name="term" required>
+                                        <label class="form-check-label" for="term">{{ settings()->term_content ?? '' }}</label>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-3 col-xxl-3 col-8">
                                     <button type="submit" class="btn w-100 btn-alt-primary mb-0 submit-btn" disabled>
                                         <i class="fa fa-fw fa-user-plus me-1"></i> {{ __('auth.register.submit') }}
@@ -241,6 +248,13 @@
     <script>
         $(document).on('change', 'select[name=federation_id]', function (e) {
             e.preventDefault();
+
+            $('.people-player').hide();
+            $('.people-referee').hide();
+            $('.people-coach').hide();
+            $('.people-racer').hide();
+            $('.people-school').hide();
+            $('.people-all').hide();
 
             let typeSelectDiv = $('.people-type-select'),
                 typeSelect = typeSelectDiv.find('select'),
@@ -271,6 +285,8 @@
                     playerClub.selectpicker('destroy');
                     schoolClub.selectpicker('destroy');
                     typeOptions.remove();
+                    playerClubOptions.remove();
+                    schoolClubOptions.remove();
                 },
                 success: function (response) {
                     $.each(response.types, function (i, item) {

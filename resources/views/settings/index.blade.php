@@ -74,6 +74,11 @@
                 <textarea rows="6" class="form-control" id="header_under_text" name="settings[header_under_text]" placeholder="Kayan Yazı..">{{ $header_under_text }}</textarea>
             </div>
 
+            <div class="mb-3">
+                <label class="form-label" for="term_content">Kayıt Ol Onaylama Yazısı</label>
+                <textarea rows="6" class="form-control" id="term_content" name="settings[term_content]" placeholder="Onaylama Yazı..">{{ settings()->term_content ?? '' }}</textarea>
+            </div>
+
             <hr>
 
             <div class="mb-3">

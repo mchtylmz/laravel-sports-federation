@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\Status;
+use App\Models\People;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -54,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
             $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
             $view->with('note_count', $note_count);
+            $view->with('people_wait_count', People::where('status', Status::pending)->count());
         });
 
         Carbon::setlocale(app()->getLocale());

@@ -55,7 +55,7 @@
 <script src="{{ asset('assets/js/plugins/bootstrap-select/dist/js/i18n/defaults-tr_TR.js') }}"></script>
 
 <!-- Page JS Code -->
-<script src="{{ asset('assets/js/pages/op_auth_signin.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/op_auth_signin.min.js') }}?v={{ config('app.version') }}"></script>
 <script>
     function calculateAge(birthdate, minAge = 0) {
         const birthDateObj = new Date(birthdate);

@@ -92,6 +92,11 @@ class AuthController extends Controller
     public function registerSave(SaveRequest $request)
     {
         $validated = $request->validated();
+        if (!$request->integer('term')) {
+            return response()->json([
+                'message' => 'Onay alanını lütfen işaretleyiniz!',
+            ], 400);
+        }
 
         if ($people = People::where('license_no', $request->get('license_no'))->first()) {
             return response()->json([

@@ -59,10 +59,10 @@ if (!function_exists('federations')) {
     function federations()
     {
         if (hasRole('admin')) {
-            return \App\Models\Federation::where('id', user()->federation()?->id)->get();
+            return \App\Models\Federation::where('id', user()->federation()?->id)->orderBy('name', 'ASC')->get();
         }
 
-        return \App\Models\Federation::all();
+        return \App\Models\Federation::orderBy('name', 'ASC')->get();
     }
 }
 
