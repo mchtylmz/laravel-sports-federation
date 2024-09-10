@@ -63,6 +63,7 @@ class PeopleResource extends JsonResource
             'gender_text' => $this->gender?->title(),
             'status' => $this->when($this->status, $this->status?->value, ''),
             'status_text' => $this->status ? $this->status?->title() : '',
+            'racer_document' => $this->getMeta('racer_document'),
             'player_club_id' => $this->getMeta('player_club_id'),
             'player_club_id_text' => Club::find($this->getMeta('player_club_id'))?->name,
             'referee_class' => $this->getMeta('referee_class'),

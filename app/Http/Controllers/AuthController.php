@@ -104,7 +104,7 @@ class AuthController extends Controller
             ], 400);
         }
 
-        unset($validated['photo']);
+        // unset($validated['photo']);
         if ($request->hasFile('photo')) {
             $validated['photo'] = UploadFile::image($request->file('photo'));
         }

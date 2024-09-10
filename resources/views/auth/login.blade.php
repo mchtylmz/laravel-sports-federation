@@ -3,7 +3,7 @@
 @section('content')
     <!-- Sign In Section -->
     <div class="bg-body-extra-light">
-        <div class="login-card py-4 px-5" style="background-color: rgba(89,109,124)">
+        <div class="login-card py-4 px-5" style="background-color: rgba(1,121,197)">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-10 mb-2">
                     <h2 class="fw-medium px-0 px-sm-5 mb-0 text-white mb-0">{!! settings()->login_title ?? '' !!}</h2>

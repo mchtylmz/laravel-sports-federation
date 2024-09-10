@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_groups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('people_id');
+            $table->unsignedBigInteger('event_id')->index();
+            $table->unsignedBigInteger('people_id')->index();
             $table->timestamps();
         });
     }

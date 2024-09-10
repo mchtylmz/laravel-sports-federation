@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('federation_id');
+            $table->unsignedBigInteger('federation_id')->index();
             $table->string('title');
             $table->text('content')->nullable();
-            $table->tinyInteger('is_read')->default(0);
+            $table->tinyInteger('is_read')->default(0)->index();
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('punishments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('people_id')->nullable();
+            $table->unsignedBigInteger('people_id')->nullable()->index();
             $table->string('reason');
             $table->text('description')->nullable();
             $table->timestamps();

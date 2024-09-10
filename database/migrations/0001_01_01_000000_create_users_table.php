@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('role', ['calendar', 'manager', 'admin', 'superadmin'])->default('manager');
-            $table->enum('permit', ['no', 'tescil', 'muafiyet', 'mudur', 'okul'])->default('no');
+            $table->enum('role', ['calendar', 'manager', 'admin', 'superadmin'])->default('manager')->index();
+            $table->enum('permit', ['no', 'tescil', 'muafiyet', 'mudur', 'okul'])->default('no')->index();
             $table->string('name');
             $table->string('username')->unique();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('password');
-            $table->enum('status', ['active', 'passive'])->default('active');
+            $table->enum('status', ['active', 'passive'])->default('active')->index();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

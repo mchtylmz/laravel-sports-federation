@@ -3,7 +3,7 @@
 @section('content')
     <!-- Sign In Section -->
     <div class="bg-body-extra-light">
-        <div class="login-card py-3 px-5" style="background-color: rgba(89,109,124)">
+        <div class="login-card py-3 px-5" style="background-color: rgba(1,121,197)">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-9">
                     <h2 class="fw-medium px-0 px-sm-5 mb-0 text-white mb-0">{!! settings()->login_title ?? '' !!}</h2>
@@ -29,7 +29,7 @@
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-lg-6 mb-2">
-                                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş Seçiniz</label>
+                                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş Seçiniz <span class="text-danger">*</span></label>
                                     <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" required>
                                         @foreach(federations() as $federation)
                                             <option value="{{ $federation->id }}">{{ $federation->name }}</option>
@@ -37,7 +37,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 mb-2 people-type-select" style="display: none">
-                                    <label class="form-label" for="type">Kişi Tipi</label>
+                                    <label class="form-label" for="type">Kişi Tipi <span class="text-danger">*</span></label>
                                     <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tipi Seçiniz..." data-size="5" data-live-search="true" required>
                                     </select>
                                 </div>
@@ -45,26 +45,27 @@
 
                             <div class="row people-all" style="display: none">
                                 <div class="col-lg-6 mb-3">
-                                    <label class="form-label" for="photo">Fotoğraf</label>
+                                    <label class="form-label" for="photo">Fotoğraf (.jpg, .png, .jpeg)</label>
                                     <input type="file" class="dropify" id="photo" name="photo"
                                            data-show-remove="false"
                                            data-show-errors="true"
                                            data-allowed-file-extensions="jpg png jpeg"
+                                           accept=".jpg,.png,.jpeg"
                                            data-max-file-size="2M"
                                     />
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
                                     <div class="mb-3">
-                                        <label class="form-label" for="license_no">Lisans No</label>
+                                        <label class="form-label" for="license_no">Lisans No <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="license_no" name="license_no" placeholder="XXXXX..." required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label" for="name">İsim</label>
+                                        <label class="form-label" for="name">İsim <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="name" name="name" placeholder="İsim.." required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label" for="surname">Soyisim</label>
+                                        <label class="form-label" for="surname">Soyisim <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyisim.." required>
                                     </div>
                                 </div>
@@ -89,7 +90,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="identity">Pasaport/Kimlik Bilgisi</label>
+                                        <label class="form-label" for="identity">Pasaport/Kimlik Bilgisi <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="identity" name="identity" placeholder="Pasaport/Kimlik  Bilgisi.." required>
                                     </div>
                                 </div>
@@ -123,7 +124,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3 adult18">
-                                        <label class="form-label" for="gender">Cinsiyet</label>
+                                        <label class="form-label" for="gender">Cinsiyet <span class="text-danger">*</span></label>
                                         <select class="selectpicker form-control" id="gender" name="gender" data-placeholder="Cinsiyet Seçiniz..." data-size="5" data-live-search="false" required>
                                             @foreach(\App\Enums\Gender::titles() as $key => $value)
                                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -131,13 +132,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 d-none">
                                     <div class="mb-3">
                                         <label class="form-label" for="licensed_at">Lisans Tarihi</label>
                                         <input type="text" class="js-flatpickr form-control" id="licensed_at" name="licensed_at" data-locale="tr" placeholder="YYYY-AA-GG" data-max-date="{{ now()->format('Y-m-d') }}" readonly="readonly">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 d-none">
                                     <div class="mb-3">
                                         <label class="form-label" for="registered_at">Kayıt Tarihi</label>
                                         <input type="text" class="js-flatpickr form-control" id="registered_at" name="registered_at" data-locale="tr" placeholder="YYYY-AA-GG" data-max-date="{{ now()->format('Y-m-d') }}" readonly="readonly">

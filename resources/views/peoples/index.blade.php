@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="text-end mb-3">
-        @if(hasRole('admin') || (hasRole('superadmin') && !userPermit(['mudur'])))
+        @if(hasRole('admin') || (hasRole('superadmin') && !userPermit(['mudur', 'muafiyet'])))
             <a type="button" class="btn btn-info" href="{{ route('people.show') }}">
                 <i class="fa fa-fw fa-plus"></i> {{ __('peoples.add') }}
             </a>
@@ -57,6 +57,14 @@
                         @foreach(\App\Enums\Gender::titles() as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <label class="form-label" for="racer_document">Muafiyet</label>
+                    <select class="selectpicker form-control" id="racer_document" name="racer_document" data-placeholder="Muafiyet Seçiniz...." data-size="5" data-live-search="true">
+                        <option value="">{{ __('table.all') }}</option>
+                        <option value="Evet">Evet</option>
+                        <option value="Hayır">Hayır</option>
                     </select>
                 </div>
                 <div class="col-lg-2 mb-3">
@@ -117,6 +125,11 @@
                     {{ __('table.gender') }}
                 </th>
                 -->
+                @if(permitIf(role(), ['muafiyet']))
+                    <th data-field="racer_document" data-sortable="true">
+                        Muafiyet
+                    </th>
+                @endif
                 <th data-field="status" data-formatter="setText" data-sortable="true">
                     {{ __('table.status') }}
                 </th>

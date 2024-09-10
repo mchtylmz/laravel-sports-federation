@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('federation_id')->nullable();
-            $table->string('type')->nullable();
+            $table->unsignedBigInteger('federation_id')->nullable()->index();
+            $table->string('type')->nullable()->index();
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('surname');
@@ -24,13 +24,13 @@ return new class extends Migration
             $table->string('identity')->nullable();
             $table->string('birth_place')->nullable();
             $table->date('birth_date')->nullable();
-            $table->enum('adult', ['0', '1', '2'])->default('2');
+            $table->enum('adult', ['0', '1', '2'])->default('2')->index();
             $table->string('father_name')->nullable();
-            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable()->index();
             $table->date('registered_at')->nullable();
             $table->date('licensed_at')->nullable();
             $table->string('license_no')->nullable();
-            $table->enum('status', ['active', 'passive', 'pending'])->default('active');
+            $table->enum('status', ['active', 'passive', 'pending'])->default('active')->index();
 
             $table->timestamps();
             $table->softDeletes();

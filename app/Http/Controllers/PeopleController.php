@@ -65,6 +65,9 @@ class PeopleController extends Controller
         if ($status = $request->get('status')) {
             $people->where('status', $status);
         }
+        if ($racer_document = $request->get('racer_document')) {
+            $people->whereMeta('racer_document', $racer_document);
+        }
         if ($racer_car_no = $request->integer('racer_car_no')) {
             $people->whereMeta('racer_car_no', $racer_car_no);
         }

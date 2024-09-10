@@ -38,11 +38,11 @@
                 <th data-field="id" data-width="5">
                     {{ __('table.id') }}
                 </th>
-                <th data-field="federation_names" data-formatter="setHtml" data-width="15">
-                    {{ __('table.federation') }}
-                </th>
                 <th data-field="name" data-sortable="true" data-width="25" data-align="left">
                     {{ __('clubs.form.name') }}
+                </th>
+                <th data-field="federation_names" data-formatter="setHtml" data-width="15">
+                    {{ __('table.federation') }}
                 </th>
                 <th data-field="location" data-sortable="true">
                     {{ __('table.location') }}
@@ -53,9 +53,11 @@
                 <th data-field="user_info" data-formatter="setHtml">
                     {{ __('clubs.form.user') }}
                 </th>
-                <th data-field="tombala" data-sortable="true">
-                    Tombala
-                </th>
+                @if(permitIf(role(), ['mudur', 'muafiyet']))
+                    <th data-field="tombala" data-sortable="true">
+                        Tombala
+                    </th>
+                @endif
                 <th data-field="status" data-formatter="setHtml" data-sortable="true">
                     {{ __('table.status') }}
                 </th>

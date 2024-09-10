@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('directors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('federation_id');
+            $table->unsignedBigInteger('federation_id')->index();
             $table->string('title')->nullable();
             $table->string('name');
             $table->string('surname');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('identity')->nullable();
-            $table->tinyInteger('sort')->default(1);
+            $table->tinyInteger('sort')->default(1)->index();
             $table->timestamps();
         });
     }
