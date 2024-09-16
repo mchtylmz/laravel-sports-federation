@@ -12,7 +12,7 @@
 
             @if(hasRole('superadmin'))
                 <div class="mb-3">
-                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
+                    <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş <span class="text-danger">*</span></label>
                     <select class="selectpicker form-control" id="federation_id" name="federation_id" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" required>
                         @foreach(federations() as $federation)
                             <option value="{{ $federation->id }}" @selected($people->federation_id == $federation->id)>{{ $federation->name }}</option>
@@ -24,7 +24,7 @@
             @endif
 
             <div class="mb-0">
-                <label class="form-label" for="type">Kişi Tipi</label>
+                <label class="form-label" for="type">Kişi Tipi <span class="text-danger">*</span></label>
                 <select class="selectpicker form-control" id="type" name="type" data-placeholder="Kişi Tipi Seçiniz..." data-size="5" data-live-search="true" required>
                     @foreach(\App\Enums\PeopleType::titles() as $key => $value)
                         @if(hasRole('admin'))
@@ -46,7 +46,7 @@
                 <div class="col-lg-12"><hr></div>
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="photo">Fotoğraf</label>
+                        <label class="form-label" for="photo">Fotoğraf <span class="text-danger">*</span></label>
                         <input type="file" class="dropify" id="photo" name="photo"
                                data-show-remove="false"
                                data-show-errors="true"
@@ -59,19 +59,19 @@
 
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="license_no">Lisans No</label>
+                        <label class="form-label" for="license_no">Lisans No <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="license_no" name="license_no" placeholder="XXXXX..." value="{{ $people->license_no ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="name">İsim</label>
+                        <label class="form-label" for="name">İsim <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="İsim.." value="{{ $people->name ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="surname">Soyisim</label>
+                        <label class="form-label" for="surname">Soyisim <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyisim.." value="{{ $people->surname ?? '' }}" required>
                     </div>
                 </div>
@@ -89,25 +89,25 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="nationality">Uyruğu</label>
+                        <label class="form-label" for="nationality">Uyruğu <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Uyruğu.." value="{{ $people->nationality ?? '' }}">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="identity">Pasaport/Kimlik Bilgisi</label>
+                        <label class="form-label" for="identity">Pasaport/Kimlik Bilgisi <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="identity" name="identity" placeholder="Pasaport/Kimlik  Bilgisi.." value="{{ $people->identity ?? '' }}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="birth_place">Doğum Yeri</label>
+                        <label class="form-label" for="birth_place">Doğum Yeri <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="birth_place" name="birth_place" placeholder="Doğum Yeri.." value="{{ $people->birth_place ?? '' }}">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="birth_date">Doğum Tarihi</label>
+                        <label class="form-label" for="birth_date">Doğum Tarihi <span class="text-danger">*</span></label>
                         <input type="text" class="js-flatpickr form-control" id="birth_date" name="birth_date" data-locale="tr" placeholder="YYYY-AA-GG" value="{{ $people->birth_date?->format('Y-m-d') ?? '' }}" readonly="readonly">
                     </div>
                 </div>
@@ -123,13 +123,13 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="father_name">Baba Adı</label>
+                        <label class="form-label" for="father_name">Baba Adı <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Baba Adı.." value="{{ $people->father_name ?? '' }}">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3 adult18">
-                        <label class="form-label" for="gender">Cinsiyet</label>
+                        <label class="form-label" for="gender">Cinsiyet <span class="text-danger">*</span></label>
                         <select class="selectpicker form-control" id="gender" name="gender" data-placeholder="Cinsiyet Seçiniz..." data-size="5" data-live-search="true" required>
                             @foreach(\App\Enums\Gender::titles() as $key => $value)
                                 <option value="{{ $key }}" @selected($key == $people->gender?->value)>{{ $value }}</option>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3 adult18">
-                        <label class="form-label" for="status">Durum</label>
+                        <label class="form-label" for="status">Durum <span class="text-danger">*</span></label>
                         <select class="selectpicker form-control" id="status" name="status" data-placeholder="Durum Seçiniz..." data-size="5" data-live-search="true" required>
                             @foreach(\App\Enums\Status::titles() as $key => $value)
                                 @if(!hasRole('superadmin') && $key == 'pending')
@@ -169,7 +169,7 @@
             <div class="row people-player" style="display: none">
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="player_club_id">Kulüp</label>
+                        <label class="form-label" for="player_club_id">Kulüp <span class="text-danger">*</span></label>
                         <select class="selectpicker form-control" id="player_club_id" name="player_club_id" data-placeholder="Kulüp Seçiniz...." data-size="5" data-live-search="true">
                             @if(hasRole('superadmin'))
                                 @foreach(clubs() as $club)
@@ -188,7 +188,7 @@
             <div class="row people-referee" style="display: none">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="referee_class">Klasman</label>
+                        <label class="form-label" for="referee_class">Klasman <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="referee_class" name="referee_class" placeholder="Klasman Adı.." value="{{ $people->getMeta('referee_class') ?? '' }}">
                     </div>
                 </div>
@@ -203,7 +203,7 @@
             <div class="row people-coach" style="display: none">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label class="form-label" for="coach_class">Klasman</label>
+                        <label class="form-label" for="coach_class">Klasman <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="coach_class" name="coach_class" placeholder="Klasman Adı.." value="{{ $people->getMeta('coach_class') ?? '' }}">
                     </div>
                 </div>
@@ -218,7 +218,7 @@
             <div class="row people-racer" style="display: none">
                 <div class="col-lg-3">
                     <div class="mb-3">
-                        <label class="form-label" for="racer_section">Yarışma Dalı</label>
+                        <label class="form-label" for="racer_section">Yarışma Dalı <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="racer_section" name="racer_section" placeholder="Yarışma Dalı.." value="{{ $people->getMeta('racer_section') ?? '' }}">
                     </div>
                 </div>
@@ -274,7 +274,7 @@
             <div class="row people-school" style="display: none">
                 <div class="col-lg-4">
                     <div class="mb-3">
-                        <label class="form-label" for="school_club_id">Kulüp</label>
+                        <label class="form-label" for="school_club_id">Kulüp <span class="text-danger">*</span></label>
                         <select class="selectpicker form-control" id="school_club_id" name="school_club_id" data-placeholder="Kulüp Seçiniz...." data-size="5" data-live-search="true">
                             @if(hasRole('superadmin'))
                                 @foreach(clubs() as $club)

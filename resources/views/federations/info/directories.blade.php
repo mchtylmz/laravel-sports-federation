@@ -60,32 +60,32 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="name">Ad</label>
+                                                <label class="form-label" for="name">Ad <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" name="name" placeholder="Ad..." value="{{ $director->name }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="surname">Soyad</label>
+                                                <label class="form-label" for="surname">Soyad <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyad..." value="{{ $director->surname }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label" for="title">Görev</label>
-                                                <input type="text" class="form-control" id="title" name="title" placeholder="Görev..." value="{{ $director->title }}">
+                                                <label class="form-label" for="title">Görev <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="Görev..." value="{{ $director->title }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="phone">Telefon</label>
-                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..." value="{{ $director->phone }}">
+                                                <label class="form-label" for="phone">Telefon <span class="text-danger">*</span></label>
+                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..." value="{{ $director->phone }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="email">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email..." value="{{ $director->email }}">
+                                                <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email..." value="{{ $director->email }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -134,32 +134,32 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label" for="name">Ad</label>
+                            <label class="form-label" for="name">Ad <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Ad..." required>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label" for="surname">Soyad</label>
+                            <label class="form-label" for="surname">Soyad <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="surname" name="surname" placeholder="Soyad..." required>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="mb-3">
-                            <label class="form-label" for="title">Görev</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Görev...">
+                            <label class="form-label" for="title">Görev <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Görev..." required>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label" for="phone">Telefon</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon...">
+                            <label class="form-label" for="phone">Telefon <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..." required>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email...">
+                            <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email..." required>
                         </div>
                     </div>
                     <div class="col-lg-6">

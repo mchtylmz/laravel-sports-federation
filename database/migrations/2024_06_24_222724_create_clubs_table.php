@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->text('federation_id')->nullable()->index();
+            $table->text('federation_id')->nullable();
             $table->string('name')->index();
             $table->string('user_name');
             $table->string('user_phone')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('location')->nullable();
             $table->string('region')->nullable();
             $table->enum('status', ['active', 'passive'])->default('active')->index();
-            $table->text('tombala_file')->nullable()->index();
+            $table->text('tombala_file')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -29,10 +29,10 @@ class ClubResource extends JsonResource
             ];
         }
         if (hasRole('admin')) {
-            $actionsData = [
+            /*$actionsData = [
                 ...$actionsData,
                 'edit' => route('club.show', $this->id)
-            ];
+            ];*/
         }
 
         if (userPermit(['mudur'])) {

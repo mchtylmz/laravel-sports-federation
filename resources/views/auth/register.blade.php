@@ -72,7 +72,7 @@
 
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="phone">Telefon</label>
+                                        <label class="form-label" for="phone">Telefon <span class="text-danger">*</span></label>
                                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..">
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="nationality">Uyruk</label>
+                                        <label class="form-label" for="nationality">Uyruk <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Uyruğu..">
                                     </div>
                                 </div>
@@ -96,20 +96,20 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="birth_place">Doğum Yeri</label>
+                                        <label class="form-label" for="birth_place">Doğum Yeri <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="birth_place" name="birth_place" placeholder="Doğum Yeri..">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="birth_date">Doğum Tarihi</label>
+                                        <label class="form-label" for="birth_date">Doğum Tarihi <span class="text-danger">*</span></label>
                                         <input type="text" class="js-flatpickr form-control" id="birth_date" name="birth_date" data-locale="tr" placeholder="YYYY-AA-GG" data-max-date="{{ now()->subYears(6)->format('Y-m-d') }}" readonly="readonly">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 d-none">
+                                <div class="col-lg-4">
                                     <div class="mb-3 adult18">
-                                        <label class="form-label" for="adult">Veli Onay Durumu</label>
-                                        <select class="selectpicker form-control" id="adult" name="adult"  data-size="5" data-live-search="true">
+                                        <label class="form-label" for="adult">Veli Onay Durumu  <span class="text-danger">*</span></label>
+                                        <select class="selectpicker form-control" id="adult" name="adult"  data-size="5" data-live-search="true" required>
                                             @foreach(\App\Enums\PeopleAdult::titles() as $key => $value)
                                                 <option value="{{ $key }}">{{ $value }}</option>
                                             @endforeach
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="father_name">Baba Adı</label>
+                                        <label class="form-label" for="father_name">Baba Adı <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Baba Adı..">
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                             <div class="row people-player" style="display: none">
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label class="form-label" for="player_club_id">Kulüp</label>
+                                        <label class="form-label" for="player_club_id">Kulüp <span class="text-danger">*</span></label>
                                         <select class="selectpicker form-control" id="player_club_id" name="player_club_id" data-placeholder="Kulüp Seçiniz...." data-size="5" data-live-search="true">
 
                                         </select>
@@ -160,7 +160,7 @@
                             <div class="row people-referee" style="display: none">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label" for="referee_class">Klasman</label>
+                                        <label class="form-label" for="referee_class">Klasman <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="referee_class" name="referee_class" placeholder="Klasman Adı..">
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                             <div class="row people-coach" style="display: none">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label" for="coach_class">Klasman</label>
+                                        <label class="form-label" for="coach_class">Klasman <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="coach_class" name="coach_class" placeholder="Klasman Adı..">
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@
                             <div class="row people-school" style="display: none">
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="school_club_id">Kulüp</label>
+                                        <label class="form-label" for="school_club_id">Kulüp <span class="text-danger">*</span></label>
                                         <select class="selectpicker form-control" id="school_club_id" name="school_club_id" data-placeholder="Kulüp Seçiniz...." data-size="5" data-live-search="true">
 
                                         </select>

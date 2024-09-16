@@ -8,20 +8,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="fullname">Federasyon Adı</label>
+                        <label class="form-label" for="fullname">Federasyon Adı <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Ad Soyadd..." value="{{ $federation->getMeta('fullname') }}" required>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="phone">Telefon</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..." value="{{ $federation->getMeta('phone') }}">
+                        <label class="form-label" for="phone">Telefon <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon..." value="{{ $federation->getMeta('phone') }}" required>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="mb-3">
-                        <label class="form-label" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email..." value="{{ $federation->getMeta('email') }}">
+                        <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email..." value="{{ $federation->getMeta('email') }}"required>
                     </div>
                 </div>
                 <div class="col-lg-12">
