@@ -102,7 +102,12 @@
 
             <div class="mb-3">
                 <label class="form-label" for="end_notes">{{ __('events.event') }} {{ __('events.form.end_notes') }}</label>
-                <textarea id="content" class="form-control" name="end_notes" placeholder="{{ __('events.form.end_notes') }}..." rows="3">{{ $event->end_notes ?? '' }}</textarea>
+                <textarea id="content" class="form-control" name="end_notes" placeholder="{{ __('events.form.end_notes') }}..." rows="5">{{ $event->end_notes ?? '' }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="end_notes2">{{ __('Etkinlik Turnuva Sonucu') }}</label>
+                <textarea id="content" class="form-control" name="end_notes2" placeholder="{{ __('Etkinlik Turnuva Sonucu') }}..." rows="5">{{ $event->end_notes2 ?? '' }}</textarea>
             </div>
 
             <div class="mb-4 text-center">

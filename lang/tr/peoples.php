@@ -17,6 +17,7 @@ return [
     'coach' => 'Antrenör',
     'racer' => 'Yarışçı',
     'school' => 'Okul Sporları',
+    'ferdi' => 'Ferdi',
 
     'noAdult' => '18 Yaşından Büyük',
     'adult18' => '18 Yaşından Küçük, Veli Onaylı',

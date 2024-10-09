@@ -106,13 +106,13 @@
                         <li class="list-group-item">
                             İsim Soyisim: <strong>{{ $director->name }} {{ $director->surname }}</strong>
                             <br>
-                            Görev: <strong>{{ $director->titlee ?? ' - ' }}</strong>
+                            Görev: <strong>{{ $director->title ?? ' - ' }}</strong>
                             <br>
-                            Telefon: <span>{{ $director->phone ?? ' - '}}</span>
+                            Telefon: <strong>{{ $director->phone ?? ' - '}}</strong>
                             <br>
-                            Email: <span>{{ $director->emaile ?? ' - ' }}</span>
+                            Email: <strong>{{ $director->email ?? ' - ' }}</strong>
                             <br>
-                            Kimlik: <span>{{ $director->identitye ?? ' - ' }}</span>
+                            Kimlik: <strong>{{ $director->identity ?? ' - ' }}</strong>
                         </li>
                     @endforeach
                 </ul>

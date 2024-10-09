@@ -37,11 +37,11 @@
                 </div>
                 <div class="col-lg-2 mb-3">
                     <label class="form-label" for="start_date">Başlangıç Tarihi</label>
-                    <input type="text" class="js-flatpickr form-control" id="start_date" name="start_date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                    <input type="text" class="js-flatpickr form-control" id="start_date" name="start_date" data-locale="tr" placeholder="YYYY-AA-GG" readonly="readonly">
                 </div>
                 <div class="col-lg-2 mb-3">
                     <label class="form-label" for="end_date">Bitiş Tarihi</label>
-                    <input type="text" class="js-flatpickr form-control" id="end_date" name="end_date" data-locale="tr" placeholder="YYYY-AA-GG" data-mode="range" readonly="readonly">
+                    <input type="text" class="js-flatpickr form-control" id="end_date" name="end_date" data-locale="tr" placeholder="YYYY-AA-GG" readonly="readonly">
                 </div>
                 <div class="col-lg-2 mb-3">
                     <button type="submit" class="btn btn-alt-success w-100 js-filter-submit">

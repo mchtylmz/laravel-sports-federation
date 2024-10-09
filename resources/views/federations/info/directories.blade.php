@@ -90,8 +90,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="identity">Kimlik</label>
-                                                <input type="text" class="form-control" id="identity" name="identity" placeholder="Kimlik..." value="{{ $director->identity }}">
+                                                <label class="form-label" for="identity">Kimlik <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="identity" name="identity" placeholder="Kimlik..." value="{{ $director->identity }}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -164,8 +164,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label" for="identity">Kimlik</label>
-                            <input type="text" class="form-control" id="identity" name="identity" placeholder="Kimlik...">
+                            <label class="form-label" for="identity">Kimlik <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="identity" name="identity" placeholder="Kimlik..." required>
                         </div>
                     </div>
                     <div class="col-lg-6">

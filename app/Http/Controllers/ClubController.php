@@ -102,6 +102,23 @@ class ClubController extends Controller
         ]);
     }
 
+    public function selected(Request $request, Club $club)
+    {
+        if (!hasRole( 'admin')) {
+            abort(403);
+        }
+
+        $club->update([
+            'selected' => $club->selected ? 0 : 1,
+            'selected_at' => now()
+        ]);
+
+        return response()->json([
+            'message' => __(':name kulübü tescil bilgisi güncellendi', ['name' => $club->name]),
+            'refresh' => true
+        ]);
+    }
+
     public function delete(Club $club)
     {
         if (!hasRole('superadmin')) {

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <x-block title="{{ __('settings.general') }}">
-        <form class="js-validation-form" action="{{ route('settings.save') }}" method="POST" enctype="multipart/form-data">
+        <form class="js-validation-form" action="{{ route('settings.save') }}" method="POST"
+              enctype="multipart/form-data">
             @csrf
 
             <div class="row">
@@ -46,54 +47,96 @@
 
             <div class="mb-3">
                 <label class="form-label" for="site_title">Site Başlığı</label>
-                <input type="text" class="form-control" id="site_title" name="settings[site_title]" placeholder="Başlığı.." value="{{ $site_title }}" required>
+                <input type="text" class="form-control" id="site_title" name="settings[site_title]"
+                       placeholder="Başlığı.." value="{{ $site_title }}" required>
             </div>
 
 
-           <div class="row align-items-start">
-               <div class="col-lg-6">
-                   <div class="mb-3">
-                       <label class="form-label" for="phone">Telefon Numarası</label>
-                       <input type="text" class="form-control" id="phone" name="settings[phone]" placeholder="Telefon.." value="{{ settings()->phone ?? '' }}">
-                   </div>
-                   <div class="mb-3">
-                       <label class="form-label" for="email">Email Adresi</label>
-                       <input type="text" class="form-control" id="email" name="settings[email]" placeholder="Email.." value="{{ settings()->email ?? '' }}">
-                   </div>
-               </div>
-               <div class="col-lg-6">
-                   <div class="mb-3">
-                       <label class="form-label" for="address">Adres</label>
-                       <textarea rows="4" class="form-control" id="address" name="settings[address]" placeholder="Adres..">{{ settings()->address }}</textarea>
-                   </div>
-               </div>
-           </div>
+            <div class="row align-items-start">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="phone">Telefon Numarası</label>
+                        <input type="text" class="form-control" id="phone" name="settings[phone]"
+                               placeholder="Telefon.." value="{{ settings()->phone ?? '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email Adresi</label>
+                        <input type="text" class="form-control" id="email" name="settings[email]" placeholder="Email.."
+                               value="{{ settings()->email ?? '' }}">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="address">Adres</label>
+                        <textarea rows="4" class="form-control" id="address" name="settings[address]"
+                                  placeholder="Adres..">{{ settings()->address }}</textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="link">Link</label>
+                        <input type="text" class="form-control" id="phone" name="settings[link]" placeholder="Link.."
+                               value="{{ settings()->link ?? '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="facebook">Facebook</label>
+                        <input type="text" class="form-control" id="facebook" name="settings[facebook]"
+                               placeholder="facebook.." value="{{ settings()->facebook ?? '' }}">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="x">Twitter (X)</label>
+                        <input type="text" class="form-control" id="x" name="settings[x]" placeholder="Twitter.."
+                               value="{{ settings()->x ?? '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="youtube">Youtube</label>
+                        <input type="text" class="form-control" id="youtube" name="settings[youtube]"
+                               placeholder="youtube.." value="{{ settings()->youtube ?? '' }}">
+                    </div>
+                </div>
+            </div>
 
             <div class="mb-3">
                 <label class="form-label" for="header_under_text">Kayan Yazı</label>
-                <textarea rows="6" class="form-control" id="header_under_text" name="settings[header_under_text]" placeholder="Kayan Yazı..">{{ $header_under_text }}</textarea>
+                <textarea rows="6" class="form-control" id="header_under_text" name="settings[header_under_text]"
+                          placeholder="Kayan Yazı..">{{ $header_under_text }}</textarea>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="term_content">Kayıt Ol Onaylama Yazısı</label>
-                <textarea rows="6" class="form-control" id="term_content" name="settings[term_content]" placeholder="Onaylama Yazı..">{{ settings()->term_content ?? '' }}</textarea>
+                <textarea rows="6" class="form-control" id="term_content" name="settings[term_content]"
+                          placeholder="Onaylama Yazı..">{{ settings()->term_content ?? '' }}</textarea>
             </div>
 
             <hr>
 
             <div class="mb-3">
+                <label class="form-label" for="register_status">Kayıt Olma Özelliği</label>
+                <select class="selectpicker form-control" id="register_status" name="settings[register_status]"
+                        data-placeholder="Kayıt Olma Özelliği.." data-size="2" data-live-search="false" readonly>
+                    <option value="0" @selected(settings()->register_status == 0)>Kapalı</option>
+                    <option value="1" @selected(settings()->register_status == 1)>Açık</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="register_title">Kayıt Ol Ana Başlık</label>
-                <input type="text" class="form-control" id="register_title" name="settings[register_title]" placeholder="Başlığı.." value="{{ settings()->register_title }}" required>
+                <input type="text" class="form-control" id="register_title" name="settings[register_title]"
+                       placeholder="Başlığı.." value="{{ settings()->register_title }}" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="login_title">Giriş Yap Ana Başlık</label>
-                <input type="text" class="form-control" id="login_title" name="settings[login_title]" placeholder="Başlığı.." value="{{ settings()->login_title }}" required>
+                <input type="text" class="form-control" id="login_title" name="settings[login_title]"
+                       placeholder="Başlığı.." value="{{ settings()->login_title }}" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="login_subtitle">Giriş Yap Alt Başlık</label>
-                <input type="text" class="form-control" id="login_subtitle" name="settings[login_subtitle]" placeholder="Başlığı.." value="{{ settings()->login_subtitle }}" required>
+                <input type="text" class="form-control" id="login_subtitle" name="settings[login_subtitle]"
+                       placeholder="Başlığı.." value="{{ settings()->login_subtitle }}" required>
             </div>
 
             <div class="row">

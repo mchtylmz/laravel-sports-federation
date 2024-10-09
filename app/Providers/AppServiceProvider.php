@@ -50,13 +50,18 @@ class AppServiceProvider extends ServiceProvider
                     }
                 );
             }
+            
+            $people_count = People::where('status', Status::pending);
+            if (auth()->check() && hasRole('admin')) {
+                $people_count->where('federation_id', auth()->user()->federation()?->id);
+            }
 
             $view->with('site_title', settings()->site_title ?? config('app.name'));
             $view->with('header_under_text', settings()->header_under_text ?? false);
             $view->with('site_logo', settings()->site_logo ?? 'uploads/logo.png');
             $view->with('site_favicon', settings()->site_favicon ?? 'uploads/logo.png');
             $view->with('note_count', $note_count);
-            $view->with('people_wait_count', People::where('status', Status::pending)->count());
+            $view->with('people_wait_count', $people_count->count());
         });
 
         Carbon::setlocale(app()->getLocale());

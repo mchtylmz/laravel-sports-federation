@@ -88,7 +88,7 @@
                 <div class="mb-3">
                     @php $clubFederations = explode(',', ($club->federation_id ?? ''))@endphp
                     <label class="form-label" for="federation_id">{{ __('table.federation') }} / Branş</label>
-                    <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple required readonly>
+                    <select class="selectpicker form-control" id="federation_id" name="federation_id[]" data-placeholder="{{ __('table.federation') }}...." data-size="10" data-live-search="true" multiple readonly>
                         @foreach(federations() as $federation)
                             <option value="{{ $federation->id }}" @selected(in_array($federation->id, $clubFederations))>{{ $federation->name }}</option>
                         @endforeach

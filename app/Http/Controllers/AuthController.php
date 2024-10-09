@@ -83,6 +83,11 @@ class AuthController extends Controller
 
     public function register()
     {
+        if(!settings()->register_status) {
+            return redirect()->to('/');
+        }
+        
+        
         return view('auth.register', [
             'title' => __('auth.register.title')
         ]);
@@ -95,6 +100,11 @@ class AuthController extends Controller
         if (!$request->integer('term')) {
             return response()->json([
                 'message' => 'Onay alanını lütfen işaretleyiniz!',
+            ], 400);
+        }
+        if (!$request->hasFile('photo')) {
+            return response()->json([
+                'message' => 'Fotoğraf yükleyiniz!',
             ], 400);
         }
 

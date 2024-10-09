@@ -18,6 +18,7 @@ class ClubResource extends JsonResource
     {
         $actionsData = [
             'view' => route('club.show', $this->id),
+            'id' => $this->id
         ];
         if (hasRole('superadmin')) {
             $actionsData = [
@@ -25,14 +26,23 @@ class ClubResource extends JsonResource
                 'edit' => route('club.show', $this->id),
                 'delete' => route('club.delete', $this->id),
                 'deleteMessage' => __('settings.club_delete', ['name' => $this->name]),
-                'id' => $this->id
             ];
         }
         if (hasRole('admin')) {
-            /*$actionsData = [
-                ...$actionsData,
-                'edit' => route('club.show', $this->id)
-            ];*/
+            if ($this->selected) {
+                $actionsData = [
+                    ...$actionsData,
+                    'selected' => route('club.selected', $this->id),
+                    'selectedMessage' => __('İlgili kulüp tescilli kulüp listesinden çıkarılıacaktır, işleme devam edilsin mi?'),
+                    'selectedStatus' => true
+                ];
+            } else {
+                $actionsData = [
+                    ...$actionsData,
+                    'selected' => route('club.selected', $this->id),
+                    'selectedMessage' => __('İlgili kulüp tescilli kulüp olarak eklenecektir, işleme devam edilsin mi?')
+                ];
+            }
         }
 
         if (userPermit(['mudur'])) {
@@ -66,7 +76,7 @@ class ClubResource extends JsonResource
             'user_email' => $this->user_email,
             'user_info' => sprintf('%s - %s', $this->user_name, $this->user_phone ?: $this->user_email),
             'user_info_html' => sprintf('%s <br> %s', $this->user_name, $this->user_phone ?: $this->user_email),
-            'tombala' => !empty($this->tombala) ? 'Evet' : 'Hayır',
+            'tombala' => !empty($this->tombala_file) ? 'Evet' : 'Hayır',
             'status' => $this->status,
             'status_text' => trans('table.'.$this->status->value),
             'status_html' => sprintf('<span class="status %s">%s</span>', $this->status->value, trans('table.'.$this->status->value)),

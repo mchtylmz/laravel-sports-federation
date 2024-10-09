@@ -53,7 +53,7 @@
                 <th data-field="user_info" data-formatter="setHtml">
                     {{ __('clubs.form.user') }}
                 </th>
-                @if(permitIf(role(), ['mudur', 'muafiyet']))
+                @if(permitIf(role(), ['mudur', 'muafiyet', 'tescil']))
                     <th data-field="tombala" data-sortable="true">
                         Tombala
                     </th>

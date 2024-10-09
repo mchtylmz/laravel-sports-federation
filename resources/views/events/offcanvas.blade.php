@@ -76,4 +76,8 @@
         {{ __('events.form.end_notes') }}
         <br> <strong>{{ $event->end_notes }}</strong>
     </li>
+    <li class="list-group-item">
+        {{ __('Etkinlik Turnuva Sonucu') }}
+        <br> <strong>{{ $event->end_notes2 }}</strong>
+    </li>
 </ul>

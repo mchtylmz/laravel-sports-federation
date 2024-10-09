@@ -10,6 +10,7 @@ enum PeopleType: string
     case racer = 'racer';
 
     case school = 'school';
+    case ferdi = 'ferdi';
 
     public static function names(): array
     {
@@ -29,6 +30,7 @@ enum PeopleType: string
             self::coach->value => __('peoples.coach'),
             self::racer->value => __('peoples.racer'),
             self::school->value => __('peoples.school'),
+            self::ferdi->value => __('Ferdi Sporcu'),
         ];
     }
 

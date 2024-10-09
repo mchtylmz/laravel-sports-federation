@@ -45,13 +45,14 @@
 
                             <div class="row people-all" style="display: none">
                                 <div class="col-lg-6 mb-3">
-                                    <label class="form-label" for="photo">Fotoğraf (.jpg, .png, .jpeg)</label>
+                                    <label class="form-label" for="photo">Fotoğraf (.jpg, .png, .jpeg) <span class="text-danger">*</span></label>
                                     <input type="file" class="dropify" id="photo" name="photo"
                                            data-show-remove="false"
                                            data-show-errors="true"
                                            data-allowed-file-extensions="jpg png jpeg"
                                            accept=".jpg,.png,.jpeg"
                                            data-max-file-size="2M"
+                                           required
                                     />
                                 </div>
 

@@ -26,7 +26,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
 
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/style.css') }}?v={{ config('app.version') }}">
     <style>
         .nav-link.active {
             background-color: #2356d7 !important;

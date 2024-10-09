@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->time('end_time')->default('18:00:00');
             $table->text('end_notes')->nullable();
+            $table->text('end_notes2')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();

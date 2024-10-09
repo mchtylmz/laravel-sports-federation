@@ -180,6 +180,9 @@ if (!function_exists('federation_clubs')) {
         if (!empty($select) && is_array($select) && !in_array('*', $select)) {
             $clubs->select($select);
         }
+        if (hasRole('admin')) {
+
+        }$clubs->where('selected', 1);
 
         return $clubs->get();
     }

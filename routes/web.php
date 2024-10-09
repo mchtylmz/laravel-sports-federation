@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
             Route::get('json', 'json')->name('json');
             Route::get('detail/{club:id?}', 'detail')->name('show');
             Route::post('save/{club:id?}', 'save')->name('save');
+            Route::post('selected/{club:id?}', 'selected')->name('selected');
             Route::middleware('role:superadmin')->post('delete/{club:id}', 'delete')->name('delete');
         });
 

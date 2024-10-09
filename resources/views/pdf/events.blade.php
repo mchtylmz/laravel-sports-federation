@@ -39,8 +39,12 @@
 @if(!empty($federation))
     <center>
         <img src="{{ public_path($federation?->logo) }}" style="height: 150px; object-fit: contain; max-width: 480px" />
-        <h2>{{ $federation->name }}</h2>
     </center>
+@else
+    <center>
+        <img src="{{ public_path($site_logo) }}" style="height: 100px; object-fit: contain; max-width: 480px" />
+    </center>
+    <br>
 @endif
 
 <table class="table table-bordered" style="width: 100%;">

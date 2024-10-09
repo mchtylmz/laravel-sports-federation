@@ -120,15 +120,15 @@ class FederationInfoController extends Controller
     public function contactSave(Request $request, Federation $federation)
     {
         $federation->setMeta([
-            'fullname' => $request->string('fullname'),
-            'phone' => $request->string('phone'),
-            'email' => $request->string('email'),
-            'fax' => $request->string('fax'),
-            'website' => $request->string('website'),
-            'social_facebook' => $request->string('facebook'),
-            'social_x' => $request->string('x'),
-            'social_instagram' => $request->string('instagram'),
-            'social_youtube' => $request->string('youtube'),
+            'fullname' => $request->get('fullname'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+            'fax' => $request->get('fax'),
+            'website' => $request->get('website'),
+            'social_facebook' => $request->get('facebook'),
+            'social_x' => $request->get('x'),
+            'social_instagram' => $request->get('instagram'),
+            'social_youtube' => $request->get('youtube'),
         ]);
 
         return response()->json([

@@ -36,10 +36,10 @@ class LogController extends Controller
             $log->where('table_name', $request->get('table_name'));
         }
         if ($request->get('start_date')) {
-            $log->where('log_date', '>=', $request->date('start_date', 'Y-m-d 00:00:00'));
+            $log->where('log_date', '>=', date('Y-m-d 00:00:00', strtotime($request->get('start_date'))));
         }
         if ($request->get('end_date')) {
-            $log->where('log_date', '<=', $request->date('end_date', 'Y-m-d 23:59:59'));
+            $log->where('log_date', '<=', date('Y-m-d 23:59:59', strtotime($request->get('end_date'))));
         }
 
         return response()->json([
