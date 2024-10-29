@@ -25,7 +25,9 @@
                       <h5 class="mb-1">{{ $event->title }}</h5>
                       <small>{{ Carbon\Carbon::parse($start_date)->translatedFormat('d M Y, H:i') }}</small>
                     </div>
-                    <p class="mb-1">{!! !empty($event->user?->role == 'admin') ? (!empty($event->location) ? $event->location: '') .'<br>'. $event->user?->federation()?->name : $event->location !!}</p>
+                    <p class="mb-1">
+                        {!! !empty($event->user?->role == 'admin') ? (!empty($event->location) ? $event->location.'<br>': '') . $event->user?->federation()?->name : $event->location !!}
+                    </p>
                   </a>
                   @endforeach
                 </div>
@@ -44,8 +46,45 @@
                  onerror="this.src='{{ asset('uploads/no-img.png') }}'"
                  class="w-100">
         </div>
+
             @if(permitIf(role(), ['mudur']))
-                <div class="col-lg-3 p-3"></div> @endif
+                <div class="col-lg-3 p-3">
+                    <!-- Your Block - block block-rounded block-mode-hidden -->
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">
+                                Genel Kurullar
+                            </h3>
+
+                        </div>
+                        <div class="block-content fs-sm p-0">
+
+
+                            <div class="list-group" style="height: 400px; overflow-y: scroll;">
+
+                                @foreach($events2 as $event)
+                                    @php $start_date = sprintf('%s %s', $event->start_date?->format('Y-m-d'), $event->start_time); @endphp
+                                    <a href="javascript:;" class="list-group-item list-group-item-action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" data-toggle="view" data-route="{{ route('event.show', $event->id) }}?format=json">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{ $event->title }}</h5>
+                                            <small>{{ Carbon\Carbon::parse($start_date)->translatedFormat('d M Y, H:i') }}</small>
+                                        </div>
+                                        <p class="mb-1">
+                                            {!! !empty($event->user?->role == 'admin') ? (!empty($event->location) ? $event->location.'<br>': '') . $event->user?->federation()?->name : $event->location !!}
+                                        </p>
+                                    </a>
+                                @endforeach
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- END Your Block -->
+
+
+                </div>
+            @endif
+
         <div class="col-lg-8">
             <div class="row justify-content-center align-items-start mt-1">
                 @if($phone = settings()->phone)

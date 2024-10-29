@@ -28,9 +28,29 @@ class HomeController extends Controller
         })
         ->orderBy('start_date');
 
+        $events2 = Event::where('type', 'federation_date')
+            ->where(function (Builder $query) {
+            $query->where('start_date', '>=', now()->format('Y-m-d'))
+            ->where('start_date', '<=', now()->addDays(7)->format('Y-m-d'));
+
+            if (!hasRole('superadmin')) {
+                $query->where('user_id', request()->user()->id);
+            }
+        })
+        ->orWhere(function (Builder $query) {
+            $query->where('start_date', '<', now()->format('Y-m-d'))
+            ->where('end_date', '>=', now()->format('Y-m-d'));
+
+            if (!hasRole('superadmin')) {
+                $query->where('user_id', request()->user()->id);
+            }
+        })
+        ->orderBy('start_date');
+
         return view('home.index', [
             'title' => __('home.title'),
-            'events' => $events->get()
+            'events' => $events->get(),
+            'events2' => $events2->get(),
         ]);
     }
 

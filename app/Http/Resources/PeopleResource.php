@@ -25,11 +25,11 @@ class PeopleResource extends JsonResource
         ];
 
         if (hasRole('superadmin') && userPermit(['mudur'])) {
-            unset($actionsData['edit'], $actionsData['delete']);
+            unset($actionsData['delete']);
         }
 
         if ($this->status == Status::pending) {
-            unset($actionsData['edit']);
+            //unset($actionsData['edit']);
             $actionsData['id'] = $this->id;
             $actionsData['approve'] = route('people.approve', $this->id);
             $actionsData['approveMessage'] = __('peoples.approve_message', ['name' => $this->fullname]);

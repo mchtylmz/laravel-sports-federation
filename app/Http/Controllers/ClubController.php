@@ -88,7 +88,12 @@ class ClubController extends Controller
                 $validated['tombala_file'] = null;
             }
         }
-
+        if ($request->hasFile('file_1')) {
+            $validated['file_1'] = UploadFile::file($request->file('file_1'));
+        }
+        if ($request->hasFile('file_2')) {
+            $validated['file_2'] = UploadFile::file($request->file('file_2'));
+        }
 
         if (!$club->id) {
             $club = Club::create($validated);

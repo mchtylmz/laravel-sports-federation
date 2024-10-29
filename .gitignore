@@ -18,3 +18,14 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+*.jpg
+*.png
+*.xlsx
+*.pdf
+*.xls
+*.zip
+*.rar
+*.gz
+.DS_Store
+/public/.DS_Store
+__MACOSX

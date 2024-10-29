@@ -30,6 +30,23 @@
             </a>
         @endif
     </li>
+    @if(!empty($club->file_1))
+    <li class="list-group-item">
+        Belge <br>
+
+            <a target="_blank" class="text-dark w-100" href="{{ asset($club->file_1) }}">
+                <strong>Belgeyi Görüntüle</strong>
+            </a>
+    </li>
+    @endif
+    @if(!empty($club->file_2))
+    <li class="list-group-item">
+        Genel Kurul Listesi <br>
+            <a target="_blank" class="text-dark w-100" href="{{ asset($club->file_2) }}">
+                <strong>Belgeyi Görüntüle</strong>
+            </a>
+    </li>
+    @endif
 </ul>
 
 <h5 class="bg-light-subtle p-3 mt-3 mb-0">{{ __('federations.title') }}</h5>

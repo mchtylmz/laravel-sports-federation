@@ -96,6 +96,49 @@
                 </div>
             @endif
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="file_1">Belge</label>
+                        <input type="file" class="dropify" id="file_1" name="file_1"
+                               data-show-remove="false"
+                               data-show-errors="true"
+                               data-allowed-file-extensions="pdf"
+                               accept=".pdf"
+                               data-max-file-size="30M"
+                               @if(!empty($club->file_1)) data-default-file="{{ asset($club->file_1) }}" @endif
+                        />
+                        @if(!empty($club->file_1))
+                            <div class="border w-100 py-2">
+                                <a target="_blank" class="text-dark p-3" href="{{ asset($club->file_1) }}">
+                                    <strong>Belgeyi Görüntüle</strong>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="file_2">Genel Kurul Listesi</label>
+                        <input type="file" class="dropify" id="file_2" name="file_2"
+                               data-show-remove="false"
+                               data-show-errors="true"
+                               data-allowed-file-extensions="pdf"
+                               accept=".pdf"
+                               data-max-file-size="30M"
+                               @if(!empty($club->file_2)) data-default-file="{{ asset($club->file_2) }}" @endif
+                        />
+                        @if(!empty($club->file_2))
+                            <div class="border w-100 py-2">
+                                <a target="_blank" class="text-dark p-3" href="{{ asset($club->file_2) }}">
+                                    <strong>Belgeyi Görüntüle</strong>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             <div class="mb-4 text-center">
                 <button type="submit" class="btn btn-alt-primary px-4">
                     <i class="fa fa-save mx-2 fa-faw"></i> {{ __('table.save') }}

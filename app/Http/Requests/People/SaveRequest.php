@@ -35,7 +35,7 @@ class SaveRequest extends BaseRequest
             'father_name' => ['nullable', 'string'],
             'licensed_at' => ['nullable', 'date:Y-m-d'],
             'registered_at' => ['nullable', 'date:Y-m-d'],
-            'status' => ['nullable', 'in:active,passive'],
+            'status' => ['nullable', 'in:active,passive,pending'],
         ];
     }
 }

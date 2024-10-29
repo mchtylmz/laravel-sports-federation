@@ -239,6 +239,7 @@
 
                                             let formEventStatus = $('form.event-status-form');
                                             if (formEventStatus.length) {
+
                                                 formOffcanvas(formEventStatus);
                                             }
 
@@ -370,8 +371,10 @@
             });
 
             $('.dropify').dropify({
+                imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'],
+                maxFileSizePreview: '30M',
                 messages: {
-                    'default': 'Bir fotoğraf seçin',
+                    'default': 'Bir dosya seçin',
                     'replace': 'Değiştirmek için tıklayın',
                     'remove':  'Kaldır',
                     'error':   'Hata! Yanlış bir şey oldu.'

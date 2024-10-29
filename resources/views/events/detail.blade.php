@@ -65,6 +65,15 @@
                     <label class="form-label" for="end_time">{{ __('events.event') }} {{ __('events.form.end_time') }}</label>
                     <input type="text" class="js-flatpickr form-control" id="end_time" name="end_time"  data-locale="tr" placeholder="SS:DD" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true" value="{{ $event->end_time ?? now()->format('H:i') }}" readonly="readonly">
                 </div>
+
+
+                @if(empty($event) || !$event->exists)
+                    <div class="col-lg-12 mb-3">
+                        <label class="form-label" for="repeat_date">{{ __('events.event') }} Tekrarlama Tarihleri</label>
+                        <input type="text" class="js-flatpickr form-control" id="repeat_date" name="repeat_date" data-locale="tr" placeholder="YYYY-AA-GG" data-date-format="Y-m-d" data-week-numbers="true" data-mode="multiple" readonly="readonly" data-min-date="<?=now()->addDay()->format('Y-m-d')?>">
+                        <p>Eğer etkinlik tekrar edilecekse, tekrar edilecek tarihleri takvimden seçebilirsiniz. Birden fazla tarih seçimi yapılabilir.</p>
+                    </div>
+                @endif
             </div>
 
             <div class="mb-3 {{ hasRole('admin') ? 'd-block' : 'd-none' }}">

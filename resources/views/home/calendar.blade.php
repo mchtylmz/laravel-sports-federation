@@ -99,10 +99,10 @@
                         <th data-field="location" data-sortable="true">
                             {{ __('table.location') }}
                         </th>
-                        <th data-field="start_date" data-sortable="true">
+                        <th data-field="startStr" data-sortable="true">
                             {{ __('table.start_date') }}
                         </th>
-                        <th data-field="end_date" data-sortable="true">
+                        <th data-field="endStr" data-sortable="true">
                             {{ __('table.end_date') }}
                         </th>
                         @if(hasRole('admin'))

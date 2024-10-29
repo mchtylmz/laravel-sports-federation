@@ -167,6 +167,15 @@ class EventController extends Controller
             }
         }
 
+        if ($repeat_dates = explode(',', $request->get('repeat_date'))) {
+            foreach ($repeat_dates as $repeat_date) {
+                $validated['start_date'] = date('Y-m-d', strtotime(trim($repeat_date)));
+                $validated['end_date'] = date('Y-m-d', strtotime(trim($repeat_date)));
+                user()->events()->create($validated);
+            }
+        }
+
+
         return response()->json([
             'message' => __('events.save_success', ['title' => $event->title]),
             'redirect' => route('event.index')

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('tombala_file')->nullable();
             $table->tinyInteger('selected')->default(0);
             $table->timestamp('selected_at')->nullable();
+            $table->string('file_1')->nullable();
+            $table->string('file_2')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
